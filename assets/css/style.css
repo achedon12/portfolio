@@ -1,0 +1,140 @@
+:root
+{
+    --white-color: #ffffff;
+    --black-color: #000000;
+    --orange-color: #cf6d17;
+}
+
+*
+{
+    margin: 0;
+    padding: 0;
+    
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* Header */
+header
+{
+    display: flex;
+    justify-content: end;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: -1;
+    background-image: url(../img/peter-gargiulo-cGNCepznaV8-unsplash.jpg);
+    height: 50vh;
+}
+
+header>nav
+{
+    width: 80%;
+}
+
+header>nav>ul
+{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+}
+
+header>nav>ul>li
+{
+    list-style: none;
+}
+
+header>nav a
+{
+    font-size: x-large;
+    text-decoration: none;
+    color: var(--white-color);
+}
+
+header>nav a:hover
+{
+    color: var(--orange-color);
+}
+
+header>img
+{
+    width: 325px; 
+}
+
+/* Main */
+
+main>section
+{
+    margin-top: 5%;
+}
+
+
+main>section#contact
+{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+}
+
+main>section#contact>a{
+    text-align: center;
+    width: 20%;
+    min-width: 150px;
+    margin: 1%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(../img/peter-gargiulo-cGNCepznaV8-unsplash.jpg);
+    padding: 1%;
+    border-radius: 25px;
+}
+
+main>section#contact>a:hover>img
+{
+    transform: scale(1.5);
+    transition-duration: 0.2s;
+}
+
+main>section#contact>a>img{
+    width: 10%;
+}
+
+/* Footer */
+footer
+{
+    color: var(--white-color);
+    display: flex;
+    background-color: var(--black-color);
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer>ul
+{
+    display: flex;
+    width: 75%;
+}
+
+footer>ul>li
+{
+    padding: 2%;
+    list-style: none;
+    width: 25%;
+}
+
+footer a
+{
+    text-decoration: none;
+    color: var(--white-color);
+}
+
+footer a:hover
+{
+    color: var(--orange-color);
+}
