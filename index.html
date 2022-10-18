@@ -1,58 +1,92 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Leo</title>
-        <link rel="stylesheet" href="assets/css/style.css">
-    </head>
-    <body>
-        <header>
-            <nav>
-                <ul>
-                    <li><a href="#aboutMe">A propos de moi</a></li>
-                    <li><a href="#compétences">Compétences</a></li>
-                    <li><a href="#projets">Projets</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-            <img src="assets/img/icon.png" alt="zfsdf">
-        </header>
-        <main>
-            <section id="aboutMe">
+	<head>
+		<title>Léo | Portfolio</title>
+		<link rel="stylesheet" href="assets/css/style.css">
+		<link rel="shortcut icon" href="assets/img/dev.png" type="image/x-icon">
+	</head>
+	<body>
+		<header>
+			<nav>
+				<ul>
+					<li><a href="#aboutMe">A propos de moi</a></li>
+					<li><a href="#compétences">Compétences</a></li>
+					<li><a href="#projets">Projets</a></li>
+					<li><a href="#contact">Contact</a></li>
+				</ul>
+			</nav>
+			<img src="assets/img/icon.png" alt="zfsdf">
+		</header>
+		<main>
+			<section id="aboutMe">
+				<h1>A propos de moi</h1>
+				<p>Salut, moi c'est <span>Léo Deroin</span> et j'ai <span>19 ans</span>. Je suis <span>développeur junior</span>.
+					J'ai fais un baccalauréat général et technologique et je suis maintenant à l'IUT informatique de Valence en 2ème année. Je suis <span>passionné</span> par l'informatique
+					et le monde technologique depuis maintenant <span>6 ans</span>.
+					Durant mon temps libre, je n'hésite pas à <span>faire du sport</span>, <span>me documenter</span> sur les nouvelles technologies et <span>me former</span>.
+					Je suis axé sur le <span>développement web</span> et j'aimerai consolider mes compétences dans ce domaine afin de devenir
+					<span>développeur full-stack</span>.</p>
+					<a href="#"><button>Mon CV</button></a>
+				</section>
 
-            </section>
+			<h1>Mes compétences</h1>
+			<section id="compétences">
+				
+			</section>
 
-            <section id="compétences">
-                
-            </section>
-
-            <section id="projets">
-                
-            </section>
-
-            <section id="contact">
-                <a href="https://www.github.com/achedon12" target="blank">
-                    <img src="assets/img/github.png" alt="1">
-                </a>
-                <a href="https://www.linkedin.com/in/leo-deroin/" target="blank">
-                    <img src="assets/img/linkedin.png" alt="2">
-                </a>
-                <a href="tel:0640848933">
-                    <img src="assets/img/phone-call.png" alt="3">
-                </a>
-                <a href="mailto:l.deroin@netcourrier.com">
-                    <img src="assets/img/email.png" alt="4">
-                </a>
-            </section>
-        </main>
-        <footer>
-            <ul>
-                <li><a href="#aboutMe">A propos de moi</a></li>
-                <li><a href="#compétences">Compétences</a></li>
-                <li><a href="#projets">Projets</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <p>&copy; Copyright 2022 - <a href="https://github.com/achedon12" target="blank">Léo Deroin</a></p>
-        </footer>
-    </body>
-    <script src="assets/js/index.js"></script>
+			<h1>Mes projets</h1>
+			<section id="projets">
+				<article class="little">
+					<h1>Site Portfolio</h1>
+					<p>Ce site est mon <span>portfolio</span> et est le projet où j'ai essayé de montrer le plus mes <span>compétences en web</span>.
+						Il me sert donc de site CV pour mes compétences.
+					</p>
+					<a href="https://github.com/achedon12/portfolio" target="blank"><button>Lien vers le projet</button></a>
+				</article>
+				<article class="big">
+					<h1>Goldrush</h1>
+					<p><span>Goldrush</span> est un serveur de jeu ayant été ouvert pendant 6 mois avec un total de <span>1500 joueurs</span> uniques. 
+						Ce serveur a permis à un groupe d'amis de <span>développer leurs compétences</span> dans les domaines du <span>gameplay</span>, du <span>developpement web</span> et de la <span>communication</span>. Ce projet a été réalisé à côté
+						de nos passions et en plus des cours. Il m'a permis de <span>montrer mes compétences</span> et ainsi les <span>améliorer</span>. C'est effectivement au cours de celui-ci que je me suis découvret une <span>passion</span>
+						sur le développement web lors de sa création.</p>
+					<a href="https://github.com/GoldRush-Corporation" target="blank"><button>Lien vers le projet</button></a>
+				</article>
+				<article class="little">
+					<h1>BenzinGarage</h1>
+					<p><span>BenzinGarage</span> est un projet en <span>cours de réalisation</span>. Ce site web permet à un garage de mieux organiser la gestion de ses stocks et de ses clients. 
+						Il est réalisé dans le cadre de ma <span>formation actuelle</span> afin de montrer ce que l'on a acquis durant ma première année de BUT informatique</p>
+					<a href="https://github.com/achedon12/BenzinGarage" target="blank"><button>Lien vers le projet</button></a>
+				</article>
+			</section>
+			<section id="contact">
+				<a href="mailto:l.deroin@netcourrier.com"><h1>l.deroin@netcourrier.com</h1></a>
+				<h1>06 40 84 89 33</h1>
+				<p>N'hésitez pas à me contacter, je suis à votre disposition pour plus d'informations</p>
+				<form method="post">
+					<input type="text" name="firstname" id="firstname" placeholder="Votre prénom">
+					<input type="text" name="name" id="name" placeholder="Votre nom">
+					<input type="email" name="mail" id="mail" placeholder="Votre Email">
+					<input type="text" name="message" id="message" placeholder="Votre message">
+					<input type="submit" value="Envoyer" id="send">
+				</form>
+				<section>
+					<a href="https://www.linkedin.com/in/leo-deroin/" target="blank"><img src="assets/img/linkedin.png" alt="linkdin"></a>
+					<a href="https://www.github.com/achedon12" target="blank"><img src="assets/img/github.png" alt="github"></a>
+					<a href="http://discordapp.com/users/741646023939588236" target="blank"><img src="assets/img/discord.png" alt="discord"></a>
+					<a href="tel:0640848933" target="blank"><img src="assets/img/phone-call.png" alt="phone"></a>
+					<a href="mailto:l.deroin@netcourrier.com" target="blank"><img src="assets/img/email.png" alt="mail"></a>
+				</section>
+			</section>
+		</main>
+		<footer>
+			<ul>
+				<li><a href="#aboutMe">A propos de moi</a></li>
+				<li><a href="#compétences">Compétences</a></li>
+				<li><a href="#projets">Projets</a></li>
+				<li><a href="#contact">Contact</a></li>
+			</ul>
+			<p>&copy; Copyright 2022 - <a href="https://github.com/achedon12" target="blank">Léo Deroin</a></p>
+		</footer>
+	</body>
+	<script src="assets/js/index.js"></script>
 </html>

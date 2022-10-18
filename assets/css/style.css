@@ -3,6 +3,7 @@
     --white-color: #ffffff;
     --black-color: #000000;
     --orange-color: #cf6d17;
+    --grey-color: #949494;
 }
 
 *
@@ -15,6 +16,8 @@
     -ms-user-select: none;
     user-select: none;
     -webkit-user-drag: none;
+
+    scroll-behavior: smooth;
 }
 
 /* Header */
@@ -27,7 +30,8 @@ header
     background-size: cover;
     z-index: -1;
     background-image: url(../img/peter-gargiulo-cGNCepznaV8-unsplash.jpg);
-    height: 50vh;
+    height: 50%;
+    min-height: 250px;
 }
 
 header>nav
@@ -42,11 +46,14 @@ header>nav>ul
     align-items: center;
     justify-content: space-around;
     width: 100%;
+    flex-wrap: wrap;
 }
 
 header>nav>ul>li
 {
     list-style: none;
+    width: 20%;
+    min-width: 150px;
 }
 
 header>nav a
@@ -67,42 +74,290 @@ header>img
 }
 
 /* Main */
+main
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+main>h1
+{
+    margin-top: 3%;
+}
 
 main>section
 {
     margin-top: 5%;
-}
-
-
-main>section#contact
-{
-    display: flex;
-    flex-wrap: wrap;
     width: 100%;
-    justify-content: center;
 }
 
-main>section#contact>a{
-    text-align: center;
-    width: 20%;
-    min-width: 150px;
+/* Main aboutMe */
+
+main>section#aboutMe
+{
     margin: 1%;
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 70%;
+    min-width: 250px;
     background-repeat: no-repeat;
     background-size: cover;
     background-image: url(../img/peter-gargiulo-cGNCepznaV8-unsplash.jpg);
+    border-radius: 25px;
+    color: var(--white-color);
+}
+
+main>section#aboutMe>*
+{
     padding: 1%;
+}
+
+main>section#aboutMe>h1
+{
+    margin-top: -20px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(../img/peter-gargiulo-cGNCepznaV8-unsplash.jpg);
     border-radius: 25px;
 }
 
-main>section#contact>a:hover>img
+main>section#aboutMe>a
 {
-    transform: scale(1.5);
-    transition-duration: 0.2s;
+    text-decoration: none;
+    color: var(--white-color);
 }
 
-main>section#contact>a>img{
-    width: 10%;
+main>section#aboutMe>a>button
+{
+    background-color: transparent;
+    color: var(--white-color);
+    border: 1px solid var(--white-color);
+    border-radius: 25px;
+    width: 70%;
+    min-width: 150px;
 }
+
+main>section#aboutMe>a>button:hover
+{
+    transition-duration: 0.4s;
+    background-color: var(--orange-color);
+    color: var(--white-color);
+    border: 1px solid var(--white-color);
+}
+
+/* Main compétences */
+
+
+/* Main => Projets */
+main>section#projets
+{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+main>section#projets>article
+{
+    margin: 1%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 30%;
+    min-width: 250px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(../img/peter-gargiulo-cGNCepznaV8-unsplash.jpg);
+    border-radius: 25px;
+    color: var(--white-color);
+}
+
+main>section#projets>article>*
+{
+    padding: 2%;
+}
+
+main>section#projets>article.little
+{
+    height: 80%;
+    align-self: flex-end;
+}
+
+main>section#projets>article.big
+{
+    height: 100%;
+}
+
+main>section#projets>article>h1
+{
+    margin-top: -20px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(../img/peter-gargiulo-cGNCepznaV8-unsplash.jpg);
+    border-radius: 25px;
+}
+
+main>section#projets>article>p
+{
+    width: 80%;
+    height: 100%;
+}
+
+main>section#projets>article>a>button
+{
+    background-color: transparent;
+    border: 1px solid var(--white-color);
+    color: var(--white-color);
+    border-radius: 25px;
+    width: 70%;
+    min-width: 150px;
+}
+
+main>section#projets>article>a>button:hover
+{
+    transition-duration: 0.4s;
+    background-color: var(--orange-color);
+    color: var(--white-color);
+    border: 1px solid var(--white-color);
+}
+
+p>span
+{
+    color: var(--orange-color);
+}
+
+/* Main => Contact */
+main>section#contact
+{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(../img/peter-gargiulo-cGNCepznaV8-unsplash.jpg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+main>section#contact>*
+{
+    color: var(--white-color);
+    margin-top: 2%;
+}
+
+main>section#contact>a
+{
+    color: var(--white-color);
+    text-decoration: none;
+    width: 10%;
+    min-width: 180px;
+}
+
+main>section#contact>a:hover>h1
+{
+    border: 1px solid var(--white-color);
+}
+
+
+main>section#contact>a>h1
+{
+    background-color: var(--orange-color);
+    border-radius: 25px;
+    font-size:small;
+    padding: 3%;
+    border: 1px solid var(--orange-color);
+}
+
+
+
+main>section#contact>p
+{
+    color: var(--white-color);
+}
+
+main>section#contact>form
+{
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    align-items: center;
+}
+
+main>section#contact>form>input
+{
+    background-color: transparent;
+    border: none;
+    margin: 1%;
+    color: var(--white-color);
+}
+
+::-webkit-input-placeholder
+{
+    color: var(--white-color);
+    padding: 1%;
+}
+
+main>section#contact>form>input:nth-child(1), main>section#contact>form>input:nth-child(2)
+{
+    margin: 1%;
+    width: 48%;
+}
+
+main>section#contact>form>input:nth-child(1),main>section#contact>form>input:nth-child(2),main>section#contact>form>input:nth-child(3)
+{
+    border-bottom: 1px solid var(--white-color);
+}
+
+main>section#contact>form>input:nth-child(3),main>section#contact>form>input:nth-child(4)
+{
+    width: 100%;
+}
+
+main>section#contact>form>input:nth-child(4)
+{
+    border: 1px solid var(--white-color);   
+    height: 10vh;
+}
+
+main>section#contact>form>input:nth-child(5)
+{
+    padding: 1%;
+    background-color: var(--orange-color);
+    border-radius: 5px;
+    width: 20%;
+    min-width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+main>section#contact>section
+{
+    display: flex;
+    width: 20%;
+    justify-content: space-around;
+    margin-bottom: 1%;
+}
+
+main>section#contact>section>a
+{
+    text-decoration: none;
+}
+
+main>section#contact>section>a:hover
+{
+    transform: scale(1.2);
+    transition-duration: 0.4s;
+}
+
+main>section#contact>section>a>img
+{
+    width: 20%;
+    min-width: 25px;
+}
+
 
 /* Footer */
 footer
@@ -137,4 +392,9 @@ footer a
 footer a:hover
 {
     color: var(--orange-color);
+}
+
+footer p
+{
+    margin-bottom: 1%;
 }
