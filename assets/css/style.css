@@ -148,7 +148,126 @@ main>section#aboutMe>a>button:hover
     border: 1px solid var(--white-color);
 }
 
-/* Main compétences */
+/* Main compétences & experiences */
+main>section#compétences
+{
+    display: flex;
+    flex-wrap: wrap;
+    color: var(--white-color);
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url(../img/peter-gargiulo-cGNCepznaV8-unsplash.jpg);
+    align-items: center;
+}
+
+main>section#compétences>h1
+{
+    margin-top: 1%;
+}
+
+main>section#compétences>section.description
+{
+    margin-top: 3%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+main>section#compétences>section.description>article
+{
+    margin-top: 2%;
+    width: 48%;
+    padding: 1%;
+    min-width: 300px;
+}
+
+main>section#compétences>article>p
+{
+    width: 50%;
+    padding: 3%;
+}
+
+main>section#compétences>article.small
+{
+    width: 50%;
+}
+
+main>section#compétences>article{
+    margin-top: 2%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+main>section#compétences>article.large
+{
+    width: 100%;
+    display: flex;
+}
+
+main>section#compétences>article>h1
+{
+    width: 100%;
+}
+
+main>section#compétences>article>section>img
+{
+    width: 2%;
+    min-width: 50px;
+    padding: 2%;
+    margin-top: 1%;
+}
+
+main>section#compétences>article>section>img:hover
+{
+    transform: scale(1.2);
+    transition-duration: 0.4s;
+}
+
+main>section#compétences>article.job
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2%;
+}
+
+main>section#compétences>article.job>section
+{
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+}
+
+main>section#compétences>article.job>section>article
+{
+    width: 40%;
+    margin-top: 2%;
+    min-width: 300px;
+    padding: 1%;
+}
+
+main>section#compétences>article.job>section>article:hover
+{
+    transform: scale(1.2);
+    transition-duration: 0.4s;
+}
+
+main>section#compétences>article.job>section>article>h1>a
+{
+    color: var(--white-color);
+}
+
+main>section#compétences>article.job>section>article>h1>a:hover
+{
+    color: var(--orange-color);
+}
 
 
 /* Main => Projets */
@@ -261,7 +380,6 @@ main>section#contact>a:hover>h1
     border: 1px solid var(--white-color);
 }
 
-
 main>section#contact>a>h1
 {
     background-color: var(--orange-color);
@@ -270,8 +388,6 @@ main>section#contact>a>h1
     padding: 3%;
     border: 1px solid var(--orange-color);
 }
-
-
 
 main>section#contact>p
 {
@@ -331,12 +447,18 @@ main>section#contact>form>input:nth-child(5)
     min-width: 100px;
     margin-left: auto;
     margin-right: auto;
+    border: 1px solid var(--orange-color);
+}
+
+main>section#contact>form>input:nth-child(5):hover
+{
+    border: 1px solid var(--white-color);
 }
 
 main>section#contact>section
 {
     display: flex;
-    width: 20%;
+    width: 50%;
     justify-content: space-around;
     margin-bottom: 1%;
 }
@@ -357,7 +479,6 @@ main>section#contact>section>a>img
     width: 20%;
     min-width: 25px;
 }
-
 
 /* Footer */
 footer
