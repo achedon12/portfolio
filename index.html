@@ -14,6 +14,7 @@
 					<li><a href="#projets">Projets</a></li>
 					<li><a href="#contact">Contact</a></li>
 				</ul>
+				<p>Développeur junior en 2ème année de BUT informatique, motivé et passioné par les nouvelles technologies.</p>
 			</nav>
 			<img src="assets/img/icon.png" alt="zfsdf">
 		</header>
@@ -31,16 +32,16 @@
 			</section>
 
 			<section id="compétences">
-				<h1>Mes compétences & expériences</h1>
+				<h1 class="title">Mes compétences & expériences</h1>
 				<section class="description">
 					<article class="small">
-						<h1>Developpement Web</h1>
+						<h1>Développement Web</h1>
 						<p>Je suis capable de <span>créer un site</span> à partir d'une maquette donnée ou bien de <span>créer une maquette</span> en fonction des besoins d'un client, de l'ajuster en fonction
 							de son avis et de <span>créer un site</span> web par la suite grâce à cette dernière. 
 						</p>
 					</article>
 					<article class="small">
-						<h1>Base de donnée</h1>
+						<h1>Base de données</h1>
 						<p>Je suis capable de créer <span>une base de donnée</span> relative en fonction des différents besoins qu'un client souhaite mettre en place. Je peux <span>créer des requètes</span>, <span>des triggers</span> et <span>des procédures</span>
 							permettant de relier base de donnée et une quelconque autre application web ou java. 
 						</p>
@@ -66,20 +67,8 @@
 						<img src="assets/img/figma.png" alt="figma">
 					</section>
 				</article>
-				<article class="large job">
-					<h1>Mes emplois en entreprise</h1>
-					<section>
-						<article>
-							<h1>Chargé de clientèle à la poste - CDI Octobre 2022</h1>
-						</article>
-						<article>
-							<h1>Vendeur/serveur chez <a href="https://www.chocolateriejacob.com/" target="blank">Gaël Jacob</a> - Travail d'été 2021 (2 mois)</h1>
-						</article>
-					</section>
-				</article>
 			</section>
-
-			<h1>Mes projets</h1>
+			<h1 class="title">Mes projets</h1>
 			<section id="projets">
 				<article class="little">
 					<h1>Site Portfolio</h1>
@@ -105,24 +94,22 @@
 			</section>
 			<section id="contact">
 				<a href="mailto:l.deroin@netcourrier.com"><h1>l.deroin@netcourrier.com</h1></a>
-				<h1>06 40 84 89 33</h1>
 				<p>N'hésitez pas à me contacter, je suis à votre disposition pour plus d'informations</p>
 				<form method="post">
-					<input type="text" name="firstname" id="firstname" placeholder="Votre prénom">
-					<input type="text" name="name" id="name" placeholder="Votre nom">
-					<input type="email" name="mail" id="mail" placeholder="Votre Email">
-					<input type="text" name="message" id="message" placeholder="Votre message">
-					<input type="submit" value="Envoyer" id="send">
+					<input type="subject" name="subject" id="subject" placeholder="Sujet" class="subject">
+					<input type="text" name="message" id="message" placeholder="Votre message" class="message">
 				</form>
+				<button onclick="fillemail()">Me contacter</button>
 				<section>
 					<a href="https://www.linkedin.com/in/leo-deroin/" target="blank"><img src="assets/img/linkedin.png" alt="linkdin"></a>
 					<a href="https://www.github.com/achedon12" target="blank"><img src="assets/img/github.png" alt="github"></a>
 					<a href="http://discordapp.com/users/741646023939588236" target="blank"><img src="assets/img/discord.png" alt="discord"></a>
 					<a href="tel:0640848933" target="blank"><img src="assets/img/phone-call.png" alt="phone"></a>
-					<a href="mailto:l.deroin@netcourrier.com" target="blank"><img src="assets/img/email.png" alt="mail"></a>
+					<a href="mailto:l.deroin@netcourrier.com" target="blank" class="emailaddress"><img src="assets/img/email.png" alt="mail"></a>
 				</section>
 			</section>
 		</main>
+		<div class="ascenseur">^</div>
 		<footer>
 			<ul>
 				<li><a href="#aboutMe">A propos de moi</a></li>

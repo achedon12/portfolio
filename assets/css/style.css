@@ -18,6 +18,8 @@
     -webkit-user-drag: none;
 
     scroll-behavior: smooth;
+
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 /* Header */
@@ -37,16 +39,31 @@ header
 header>nav
 {
     width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 header>nav>ul
 {
-    height: 100%;
+    height: 80%;
     display: flex;
     align-items: center;
     justify-content: space-around;
     width: 100%;
     flex-wrap: wrap;
+}
+header>nav>p
+{
+    margin-left: 0;
+    margin-right: 0;
+    color: var(--white-color);
+    width: 50%;
+    min-width: 150px;
+    text-align: center;
+    font-size: large;
+    padding: 1%;
+    margin-bottom: 1%;
 }
 
 header>nav>ul>li
@@ -54,6 +71,7 @@ header>nav>ul>li
     list-style: none;
     width: 20%;
     min-width: 150px;
+    text-align: center;
 }
 
 header>nav a
@@ -163,9 +181,16 @@ main>section#compétences
     align-items: center;
 }
 
+h1.title
+{
+   border-bottom: 2px solid var(--orange-color);
+   padding: 1%;
+}
+
 main>section#compétences>h1
 {
-    margin-top: 1%;
+    margin-top: 3%;
+    padding: 1%;
 }
 
 main>section#compétences>section.description
@@ -182,11 +207,26 @@ main>section#compétences>section.description>article
     width: 48%;
     padding: 1%;
     min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+main>section#compétences>section.description>article>*
+{
+    margin-top: 1%;
+}
+
+main>section#compétences>section.description>article>p
+{
+    width: 60%;
+    min-width: 250px;
 }
 
 main>section#compétences>article>p
 {
-    width: 50%;
+    width: 40%;
     padding: 3%;
 }
 
@@ -255,7 +295,7 @@ main>section#compétences>article.job>section>article
 
 main>section#compétences>article.job>section>article:hover
 {
-    transform: scale(1.2);
+    transform: scale(1.1);
     transition-duration: 0.4s;
 }
 
@@ -268,7 +308,6 @@ main>section#compétences>article.job>section>article>h1>a:hover
 {
     color: var(--orange-color);
 }
-
 
 /* Main => Projets */
 main>section#projets
@@ -344,6 +383,11 @@ main>section#projets>article>a>button:hover
     border: 1px solid var(--white-color);
 }
 
+p
+{
+    line-height: 1.5;
+}
+
 p>span
 {
     color: var(--orange-color);
@@ -371,8 +415,8 @@ main>section#contact>a
 {
     color: var(--white-color);
     text-decoration: none;
-    width: 10%;
-    min-width: 180px;
+    width: 15%;
+    min-width: 250px;
 }
 
 main>section#contact>a:hover>h1
@@ -384,7 +428,7 @@ main>section#contact>a>h1
 {
     background-color: var(--orange-color);
     border-radius: 25px;
-    font-size:small;
+    font-size:large;
     padding: 3%;
     border: 1px solid var(--orange-color);
 }
@@ -416,41 +460,34 @@ main>section#contact>form>input
     padding: 1%;
 }
 
-main>section#contact>form>input:nth-child(1), main>section#contact>form>input:nth-child(2)
-{
-    margin: 1%;
-    width: 48%;
-}
-
-main>section#contact>form>input:nth-child(1),main>section#contact>form>input:nth-child(2),main>section#contact>form>input:nth-child(3)
+main>section#contact>form>input:nth-child(1)
 {
     border-bottom: 1px solid var(--white-color);
+    padding: 1%;
 }
 
-main>section#contact>form>input:nth-child(3),main>section#contact>form>input:nth-child(4)
+main>section#contact>form>input:nth-child(1),main>section#contact>form>input:nth-child(2)
 {
     width: 100%;
 }
 
-main>section#contact>form>input:nth-child(4)
+main>section#contact>form>input:nth-child(2)
 {
     border: 1px solid var(--white-color);   
     height: 10vh;
 }
 
-main>section#contact>form>input:nth-child(5)
+main>section#contact>button
 {
-    padding: 1%;
     background-color: var(--orange-color);
-    border-radius: 5px;
-    width: 20%;
-    min-width: 100px;
-    margin-left: auto;
-    margin-right: auto;
+    border-radius: 25px;
+    width: 15%;
+    min-width: 250px;
     border: 1px solid var(--orange-color);
+    font-size: large;
 }
 
-main>section#contact>form>input:nth-child(5):hover
+main>section#contact>button:hover
 {
     border: 1px solid var(--white-color);
 }
@@ -494,12 +531,13 @@ footer
 footer>ul
 {
     display: flex;
-    width: 75%;
+    width: 90%;
 }
 
 footer>ul>li
 {
-    padding: 2%;
+    padding: 1%;
+    text-align: center;
     list-style: none;
     width: 25%;
 }
@@ -518,4 +556,31 @@ footer a:hover
 footer p
 {
     margin-bottom: 1%;
+}
+
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 0 var(--grey-color);
+    border-radius: 50px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--grey-color);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--grey-color);
+}
+
+.ascenseur
+{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    color: red;
 }
