@@ -584,17 +584,10 @@ footer p
     color: red;
 }
 
-@media screen and (max-width:827px){
-    main>section#projets>article
-    {
-        width: 30%;
-    }
-}
-
 @media screen and (min-width:827px){
 
     main>section#projets>article
     {
-        width: 80%;
+        width: 70%;
     }
 }
