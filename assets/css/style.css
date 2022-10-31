@@ -326,6 +326,7 @@ main>section#projets>article
     align-items: center;
     text-align: center;
     width: 30%;
+    min-width: 400px;
     background-repeat: no-repeat;
     background-size: cover;
     background-image: url(../img/peter-gargiulo-cGNCepznaV8-unsplash.jpg);
@@ -586,8 +587,26 @@ footer p
 
 @media screen and (max-width:827px){
 
-    main>section#projets>article
+    main>section#projets
     {
-        min-width: 400px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
+
+    
+    main>section#projets>article.little
+    {
+        align-self:center; 
+    }
+}
+
+
+@media screen and (min-width:827px){
+
+    main>section#projets
+    {
+        flex-direction: initial;
+    }
+
 }
