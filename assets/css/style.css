@@ -585,7 +585,7 @@ footer p
     color: red;
 }
 
-@media screen and (max-width:827px){
+@media screen and (max-width:580px){
 
     main>section#projets
     {
@@ -602,7 +602,7 @@ footer p
 }
 
 
-@media screen and (min-width:827px){
+@media screen and (min-width:580px){
 
     main>section#projets
     {
