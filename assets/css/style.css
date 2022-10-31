@@ -588,6 +588,6 @@ footer p
 
     main>section#projets>article
     {
-        width: 70%;
+        min-width: 400px;
     }
 }
