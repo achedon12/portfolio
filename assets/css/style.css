@@ -584,7 +584,9 @@ footer p
     color: red;
 }
 
-@media screen and (max-width:580px){
+
+/* Phone responsive */
+@media screen and (max-width:700px){
 
     main>section#projets
     {
@@ -602,16 +604,29 @@ footer p
     {
         align-self:center; 
     }
+
+    .description
+    {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
 }
 
-@media screen and (min-width:580px){
+/* other responsive */
+@media screen and (min-width:700px){
 
     main>section#projets>article
     {
-        width: 600px;
+        width: 500px;
     }
 
     main>section#projets
+    {
+        flex-direction: initial;
+    }
+
+    .description
     {
         flex-direction: initial;
     }
