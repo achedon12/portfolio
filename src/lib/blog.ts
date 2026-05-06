@@ -70,10 +70,18 @@ function tagsArray(json: unknown): string[] {
 }
 
 export async function getAllPosts(): Promise<PostMeta[]> {
-  const posts = await prisma.blogPost.findMany({
-    where: { published: true, publishedAt: { not: null, lte: new Date() } },
-    orderBy: { publishedAt: "desc" },
-  });
+  // Tolérance au build offline (Docker prod) : si la DB n'est pas joignable,
+  // on retourne []. Le runtime régénère via ISR (revalidate=60) au premier hit.
+  let posts;
+  try {
+    posts = await prisma.blogPost.findMany({
+      where: { published: true, publishedAt: { not: null, lte: new Date() } },
+      orderBy: { publishedAt: "desc" },
+    });
+  } catch (e) {
+    console.warn("[blog] getAllPosts: DB unreachable, returning []", e instanceof Error ? e.message : e);
+    return [];
+  }
 
   return posts.map((p) => {
     const { minutes, words } = readingTime(p.content);
@@ -92,7 +100,13 @@ export async function getAllPosts(): Promise<PostMeta[]> {
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | null> {
-  const p = await prisma.blogPost.findUnique({ where: { slug } });
+  let p;
+  try {
+    p = await prisma.blogPost.findUnique({ where: { slug } });
+  } catch (e) {
+    console.warn("[blog] getPostBySlug: DB unreachable, returning null", e instanceof Error ? e.message : e);
+    return null;
+  }
   if (!p || !p.published) return null;
   if (p.publishedAt && p.publishedAt > new Date()) return null;
 

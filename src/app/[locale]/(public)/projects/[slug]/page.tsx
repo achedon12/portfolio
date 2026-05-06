@@ -66,7 +66,13 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   const t = await getTranslations("ProjectDetail");
   const tNav = await getTranslations("Nav");
 
-  const project = await prisma.project.findUnique({ where: { slug } });
+  let project;
+  try {
+    project = await prisma.project.findUnique({ where: { slug } });
+  } catch (e) {
+    console.warn("[project detail] DB unreachable at render", e instanceof Error ? e.message : e);
+    notFound();
+  }
   if (!project) notFound();
 
   const [prev, next] = await Promise.all([

@@ -18,6 +18,9 @@
     "docker:prod:up": "docker compose up -d --build",
     "docker:prod:down": "docker compose down"
   },
+  "prisma": {
+    "seed": "node prisma/seed.mjs"
+  },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
     "@prisma/client": "^6.0.0",

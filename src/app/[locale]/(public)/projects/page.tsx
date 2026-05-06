@@ -36,9 +36,16 @@ export default async function ProjectsPage({ params }: Props) {
   const t = await getTranslations("Projects");
   const tNav = await getTranslations("Nav");
 
-  const projects = await prisma.project.findMany({
-    orderBy: [{ featured: "desc" }, { publishedAt: "desc" }],
-  });
+  // Tolérance au build offline : si la DB n'est pas joignable au moment du
+  // pre-render, on rend une liste vide. ISR (revalidate=60) régénère au runtime.
+  let projects: Awaited<ReturnType<typeof prisma.project.findMany>> = [];
+  try {
+    projects = await prisma.project.findMany({
+      orderBy: [{ featured: "desc" }, { publishedAt: "desc" }],
+    });
+  } catch (e) {
+    console.warn("[projects] DB unreachable at render, returning []", e instanceof Error ? e.message : e);
+  }
 
   const data = projects.map((p) => ({
     slug: p.slug,

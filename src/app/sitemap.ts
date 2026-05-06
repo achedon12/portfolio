@@ -13,10 +13,20 @@ import { routing } from "@/i18n/routing";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = process.env.NEXT_PUBLIC_APP_URL ?? "https://www.leoderoin.fr";
 
-  const [projects, posts] = await Promise.all([
-    prisma.project.findMany({ select: { slug: true, updatedAt: true } }),
-    getAllPosts(),
-  ]);
+  // Tolérance build offline : si la DB n'est pas joignable, on génère le
+  // sitemap sans les routes dynamiques. Prochaine régénération ISR au runtime.
+  let projects: Array<{ slug: string; updatedAt: Date }>;
+  let posts: Awaited<ReturnType<typeof getAllPosts>>;
+  try {
+    [projects, posts] = await Promise.all([
+      prisma.project.findMany({ select: { slug: true, updatedAt: true } }),
+      getAllPosts(),
+    ]);
+  } catch (e) {
+    console.warn("[sitemap] DB unreachable, emitting static routes only", e instanceof Error ? e.message : e);
+    projects = [];
+    posts = [];
+  }
 
   const localizedUrl = (path: string, locale: string) =>
     locale === routing.defaultLocale ? `${base}${path}` : `${base}/${locale}${path}`;

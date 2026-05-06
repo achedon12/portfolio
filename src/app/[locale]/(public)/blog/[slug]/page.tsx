@@ -23,10 +23,14 @@ interface PageProps {
 export const revalidate = 60;
 
 export async function generateStaticParams() {
-  const posts = await getAllPosts();
-  return routing.locales.flatMap((locale) =>
-    posts.map((p) => ({ locale, slug: p.slug })),
-  );
+  try {
+    const posts = await getAllPosts();
+    return routing.locales.flatMap((locale) =>
+      posts.map((p) => ({ locale, slug: p.slug })),
+    );
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
