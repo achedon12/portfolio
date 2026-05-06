@@ -1,0 +1,40 @@
+---
+title: "J'ai refait mon portfolio en voyage spatial"
+description: "Pourquoi un site personnel peut (et devrait) prendre des risques côté UX. Retour sur la refonte de leoderoin.fr v3."
+publishedAt: "2026-04-12"
+tags: ["meta", "design", "next.js"]
+---
+
+Faire un portfolio de dev en 2026, c'est un exercice piégé. Tu trouves dix mille templates "starfield + dégradé violet + flexbox propre". C'est joli pendant trois secondes, puis ça s'évapore. J'avais le mien depuis trop longtemps, et je voulais quelque chose dont **on se souvient**.
+
+## Le brief que je me suis donné
+
+Pas un portfolio. Un **voyage**. L'utilisateur arrive sur la station, observe la planète, traverse la galerie d'expéditions, finit à la station de communication. Chaque section est un point d'intérêt cosmique.
+
+Trois règles que je me suis imposées :
+
+1. **Aucune animation gratuite.** Si un effet ne sert pas l'immersion ou la lisibilité, il dégage.
+2. **Pas de magie.** Chaque shader, chaque texture est compréhensible et commenté.
+3. **Accessible.** `prefers-reduced-motion` doit donner une expérience tout aussi agréable, juste sans le show.
+
+## Stack et choix techniques
+
+- **Next 16** App Router avec Server Components quand pertinent (pages projets en SSR, contact en API route).
+- **Three.js + React Three Fiber** pour la scène hero. La planète est entièrement procédurale — pas une seule texture chargée.
+- **GSAP ScrollTrigger** pour la fusée qui descend la timeline pendant qu'on scrolle.
+- **Prisma + MySQL** pour la persistance (messages contact, projets éditables sans redéploiement, tracking de visites).
+- **Tailwind 4** avec `@theme` pour mes couleurs cosmos custom.
+
+## Ce qui était dur
+
+La 3D plein écran sans plomber le LCP. La solution : `dynamic` import avec `ssr: false`, fallback CSS pour les machines limitées, `dpr: [1, 1.75]` pour ne pas exploser les retina, et une scène volontairement légère côté géométrie (96 segments par sphère, c'est largement assez).
+
+Le smooth scroll Lenis qui se fâche avec ScrollTrigger. La doc officielle GSAP a un snippet pour les marier — il marche du premier coup, à condition de bien lifecycle l'instance Lenis.
+
+## Le résultat
+
+Lighthouse passe au-dessus de 90 sur Perf et 95+ sur le reste. L'expérience desktop est immersive sans être agressive. Sur mobile, la 3D est simplifiée mais l'esprit est là.
+
+Et surtout, je n'ai plus honte de partager le lien.
+
+> Le code est sur [GitHub](https://github.com/leoderoin) — `leoderoin-portfolio`. Si tu y vois quelque chose de douteux, dis-moi.

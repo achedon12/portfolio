@@ -1,0 +1,260 @@
+{
+  "Nav": {
+    "about": "À propos",
+    "skills": "Compétences",
+    "projects": "Projets",
+    "blog": "Blog",
+    "uses": "Setup",
+    "experience": "Parcours",
+    "contact": "Contact"
+  },
+  "Hero": {
+    "kicker": "◊ Station LD-001 — Coordonnées 48.8566° N, 2.3522° E",
+    "name": "Léo Deroin",
+    "subtitle": "Développeur Fullstack",
+    "intro": "J'embarque dans tes projets web et j'en ressors avec des interfaces qu'on a envie de revisiter. PHP, Symfony, React, Next, Vue — et un goût prononcé pour ce qui se passe à l'écran.",
+    "embark": "Embarquer",
+    "viewProjects": "Voir les projets",
+    "satellitesLabel": "// satellites en orbite",
+    "scrollLabel": "Scroll",
+    "scrollAria": "Faire défiler vers la section suivante"
+  },
+  "About": {
+    "kicker": "◊ 02 — Carte d'identité du pilote",
+    "title": "Qui pilote la station ?",
+    "stats": {
+      "yearsOfExperience": "Années d'expérience",
+      "projectsDelivered": "Projets livrés",
+      "techMastered": "Technos maîtrisées"
+    },
+    "bio1": "Développeur fullstack basé à Lyon, passionné par les interfaces qui sortent du cadre — celles qui te font rester sur une page parce qu'il s'y passe quelque chose.",
+    "bio2": "Je travaille principalement sur la stack PHP/Symfony et JS/TS (React, Next.js, Vue 3), du back robuste à l'expérience front soignée. J'aime quand un projet a une raison d'exister, pas juste un cahier des charges.",
+    "bio3": "En alternance chez Confluent Digital à Lyon, je construis des outils SaaS pour des PME et je passe trop de temps à animer des shaders."
+  },
+  "Skills": {
+    "kicker": "◊ 03 — Constellation de compétences",
+    "title": "Une carte du ciel des technos",
+    "intro": "Chaque étoile = une techno. Les liens = la cohérence d'usage. Survole pour voir le détail, filtre pour mettre une famille en avant.",
+    "all": "Toutes",
+    "category": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "devops": "DevOps",
+      "tools": "Outils"
+    },
+    "level": "Niveau",
+    "yearsOfUse": "{years, plural, one {# an d'usage} other {# ans d'usage}}",
+    "ariaLabel": "Constellation de compétences techniques"
+  },
+  "Timeline": {
+    "kicker": "◊ 04 — Trajectoire orbitale",
+    "title": "Le parcours, par étapes",
+    "present": "Présent",
+    "kind": {
+      "education": "Formation",
+      "apprenticeship": "Alternance",
+      "internship": "Stage",
+      "student": "Job étudiant",
+      "job": "Salariat",
+      "freelance": "Freelance"
+    },
+    "items": {
+      "confluent-digital": {
+        "title": "Développeur Fullstack",
+        "org": "Confluent Digital",
+        "description": "Alternance fullstack au sein d'une agence : conception et développement d'applications web métier, gestion de projet et travail en équipe sur des produits SaaS internes et clients."
+      },
+      "esgi-master": {
+        "title": "Master Ingénierie du web",
+        "org": "ESGI",
+        "description": "Master en alternance, en parallèle de l'expérience chez Confluent Digital. Spécialisation autour des architectures web modernes."
+      },
+      "elipce-apprenticeship": {
+        "title": "Développeur Fullstack",
+        "org": "ELIPCE Solutions",
+        "description": "Développement d'une application mobile multisports (React Native + Expo, back PHP), maintenance applicative de la solution interne Datanalyz, modules du site corporate (Python, JS, HTML/CSS), documentation technique et fonctionnelle, participation aux comités de refonte du site."
+      },
+      "uga-but": {
+        "title": "BUT Informatique",
+        "org": "Université Grenoble Alpes",
+        "description": "Bachelor universitaire de technologie en informatique. Première grosse mise en pratique sur la stack web et les fondamentaux du développement logiciel."
+      },
+      "elipce-internship": {
+        "title": "Développeur Fullstack",
+        "org": "ELIPCE Solutions",
+        "description": "Stage de fin de cursus : maintenance applicative sur Datanalyz, la solution interne déployée chez les clients."
+      },
+      "la-poste": {
+        "title": "Chargé de clientèle",
+        "org": "La Poste Groupe",
+        "description": "Job étudiant en CDD temps partiel : accueil et conseil client en agence postale, communication directe avec un public varié."
+      },
+      "lpo-monge": {
+        "title": "Baccalauréat général",
+        "org": "LPO Monge",
+        "description": "Bac général option Mathématiques et Sciences de l'ingénieur — fondations scientifiques avant le passage à l'informatique."
+      }
+    }
+  },
+  "Contact": {
+    "kicker": "◊ 05 — Station de communication",
+    "title": "Ouvrir un canal",
+    "intro": "Projet, freelance, collab, simple bonjour. Le terminal écoute.",
+    "labels": {
+      "name": "› Nom",
+      "email": "› Email",
+      "subject": "› Sujet",
+      "message": "› Message"
+    },
+    "selectSubject": "— sélectionner —",
+    "subjects": {
+      "projet": "projet",
+      "freelance": "freelance",
+      "collab": "collab",
+      "autre": "autre"
+    },
+    "submit": "Transmettre",
+    "submitting": "Transmission…",
+    "successTitle": "Message transmis dans l'hyperespace",
+    "successDescription": "Réponse sous 24-48h. Merci.",
+    "another": "Envoyer un autre message",
+    "errorPrefix": "Transmission échouée —",
+    "errors": {
+      "nameTooShort": "Nom trop court",
+      "nameTooLong": "Nom trop long",
+      "emailInvalid": "Email invalide",
+      "subjectInvalid": "Sujet invalide",
+      "messageTooShort": "Message trop court (20 caractères min)",
+      "messageTooLong": "Message trop long (4000 caractères max)",
+      "rateLimited": "Trop de messages. Réessaie plus tard."
+    }
+  },
+  "Footer": {
+    "tagline": "Je conçois et développe des applications web sur la stack PHP / Symfony / Phalcon et JS / TS / Next / Vue. Du back robuste à l'expérience front soignée.",
+    "available": "Ouvert aux échanges",
+    "navigation": "Navigation",
+    "letsConnect": "Restons en contact",
+    "responseTime": "Réponse sous 24-48h",
+    "rights": "Tous droits réservés",
+    "backToTop": "Retour en haut"
+  },
+  "Projects": {
+    "metaTitle": "Projets — Portfolio développeur fullstack Lyon",
+    "metaDescription": "Galerie des projets réalisés par Léo Deroin, développeur fullstack à Lyon : applications web Next.js, React, Symfony, Phalcon, Vue.js. Projets perso, école et alternance chez Confluent Digital.",
+    "kicker": "◊ Galerie d'expéditions",
+    "title": "Projets & missions",
+    "intro": "Chaque carte est une planète à explorer — perso, école, pro ou freelance. Filtre par catégorie ou par stack pour cibler. Sélection des projets web réalisés à Lyon et ailleurs en alternance, en école et sur mon temps libre.",
+    "filterCategory": "Catégorie:",
+    "filterStack": "Stack:",
+    "all": "Toutes",
+    "noResults": "Aucune expédition ne correspond à ces filtres.",
+    "empty": "Aucun projet en base. Lance npm run db:seed pour charger les exemples.",
+    "card": {
+      "featured": "★ featured"
+    }
+  },
+  "ProjectDetail": {
+    "back": "Retour à la galerie",
+    "stackTitle": "◊ Stack utilisée",
+    "missionTitle": "◊ Journal de mission",
+    "galleryTitle": "◊ Captures",
+    "viewLive": "Voir le site live",
+    "sourceCode": "Code source",
+    "previousMission": "← Mission précédente",
+    "nextMission": "Mission suivante →"
+  },
+  "Blog": {
+    "metaTitle": "Carnets de bord",
+    "metaTitlePage": "Carnets de bord — page {page}",
+    "metaDescription": "Articles de Léo Deroin sur le développement web, le shading, Symfony, Next.js et la stack en général.",
+    "kicker": "◊ Carnets de bord",
+    "title": "Articles",
+    "intro": "Notes, retours d'expérience et analyses sur ma stack. Pas de calendrier de publication, j'écris quand j'ai quelque chose à dire.",
+    "rss": "Flux RSS",
+    "empty": "Aucun article pour le moment. Reviens bientôt.",
+    "readingTime": "{minutes} min"
+  },
+  "BlogPost": {
+    "back": "Retour aux carnets",
+    "readingTime": "{minutes} min de lecture",
+    "tableOfContents": "◊ Sommaire",
+    "share": "Partager",
+    "viewAll": "Voir tous les articles →",
+    "previous": "Article précédent",
+    "next": "Article suivant",
+    "shareLabels": {
+      "twitter": "Partager sur X / Twitter",
+      "linkedin": "Partager sur LinkedIn",
+      "copy": "Copier le lien",
+      "copied": "Copié"
+    },
+    "notFound": "Article introuvable"
+  },
+  "Uses": {
+    "metaTitle": "Setup et stack — PhpStorm, Xubuntu, Next.js, Symfony",
+    "metaDescription": "Le setup complet de Léo Deroin, développeur fullstack à Lyon : PhpStorm sous Xubuntu 24.04, stack Next.js / Symfony / Phalcon, extensions Chrome, hardware et outils CLI.",
+    "kicker": "◊ /uses",
+    "title": "Mon setup et ma stack",
+    "intro": "La liste honnête de tout ce qui passe sur mon poste au quotidien — éditeurs, hardware, navigateur, stack par défaut. Mise à jour quand mon setup bouge vraiment, pas pour faire joli.",
+    "lastUpdated": "Dernière mise à jour",
+    "inspiredBy": "Page inspirée par",
+    "sections": {
+      "editor": "Éditeurs",
+      "hardware": "Hardware",
+      "os": "OS & desktop",
+      "terminal": "Terminal & runtime",
+      "browser": "Navigateur",
+      "browserExtensions": "Extensions Chrome",
+      "stack": "Stack par défaut",
+      "tools": "CLI & outils",
+      "apps": "Apps"
+    }
+  },
+  "Comments": {
+    "title": "◊ Commentaires",
+    "loading": "Chargement…",
+    "empty": "Aucun commentaire pour l'instant. Sois le premier.",
+    "disabled": "Les commentaires sont désactivés sur cet article.",
+    "formTitle": "Laisser un commentaire",
+    "labels": {
+      "pseudo": "› Pseudo",
+      "emailOptional": "› Email (facultatif)",
+      "message": "› Message"
+    },
+    "emailPlaceholder": "jamais affiché",
+    "submit": "Envoyer",
+    "submitting": "Envoi…",
+    "moderationNotice": "Modéré avant affichage",
+    "pendingTitle": "Commentaire envoyé",
+    "pendingDescription": "Il sera publié après validation manuelle. Merci !",
+    "anotherComment": "écrire un autre commentaire",
+    "errors": {
+      "pseudoTooShort": "Pseudo trop court",
+      "pseudoTooLong": "Pseudo trop long",
+      "messageTooShort": "Message trop court",
+      "messageTooLong": "Message trop long (2000 caractères max)",
+      "emailInvalid": "Email invalide",
+      "rateLimited": "Trop de commentaires. Réessaie plus tard.",
+      "unknown": "Erreur inconnue"
+    }
+  },
+  "NotFound": {
+    "metaTitle": "Signal perdu — 404",
+    "metaDescription": "La station ne capte plus cette page.",
+    "kicker": "◊ Erreur 404 — Signal perdu",
+    "title": "Hors zone de couverture",
+    "description": "Cette page n'est plus en orbite — déplacée, supprimée, ou jamais arrivée jusqu'ici. Le terminal te propose de revenir vers une trajectoire connue.",
+    "code": "ERR_PAGE_NOT_FOUND",
+    "backHome": "Retour à la station",
+    "viewProjects": "Voir les projets",
+    "viewBlog": "Lire le blog"
+  },
+  "Common": {
+    "loading": "Chargement…",
+    "error": "Erreur",
+    "fr": "Français",
+    "en": "Anglais",
+    "switchToEn": "Passer en anglais",
+    "switchToFr": "Passer en français"
+  }
+}

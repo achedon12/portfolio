@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <radialGradient id="rg" cx="50%" cy="50%" r="60%">
+      <stop offset="0%" stop-color="#fb923c" stop-opacity="0.5"/>
+      <stop offset="60%" stop-color="#0a0420"/>
+      <stop offset="100%" stop-color="#030014"/>
+    </radialGradient>
+  </defs>
+  <rect width="800" height="500" fill="#030014"/>
+  <circle cx="400" cy="220" r="180" fill="url(#rg)"/>
+  <g transform="translate(400,220)" stroke="#fb923c" stroke-width="2" fill="none" stroke-linecap="round">
+    <circle r="150" stroke-opacity="0.6"/>
+    <circle r="120" stroke-opacity="0.25" stroke-dasharray="4 8"/>
+    <line x1="0" y1="0" x2="0"   y2="-110" stroke-width="3"/>
+    <line x1="0" y1="0" x2="80"  y2="40"   stroke-width="2.5" stroke-opacity="0.85"/>
+    <circle r="6" fill="#fb923c"/>
+    <g stroke-opacity="0.7">
+      <line x1="0" y1="-150" x2="0" y2="-138" stroke-width="3"/>
+      <line x1="150" y1="0"   x2="138" y2="0" stroke-width="3"/>
+      <line x1="0" y1="150"  x2="0"   y2="138" stroke-width="3"/>
+      <line x1="-150" y1="0" x2="-138" y2="0" stroke-width="3"/>
+    </g>
+  </g>
+  <text x="400" y="430" text-anchor="middle" font-family="ui-monospace, monospace" font-size="22" fill="#e2e8f0" font-weight="700">Chronos</text>
+  <text x="400" y="455" text-anchor="middle" font-family="ui-monospace, monospace" font-size="11" fill="#94a3b8">scheduler · reporting · snapshots</text>
+</svg>

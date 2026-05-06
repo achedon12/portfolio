@@ -1,0 +1,133 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  subject   String
+  message   String   @db.Text
+  ipAddress String?
+  userAgent String?
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([isRead])
+}
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  slug        String   @unique
+  title       String
+  description String   @db.Text
+  longContent String?  @db.LongText
+  coverImage  String
+  gallery     Json?
+  techStack   Json
+  category    String
+  liveUrl     String?
+  githubUrl   String?
+  featured    Boolean  @default(false)
+  publishedAt DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([slug])
+  @@index([featured])
+}
+
+model RateLimit {
+  id      Int      @id @default(autoincrement())
+  key     String   @unique
+  count   Int      @default(1)
+  resetAt DateTime
+}
+
+model AdminUser {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+}
+
+model BlogPost {
+  id          Int       @id @default(autoincrement())
+  slug        String    @unique
+  title       String
+  description String    @db.Text
+  content     String    @db.LongText
+  coverImage  String?
+  tags        Json?
+
+  // SEO — champs surchargeables, fallback sur title/description si null
+  metaTitle       String?
+  metaDescription String?  @db.Text
+  metaKeywords    String?
+  ogImage         String?
+  canonicalUrl    String?
+  noIndex         Boolean  @default(false)
+
+  // Publishing
+  published   Boolean   @default(false)
+  publishedAt DateTime?
+
+  // Engagement
+  viewCount       Int     @default(0)
+  likeCount       Int     @default(0)
+  /// Active les commentaires sur ce post. L'admin peut couper.
+  commentsEnabled Boolean @default(true)
+
+  likes    BlogPostLike[]
+  comments BlogComment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([slug])
+  @@index([published, publishedAt])
+}
+
+/**
+ * Like anonyme d'un post — un par (post, IP) pour empêcher le spam.
+ * On stocke un hash SHA-256 de l'IP avec un pepper, jamais l'IP brute (RGPD).
+ */
+model BlogPostLike {
+  id        Int      @id @default(autoincrement())
+  postId    Int
+  ipHash    String   @db.VarChar(64)
+  createdAt DateTime @default(now())
+
+  post BlogPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@unique([postId, ipHash])
+  @@index([postId])
+}
+
+/**
+ * Commentaire anonyme sur un article.
+ * Statut "pending" par défaut → l'admin valide manuellement avant affichage public.
+ */
+model BlogComment {
+  id        Int      @id @default(autoincrement())
+  postId    Int
+  pseudo    String   @db.VarChar(80)
+  message   String   @db.Text
+  /// Email facultatif, jamais affiché — utilisé seulement pour notifs admin.
+  email     String?  @db.VarChar(160)
+  ipHash    String   @db.VarChar(64)
+  userAgent String?  @db.Text
+  /// "pending" | "approved" | "spam"
+  status    String   @default("pending") @db.VarChar(16)
+  createdAt DateTime @default(now())
+
+  post BlogPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@index([postId, status])
+  @@index([status, createdAt])
+}

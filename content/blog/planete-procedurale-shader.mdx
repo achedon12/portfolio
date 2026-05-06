@@ -1,0 +1,101 @@
+---
+title: "Une planète en shader, sans une seule texture"
+description: "Comment la planète qui tourne sur la home est générée entièrement en GLSL — bruit fbm, terminator doux, halo atmosphérique fresnel."
+publishedAt: "2026-04-22"
+tags: ["three.js", "shaders", "glsl", "webgl"]
+---
+
+La planète qui tourne sur la home de ce site n'a aucune texture. Tout est calculé en temps réel, sphère + shader fragment. Voici le pourquoi et le comment.
+
+## Pourquoi pas une texture
+
+Une texture, c'est facile : tu prends une photo de la NASA, tu la mappes sur une sphère, c'est bon. Mais :
+
+- Tu paies le download (1-4 MB pour une 4K respectable).
+- Tu es coincé avec **cette** planète. Si demain tu veux la rendre plus violette, ou ajouter une calotte polaire, tu repasses dans Photoshop.
+- C'est moins fun.
+
+L'approche shader te donne une planète **paramétrable**. Tu changes une couleur, c'est instantané.
+
+## La structure
+
+Deux meshes empilés :
+
+1. Une sphère "surface" avec un shader custom qui dessine continents + océans + lumière.
+2. Une sphère un peu plus grande (1.06×), rendue côté intérieur (`BackSide`), additive, qui crée un halo atmosphérique débordant.
+
+```tsx
+<mesh ref={surfaceRef}>
+  <sphereGeometry args={[radius, 96, 96]} />
+  <shaderMaterial vertexShader={...} fragmentShader={...} />
+</mesh>
+
+<mesh scale={1.06}>
+  <sphereGeometry args={[radius, 64, 64]} />
+  <shaderMaterial side={THREE.BackSide} blending={THREE.AdditiveBlending} ... />
+</mesh>
+```
+
+## Le shader de surface
+
+Trois ingrédients :
+
+### 1. Bruit fbm pour les continents
+
+Le **fractal Brownian motion** (fbm) c'est juste plusieurs octaves de bruit empilées avec une amplitude qui décroît. Ça donne des formes organiques — exactement le look "carte du monde vue de loin".
+
+```glsl
+float fbm(vec3 p) {
+  float v = 0.0;
+  float a = 0.5;
+  for (int i = 0; i < 5; i++) {
+    v += a * vnoise(p);
+    p *= 2.0;
+    a *= 0.5;
+  }
+  return v;
+}
+```
+
+`vnoise` est un valueNoise classique (hash + interpolation cubique). 5 octaves c'est assez pour avoir du détail sans tuer le GPU.
+
+### 2. Lumière wrap-Lambert (terminator doux)
+
+Le terminator (la frontière jour/nuit) en Lambert pur, c'est trop sec. La formule classique `n.l` clampée à zéro coupe net. Le **wrap-Lambert** étire la transition :
+
+```glsl
+float ndl = dot(normal, lightDir);
+float light = clamp(ndl * 0.5 + 0.5, 0.0, 1.0);
+```
+
+Tu obtiens un dégradé doux du jour à la nuit. Ça coûte rien, ça change tout visuellement.
+
+### 3. Calotte polaire
+
+Trivial : si la latitude est haute (`|y|` proche de 1), on lerp vers un blanc bleuté.
+
+```glsl
+float polarMask = smoothstep(0.78, 0.95, abs(normalize(vPos).y));
+surface = mix(surface, polar, polarMask);
+```
+
+## Le halo atmosphérique
+
+Pure fresnel cubique. L'idée : quand la normale est perpendiculaire au regard (= bord du disque), tu boostes l'opacité. Plus tu vas vers le centre, plus le halo s'éteint.
+
+```glsl
+float fres = pow(1.0 - max(0.0, dot(normal, viewDir)), 2.5);
+gl_FragColor = vec4(atmosphere, fres * 0.55);
+```
+
+Avec **AdditiveBlending** + **BackSide**, ça produit ce glow cyan qui déborde. Aucune texture, aucun post-processing.
+
+## Performance
+
+La géométrie est minuscule (96×96 vertices). Le shader fait 5 octaves de bruit par fragment, ce qui paraît lourd mais reste largement sous 1ms par frame sur un Mac M1 ou un PC milieu de gamme.
+
+Pour les machines vraiment limitées, je tombe sur un fallback CSS pur avec `radial-gradient` — pas la même magie, mais ça reste cohérent avec le ton du site.
+
+## Le code complet
+
+C'est dans `src/components/three/Planet.tsx` du repo. Chaque uniform est commenté, chaque fonction GLSL est expliquée. L'idée c'est que tu puisses lire et adapter, pas copier-coller dans le noir.

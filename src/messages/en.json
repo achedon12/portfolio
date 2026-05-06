@@ -1,0 +1,260 @@
+{
+  "Nav": {
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "blog": "Blog",
+    "uses": "Uses",
+    "experience": "Experience",
+    "contact": "Contact"
+  },
+  "Hero": {
+    "kicker": "◊ Station LD-001 — Coordinates 48.8566° N, 2.3522° E",
+    "name": "Léo Deroin",
+    "subtitle": "Fullstack Developer",
+    "intro": "I jump aboard your web projects and ship interfaces people actually want to revisit. PHP, Symfony, React, Next, Vue — and a serious soft spot for what happens on screen.",
+    "embark": "Embark",
+    "viewProjects": "View projects",
+    "satellitesLabel": "// satellites in orbit",
+    "scrollLabel": "Scroll",
+    "scrollAria": "Scroll to the next section"
+  },
+  "About": {
+    "kicker": "◊ 02 — Pilot ID card",
+    "title": "Who runs the station?",
+    "stats": {
+      "yearsOfExperience": "Years of experience",
+      "projectsDelivered": "Projects shipped",
+      "techMastered": "Technologies mastered"
+    },
+    "bio1": "Fullstack developer based in Lyon, hooked on interfaces that step outside the lines — the kind that make you stay on a page because something is actually happening.",
+    "bio2": "I work mostly on the PHP/Symfony and JS/TS stacks (React, Next.js, Vue 3), from solid backends to polished frontend experiences. I like projects with a real reason to exist, not just a spec.",
+    "bio3": "Apprentice at Confluent Digital in Lyon, building SaaS tools for SMBs and spending too much time animating shaders."
+  },
+  "Skills": {
+    "kicker": "◊ 03 — Skills constellation",
+    "title": "A star map of the stack",
+    "intro": "Each star = a technology. Lines = how they fit together. Hover for details, filter to highlight a family.",
+    "all": "All",
+    "category": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "devops": "DevOps",
+      "tools": "Tools"
+    },
+    "level": "Level",
+    "yearsOfUse": "{years, plural, one {# year of use} other {# years of use}}",
+    "ariaLabel": "Technical skills constellation"
+  },
+  "Timeline": {
+    "kicker": "◊ 04 — Orbital trajectory",
+    "title": "The journey, step by step",
+    "present": "Present",
+    "kind": {
+      "education": "Education",
+      "apprenticeship": "Apprenticeship",
+      "internship": "Internship",
+      "student": "Student job",
+      "job": "Full-time",
+      "freelance": "Freelance"
+    },
+    "items": {
+      "confluent-digital": {
+        "title": "Fullstack Developer",
+        "org": "Confluent Digital",
+        "description": "Fullstack apprenticeship at a digital agency: design and development of business web applications, project management, and teamwork on internal and client SaaS products."
+      },
+      "esgi-master": {
+        "title": "Master's in Web Engineering",
+        "org": "ESGI",
+        "description": "Master's degree on a work-study program, alongside the Confluent Digital apprenticeship. Specialized in modern web architectures."
+      },
+      "elipce-apprenticeship": {
+        "title": "Fullstack Developer",
+        "org": "ELIPCE Solutions",
+        "description": "Built a multi-sport mobile app (React Native + Expo, PHP backend), maintained the internal Datanalyz platform, shipped corporate website modules (Python, JS, HTML/CSS), wrote technical and functional documentation, and joined the website redesign committees."
+      },
+      "uga-but": {
+        "title": "BUT in Computer Science",
+        "org": "Université Grenoble Alpes",
+        "description": "University Bachelor of Technology in Computer Science. First serious dive into the web stack and software development fundamentals."
+      },
+      "elipce-internship": {
+        "title": "Fullstack Developer",
+        "org": "ELIPCE Solutions",
+        "description": "End-of-program internship: maintenance work on Datanalyz, the internal platform deployed at client sites."
+      },
+      "la-poste": {
+        "title": "Customer Service Agent",
+        "org": "La Poste Groupe",
+        "description": "Part-time student job: customer welcome and advisory in a postal branch, direct communication with a wide range of clients."
+      },
+      "lpo-monge": {
+        "title": "High School Diploma",
+        "org": "LPO Monge",
+        "description": "General baccalaureate with Mathematics and Engineering Sciences — scientific groundwork before pivoting to computer science."
+      }
+    }
+  },
+  "Contact": {
+    "kicker": "◊ 05 — Comms station",
+    "title": "Open a channel",
+    "intro": "Project, freelance, collab, just saying hi. The terminal is listening.",
+    "labels": {
+      "name": "› Name",
+      "email": "› Email",
+      "subject": "› Subject",
+      "message": "› Message"
+    },
+    "selectSubject": "— select —",
+    "subjects": {
+      "projet": "project",
+      "freelance": "freelance",
+      "collab": "collab",
+      "autre": "other"
+    },
+    "submit": "Transmit",
+    "submitting": "Transmitting…",
+    "successTitle": "Message sent into hyperspace",
+    "successDescription": "Reply within 24-48h. Thanks.",
+    "another": "Send another message",
+    "errorPrefix": "Transmission failed —",
+    "errors": {
+      "nameTooShort": "Name too short",
+      "nameTooLong": "Name too long",
+      "emailInvalid": "Invalid email",
+      "subjectInvalid": "Invalid subject",
+      "messageTooShort": "Message too short (20 characters min)",
+      "messageTooLong": "Message too long (4000 characters max)",
+      "rateLimited": "Too many messages. Try again later."
+    }
+  },
+  "Footer": {
+    "tagline": "I design and build web apps on the PHP / Symfony / Phalcon and JS / TS / Next / Vue stack. From rock-solid backends to polished frontend experiences.",
+    "available": "Open to opportunities",
+    "navigation": "Navigation",
+    "letsConnect": "Let's connect",
+    "responseTime": "Reply within 24-48h",
+    "rights": "All rights reserved",
+    "backToTop": "Back to top"
+  },
+  "Projects": {
+    "metaTitle": "Projects — Lyon-based fullstack developer portfolio",
+    "metaDescription": "Project gallery by Léo Deroin, fullstack developer in Lyon: web apps built with Next.js, React, Symfony, Phalcon, Vue.js. Personal, school and apprenticeship work at Confluent Digital.",
+    "kicker": "◊ Expedition gallery",
+    "title": "Projects & missions",
+    "intro": "Each card is a planet to explore — personal, school, work or freelance. Filter by category or stack to focus. A selection of web projects shipped in Lyon and elsewhere during my apprenticeship, studies and free time.",
+    "filterCategory": "Category:",
+    "filterStack": "Stack:",
+    "all": "All",
+    "noResults": "No expedition matches these filters.",
+    "empty": "No projects in DB. Run npm run db:seed to load the samples.",
+    "card": {
+      "featured": "★ featured"
+    }
+  },
+  "ProjectDetail": {
+    "back": "Back to gallery",
+    "stackTitle": "◊ Stack used",
+    "missionTitle": "◊ Mission log",
+    "galleryTitle": "◊ Captures",
+    "viewLive": "View live site",
+    "sourceCode": "Source code",
+    "previousMission": "← Previous mission",
+    "nextMission": "Next mission →"
+  },
+  "Blog": {
+    "metaTitle": "Logbook",
+    "metaTitlePage": "Logbook — page {page}",
+    "metaDescription": "Articles by Léo Deroin on web development, shaders, Symfony, Next.js and the stack in general.",
+    "kicker": "◊ Logbook",
+    "title": "Articles",
+    "intro": "Notes, takeaways and analysis on my stack. No publishing schedule — I write when I have something to say.",
+    "rss": "RSS Feed",
+    "empty": "No articles yet. Come back soon.",
+    "readingTime": "{minutes} min"
+  },
+  "BlogPost": {
+    "back": "Back to logbook",
+    "readingTime": "{minutes} min read",
+    "tableOfContents": "◊ Contents",
+    "share": "Share",
+    "viewAll": "View all articles →",
+    "previous": "Previous article",
+    "next": "Next article",
+    "shareLabels": {
+      "twitter": "Share on X / Twitter",
+      "linkedin": "Share on LinkedIn",
+      "copy": "Copy link",
+      "copied": "Copied"
+    },
+    "notFound": "Article not found"
+  },
+  "Uses": {
+    "metaTitle": "Setup and stack — PhpStorm, Xubuntu, Next.js, Symfony",
+    "metaDescription": "The full setup of Léo Deroin, fullstack developer in Lyon: PhpStorm on Xubuntu 24.04, Next.js / Symfony / Phalcon stack, Chrome extensions, hardware and CLI tools.",
+    "kicker": "◊ /uses",
+    "title": "My setup and stack",
+    "intro": "An honest list of everything I run daily on my machine — editors, hardware, browser, default stack. Updated when my setup actually shifts, not for show.",
+    "lastUpdated": "Last updated",
+    "inspiredBy": "Page inspired by",
+    "sections": {
+      "editor": "Editors",
+      "hardware": "Hardware",
+      "os": "OS & desktop",
+      "terminal": "Terminal & runtime",
+      "browser": "Browser",
+      "browserExtensions": "Chrome extensions",
+      "stack": "Default stack",
+      "tools": "CLI & tools",
+      "apps": "Apps"
+    }
+  },
+  "Comments": {
+    "title": "◊ Comments",
+    "loading": "Loading…",
+    "empty": "No comments yet. Be the first.",
+    "disabled": "Comments are disabled on this article.",
+    "formTitle": "Leave a comment",
+    "labels": {
+      "pseudo": "› Name",
+      "emailOptional": "› Email (optional)",
+      "message": "› Message"
+    },
+    "emailPlaceholder": "never shown",
+    "submit": "Send",
+    "submitting": "Sending…",
+    "moderationNotice": "Reviewed before publishing",
+    "pendingTitle": "Comment submitted",
+    "pendingDescription": "It will be published after manual review. Thanks!",
+    "anotherComment": "write another comment",
+    "errors": {
+      "pseudoTooShort": "Name too short",
+      "pseudoTooLong": "Name too long",
+      "messageTooShort": "Message too short",
+      "messageTooLong": "Message too long (2000 characters max)",
+      "emailInvalid": "Invalid email",
+      "rateLimited": "Too many comments. Try again later.",
+      "unknown": "Unknown error"
+    }
+  },
+  "NotFound": {
+    "metaTitle": "Signal lost — 404",
+    "metaDescription": "The station can't reach this page.",
+    "kicker": "◊ Error 404 — Signal lost",
+    "title": "Out of coverage",
+    "description": "This page is no longer in orbit — moved, removed, or it never made it here. The terminal suggests heading back to a known route.",
+    "code": "ERR_PAGE_NOT_FOUND",
+    "backHome": "Back to station",
+    "viewProjects": "View projects",
+    "viewBlog": "Read the blog"
+  },
+  "Common": {
+    "loading": "Loading…",
+    "error": "Error",
+    "fr": "French",
+    "en": "English",
+    "switchToEn": "Switch to English",
+    "switchToFr": "Switch to French"
+  }
+}

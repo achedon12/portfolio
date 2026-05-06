@@ -1,0 +1,90 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cosmos-deep: #030014;
+  --color-cosmos-dark: #0a0420;
+  --color-nebula-violet: #7c3aed;
+  --color-nebula-cyan: #22d3ee;
+  --color-solar-orange: #fb923c;
+
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+html,
+body {
+  background-color: var(--color-cosmos-deep);
+  color: #e2e8f0;
+}
+
+::selection {
+  background-color: rgb(124 58 237 / 0.4);
+  color: #f8fafc;
+}
+
+/* ---------- Blog : autolink heading + shiki code blocks ---------- */
+.prose-cosmos a.heading-anchor {
+  color: inherit;
+  text-decoration: none;
+}
+.prose-cosmos a.heading-anchor:hover {
+  color: var(--color-nebula-cyan);
+}
+
+/* shiki / rehype-pretty-code */
+.prose-cosmos figure[data-rehype-pretty-code-figure] {
+  margin: 1.5rem 0;
+}
+.prose-cosmos figure[data-rehype-pretty-code-figure] pre {
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  padding: 1rem 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+.prose-cosmos code[data-line-numbers] {
+  counter-reset: line;
+}
+.prose-cosmos code[data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 1.5rem;
+  margin-right: 1rem;
+  text-align: right;
+  color: rgb(148 163 184 / 0.4);
+}
+.prose-cosmos figure[data-rehype-pretty-code-figure] [data-line] {
+  padding: 0 1rem;
+}
+.prose-cosmos figure[data-rehype-pretty-code-figure] [data-highlighted-line] {
+  background: rgb(34 211 238 / 0.08);
+  border-left: 2px solid rgb(34 211 238 / 0.6);
+}
+.prose-cosmos figure[data-rehype-pretty-code-figure] figcaption[data-rehype-pretty-code-title] {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem 0.5rem 0 0;
+  border: 1px solid rgb(255 255 255 / 0.1);
+  border-bottom: none;
+  background: rgb(10 4 32 / 0.8);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: rgb(148 163 184);
+}
+.prose-cosmos figcaption[data-rehype-pretty-code-title] + pre {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

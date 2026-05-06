@@ -1,0 +1,73 @@
+---
+title: "Pourquoi Symfony reste mon outil par défaut en 2026"
+description: "Une opinion à contre-courant : non, le PHP n'est pas mort, et oui, j'ouvre toujours symfony new pour mes nouveaux projets."
+publishedAt: "2026-05-02"
+tags: ["php", "symfony", "stack"]
+---
+
+Quand je dis à un dev JS que je commence un projet en Symfony, j'ai souvent droit à un sourire poli. *"Ah, le PHP, ça existe encore ?"* Oui. Et honnêtement, je m'éclate plus à écrire du Symfony 7 qu'à câbler un nième Node + Express + ORM-de-la-semaine.
+
+## Le contexte
+
+Je fais autant de Next que de Symfony — c'est même la moitié de mes contrats. Mais quand je démarre un projet **pour moi** ou pour un client qui veut un truc qui **dure**, j'ouvre `symfony new`.
+
+Voici les trois raisons qui font que ça revient toujours.
+
+## 1. La rétrocompatibilité, pas la nouveauté
+
+Un projet Symfony 4 que tu mets à jour vers Symfony 7, c'est quelques deprecations à fixer, pas une réécriture. La doctrine "upgrade in place" est tenue depuis Fabien Potencier, et ça change la vie sur des projets de 5+ ans.
+
+Compare avec l'écosystème Node où :
+- Webpack → Vite (refonte de la config)
+- Express → Fastify → Hono (chaque migration touche des routes)
+- TypeORM → Prisma → Drizzle (chaque migration réécrit le data layer)
+
+C'est tonifiant pendant 6 mois, c'est fatigant après 3 ans.
+
+## 2. La DX (oui, vraiment)
+
+Le maker bundle :
+
+```bash
+php bin/console make:entity
+php bin/console make:controller
+php bin/console make:form
+```
+
+Ça génère du code idiomatique, conforme au standard du framework, qui passe les tests d'équipe sans relecture intensive. Pour les projets en équipe, c'est un gain énorme.
+
+Le profiler. Le service container introspectable. Le Twig avec son strict mode. Rien de sexy en demo, tout dans le quotidien.
+
+## 3. Le coût de prod
+
+Sur un VPS à 6 €/mois, je fais tourner :
+- Symfony en PHP-FPM 8.4 + opcache + JIT
+- MySQL 8
+- Nginx en reverse proxy
+- Quelques workers Symfony Messenger
+
+Ça **tient** un trafic raisonnable (20-50 req/sec sur un site B2B classique) sans broncher. Aucun runtime à 200 MB de RAM par process. Aucune cold start serverless à expliquer au client.
+
+## Là où Symfony ne gagne pas
+
+Soyons honnêtes :
+
+- **Realtime / WebSocket** : Mercure marche, mais l'écosystème JS est plus mûr.
+- **SSR / hydration React** : pas le terrain. Je colle un Next devant si besoin.
+- **Edge / CDN dynamique** : non, c'est PHP, ça tourne sur un serveur.
+
+Pour ces cas, je sors Next ou un vrai service dédié.
+
+## Le critère qui décide
+
+Si je dois trancher rapidement : *est-ce que mon projet est principalement du **CRUD métier** avec des règles complexes, des permissions, des workflows ?* Symfony.
+
+*Est-ce que c'est principalement de la **présentation** avec des interactions client riches ?* Next.
+
+*Les deux ?* Symfony pour l'API, Next pour le front. Marche très bien, je le fais sur plusieurs projets.
+
+## Le vrai débat
+
+Le débat n'est pas "PHP vs Node", c'est "framework mature et conservateur" vs "framework jeune et radical". J'ai testé les deux côtés. À 30+ ans de carrière cumulée à entretenir le code des autres, j'ai un faible pour le premier.
+
+Et puis honnêtement, écrire du PHP moderne avec types stricts, attributes, enums, readonly properties, c'est devenu **agréable**. Donne sa chance au prochain Symfony 8 si tu n'as pas regardé depuis longtemps. Tu seras peut-être surpris.
