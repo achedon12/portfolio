@@ -194,7 +194,7 @@ const PROJECTS = [
       "Docker",
     ],
     category: "pro",
-    liveUrl: "https://callcenterrate.confluent-digital.com",
+    liveUrl: "https://ccr.confluent-digital.com",
     githubUrl: null,
     featured: true,
   },

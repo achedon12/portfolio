@@ -3,6 +3,11 @@ import { prisma } from "@/lib/prisma";
 import { getAllPosts } from "@/lib/blog";
 import { routing } from "@/i18n/routing";
 
+// Force dynamic : le `next build` Docker s'exécute sans DB joignable et
+// retournerait un sitemap statique vide. En recalculant à chaque requête
+// on s'assure que projets/articles publiés y figurent toujours.
+export const dynamic = "force-dynamic";
+
 /**
  * Sitemap multi-locale.
  *
@@ -19,7 +24,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   let posts: Awaited<ReturnType<typeof getAllPosts>>;
   try {
     [projects, posts] = await Promise.all([
-      prisma.project.findMany({ select: { slug: true, updatedAt: true } }),
+      prisma.project.findMany({
+        where: { published: true },
+        select: { slug: true, updatedAt: true },
+      }),
       getAllPosts(),
     ]);
   } catch (e) {
@@ -53,6 +61,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...entry("/projects", { changeFrequency: "weekly", priority: 0.8 }),
     ...entry("/blog", { changeFrequency: "weekly", priority: 0.8 }),
     ...entry("/uses", { changeFrequency: "monthly", priority: 0.5 }),
+    ...entry("/now", { changeFrequency: "weekly", priority: 0.6 }),
+    ...entry("/lab", { changeFrequency: "monthly", priority: 0.4 }),
+    ...entry("/newsletter", { changeFrequency: "yearly", priority: 0.3 }),
     ...projects.flatMap((p) =>
       entry(`/projects/${p.slug}`, {
         lastModified: p.updatedAt,

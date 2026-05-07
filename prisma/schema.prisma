@@ -35,11 +35,15 @@ model Project {
   liveUrl     String?
   githubUrl   String?
   featured    Boolean  @default(false)
+  /// Visibilité côté public. Si false : exclu de /projects, 404 sur /projects/[slug],
+  /// exclu du sitemap et de llms.txt. L'admin reste libre d'éditer.
+  published   Boolean  @default(true)
   publishedAt DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   @@index([slug])
   @@index([featured])
+  @@index([published, publishedAt])
 }
 
 model RateLimit {
@@ -130,4 +134,77 @@ model BlogComment {
 
   @@index([postId, status])
   @@index([status, createdAt])
+}
+
+/// Statuts du double opt-in d'un abonné newsletter.
+enum NewsletterStatus {
+  PENDING
+  CONFIRMED
+  UNSUBSCRIBED
+}
+
+/**
+ * Abonné newsletter avec double opt-in.
+ *
+ * Flow :
+ *   1. Form public → row PENDING avec confirmToken envoyé par email.
+ *   2. Click confirm → CONFIRMED, confirmToken effacé.
+ *   3. Click unsub depuis n'importe quel email → UNSUBSCRIBED.
+ *
+ * `unsubscribeToken` reste actif tant que l'abonné est CONFIRMED — chaque
+ * email broadcast inclut le lien correspondant.
+ */
+model NewsletterSubscriber {
+  id               Int               @id @default(autoincrement())
+  email            String            @unique @db.VarChar(320)
+  status           NewsletterStatus  @default(PENDING)
+  confirmToken     String?           @unique @db.VarChar(64)
+  unsubscribeToken String            @unique @db.VarChar(64)
+  /// Hash SHA-256 de l'IP au moment du signup (RGPD), pour rate-limit.
+  ipHash           String?           @db.VarChar(64)
+  /// Locale au moment du signup, sert à choisir la langue des emails.
+  locale           String            @default("fr") @db.VarChar(8)
+  createdAt        DateTime          @default(now())
+  confirmedAt      DateTime?
+  unsubscribedAt   DateTime?
+
+  @@index([status])
+  @@index([createdAt])
+}
+
+/// Statut d'un mail dans la file sortante.
+enum PendingMailStatus {
+  PENDING
+  SENDING
+  SENT
+  FAILED
+}
+
+/**
+ * File de mails sortants. Tout email non temps-réel (newsletter broadcast,
+ * confirmations newsletter…) y passe et est envoyé par batch via le cron
+ * `mail-queue` (50 mails toutes les 5 min). Évite les rate limits Resend +
+ * survit à un crash du process (les mails restent PENDING).
+ *
+ * Modèle calqué sur le pattern callCenterRate (réf. /data/www/...).
+ */
+model PendingMail {
+  id          String            @id @default(cuid())
+  toAddress   String            @db.VarChar(320)
+  subject     String            @db.VarChar(500)
+  html        String            @db.LongText
+  textBody    String?           @db.LongText
+  /// Tag de catégorie : "newsletter_confirm", "newsletter_broadcast", etc.
+  category    String            @db.VarChar(60)
+  status      PendingMailStatus @default(PENDING)
+  attempts    Int               @default(0)
+  lastError   String?           @db.Text
+  scheduledAt DateTime          @default(now())
+  sentAt      DateTime?
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  @@index([status, scheduledAt])
+  @@index([category, createdAt])
+  @@index([createdAt])
 }

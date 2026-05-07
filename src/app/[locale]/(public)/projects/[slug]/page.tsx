@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ArrowLeft, Github, ExternalLink } from "lucide-react";
@@ -7,6 +8,7 @@ import { prisma } from "@/lib/prisma";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { projectJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { Breadcrumbs, type BreadcrumbItem } from "@/components/Breadcrumbs";
 
 interface PageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -15,7 +17,12 @@ interface PageProps {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale, slug } = await params;
   const project = await prisma.project.findUnique({ where: { slug } });
-  if (!project) return { title: locale === "fr" ? "Projet introuvable" : "Project not found" };
+  if (!project || !project.published) {
+    return {
+      title: locale === "fr" ? "Projet introuvable" : "Project not found",
+      robots: { index: false, follow: false },
+    };
+  }
 
   const techStack = Array.isArray(project.techStack) ? (project.techStack as string[]) : [];
   const isFr = locale === "fr";
@@ -45,15 +52,27 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       description: project.description,
       type: "article",
       url: path,
-      images: project.coverImage ? [{ url: project.coverImage }] : undefined,
       tags: techStack,
       locale: isFr ? "fr_FR" : "en_US",
+      siteName: "Léo Deroin",
+      // Image explicite si le projet en a une, sinon fallback site-wide
+      // (`/opengraph-image` au niveau racine).
+      images: project.coverImage
+        ? [{ url: project.coverImage, alt: project.title }]
+        : [
+            {
+              url: "/opengraph-image",
+              width: 1200,
+              height: 630,
+              alt: `Léo Deroin — ${project.title}`,
+            },
+          ],
     },
     twitter: {
       card: "summary_large_image",
       title: project.title,
       description: project.description,
-      images: project.coverImage ? [project.coverImage] : undefined,
+      images: project.coverImage ? [project.coverImage] : ["/opengraph-image"],
     },
   };
 }
@@ -73,16 +92,16 @@ export default async function ProjectDetailPage({ params }: PageProps) {
     console.warn("[project detail] DB unreachable at render", e instanceof Error ? e.message : e);
     notFound();
   }
-  if (!project) notFound();
+  if (!project || !project.published) notFound();
 
   const [prev, next] = await Promise.all([
     prisma.project.findFirst({
-      where: { publishedAt: { lt: project.publishedAt } },
+      where: { published: true, publishedAt: { lt: project.publishedAt } },
       orderBy: { publishedAt: "desc" },
       select: { slug: true, title: true },
     }),
     prisma.project.findFirst({
-      where: { publishedAt: { gt: project.publishedAt } },
+      where: { published: true, publishedAt: { gt: project.publishedAt } },
       orderBy: { publishedAt: "asc" },
       select: { slug: true, title: true },
     }),
@@ -95,6 +114,13 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   const localePrefix = isFr ? "" : "/en";
   const homeName = isFr ? "Accueil" : "Home";
 
+  const tCommon = await getTranslations("Common");
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { name: homeName, href: "/" },
+    { name: tNav("projects"), href: "/projects" },
+    { name: project.title },
+  ];
+
   return (
     <article className="relative">
       <header className="relative overflow-hidden">
@@ -103,6 +129,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           className="absolute inset-0 bg-gradient-to-b from-cosmos-dark/0 via-cosmos-deep/40 to-cosmos-deep"
         />
         <div className="relative mx-auto max-w-5xl px-6 pt-32 pb-12">
+          <Breadcrumbs items={breadcrumbItems} ariaLabel={tCommon("breadcrumbAria")} className="mb-6" />
           <Link
             href="/projects"
             className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-slate-400 transition-colors hover:text-nebula-cyan"
@@ -118,12 +145,24 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           <p className="mt-4 max-w-2xl text-lg text-slate-300">{project.description}</p>
 
           {project.coverImage && (
-            <div className="mt-10 overflow-hidden rounded-xl border border-white/10 bg-cosmos-dark/40">
-              <img
-                src={project.coverImage}
-                alt={project.title}
-                className="aspect-[16/9] w-full object-cover"
-              />
+            <div className="relative mt-10 aspect-[16/9] w-full overflow-hidden rounded-xl border border-white/10 bg-cosmos-dark/40">
+              {project.coverImage.startsWith("/") ? (
+                <Image
+                  src={project.coverImage}
+                  alt={project.title}
+                  fill
+                  sizes="(min-width: 1024px) 960px, 100vw"
+                  priority
+                  className="object-cover"
+                />
+              ) : (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={project.coverImage}
+                  alt={project.title}
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+              )}
             </div>
           )}
         </div>
@@ -162,11 +201,36 @@ export default async function ProjectDetailPage({ params }: PageProps) {
               {t("galleryTitle")}
             </h2>
             <div className="grid gap-4 md:grid-cols-2">
-              {gallery.map((src, i) => (
-                <div key={i} className="overflow-hidden rounded-lg border border-white/10">
-                  <img src={src} alt="" className="aspect-video w-full object-cover" />
-                </div>
-              ))}
+              {gallery.map((src, i) => {
+                const galleryAlt = isFr
+                  ? `Capture ${i + 1} — ${project.title}`
+                  : `Screenshot ${i + 1} — ${project.title}`;
+                return (
+                  <div
+                    key={i}
+                    className="relative aspect-video overflow-hidden rounded-lg border border-white/10"
+                  >
+                    {src.startsWith("/") ? (
+                      <Image
+                        src={src}
+                        alt={galleryAlt}
+                        fill
+                        sizes="(min-width: 768px) 50vw, 100vw"
+                        loading="lazy"
+                        className="object-cover"
+                      />
+                    ) : (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img
+                        src={src}
+                        alt={galleryAlt}
+                        loading="lazy"
+                        className="absolute inset-0 h-full w-full object-cover"
+                      />
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </section>
         )}

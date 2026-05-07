@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Card } from "@/components/ui/card";
 import { uses, USES_LAST_UPDATED, type SectionId } from "@/lib/uses";
 import { breadcrumbJsonLd } from "@/lib/seo";
+import { Breadcrumbs, type BreadcrumbItem } from "@/components/Breadcrumbs";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -13,19 +14,31 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const isFr = locale === "fr";
   const path = isFr ? "/uses" : "/en/uses";
 
+  const title = t("metaTitle");
+  const description = t("metaDescription");
+  const ogAlt = isFr ? "Léo Deroin — Setup et stack" : "Léo Deroin — Setup and stack";
+
   return {
-    title: t("metaTitle"),
-    description: t("metaDescription"),
+    title,
+    description,
     alternates: {
       canonical: path,
       languages: { fr: "/uses", en: "/en/uses", "x-default": "/uses" },
     },
     openGraph: {
-      title: t("metaTitle"),
-      description: t("metaDescription"),
+      title,
+      description,
       type: "website",
       url: path,
       locale: isFr ? "fr_FR" : "en_US",
+      siteName: "Léo Deroin",
+      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: ogAlt }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [{ url: "/opengraph-image", alt: ogAlt }],
     },
   };
 }
@@ -68,8 +81,19 @@ export default async function UsesPage({ params }: Props) {
     return { id, items: section.items };
   }).filter((x): x is { id: SectionId; items: typeof uses[number]["items"] } => x !== null);
 
+  const tCommon = await getTranslations("Common");
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { name: homeName, href: "/" },
+    { name: t("title") },
+  ];
+
   return (
     <div className="mx-auto max-w-4xl px-6 pt-32 pb-20">
+      <Breadcrumbs
+        items={breadcrumbItems}
+        ariaLabel={tCommon("breadcrumbAria")}
+        className="mb-8"
+      />
       <header className="mb-12">
         <p className="font-mono text-xs uppercase tracking-[0.4em] text-nebula-cyan">
           {t("kicker")}

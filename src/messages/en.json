@@ -5,6 +5,11 @@
     "projects": "Projects",
     "blog": "Blog",
     "uses": "Uses",
+    "now": "Now",
+    "lab": "Lab",
+    "newsletter": "Newsletter",
+    "explore": "Explore",
+    "exploreAria": "Open the Explore menu",
     "experience": "Experience",
     "contact": "Contact"
   },
@@ -104,7 +109,10 @@
       "name": "› Name",
       "email": "› Email",
       "subject": "› Subject",
-      "message": "› Message"
+      "message": "› Message",
+      "timeline": "› Timeline",
+      "stack": "› Preferred stack",
+      "budget": "› Approximate budget"
     },
     "selectSubject": "— select —",
     "subjects": {
@@ -112,6 +120,26 @@
       "freelance": "freelance",
       "collab": "collab",
       "autre": "other"
+    },
+    "context": {
+      "toggleShow": "More context (optional)",
+      "toggleHide": "Hide context",
+      "stackPlaceholder": "Next.js, Symfony, Vue.js…",
+      "selectTimeline": "— no rush —",
+      "selectBudget": "— not specified —"
+    },
+    "timelines": {
+      "urgent": "Urgent (within 2 weeks)",
+      "month": "Within 1 month",
+      "quarter": "Within 3 months",
+      "flexible": "Flexible"
+    },
+    "budgets": {
+      "under5k": "< €5k",
+      "5to15k": "€5 – 15k",
+      "15to50k": "€15 – 50k",
+      "over50k": "> €50k",
+      "todiscuss": "To discuss"
     },
     "submit": "Transmit",
     "submitting": "Transmitting…",
@@ -133,6 +161,7 @@
     "tagline": "I design and build web apps on the PHP / Symfony / Phalcon and JS / TS / Next / Vue stack. From rock-solid backends to polished frontend experiences.",
     "available": "Open to opportunities",
     "navigation": "Navigation",
+    "explore": "Explore",
     "letsConnect": "Let's connect",
     "responseTime": "Reply within 24-48h",
     "rights": "All rights reserved",
@@ -172,7 +201,13 @@
     "intro": "Notes, takeaways and analysis on my stack. No publishing schedule — I write when I have something to say.",
     "rss": "RSS Feed",
     "empty": "No articles yet. Come back soon.",
-    "readingTime": "{minutes} min"
+    "readingTime": "{minutes} min",
+    "searchPlaceholder": "Search articles…",
+    "searchAria": "Search articles",
+    "searchClear": "Clear search",
+    "allTags": "All",
+    "noResults": "No article matches these filters.",
+    "resultsCount": "{count, plural, one {# result} other {# results}}"
   },
   "BlogPost": {
     "back": "Back to logbook",
@@ -182,6 +217,8 @@
     "viewAll": "View all articles →",
     "previous": "Previous article",
     "next": "Next article",
+    "related": "Related trajectories",
+    "readArticle": "Read article",
     "shareLabels": {
       "twitter": "Share on X / Twitter",
       "linkedin": "Share on LinkedIn",
@@ -209,6 +246,124 @@
       "tools": "CLI & tools",
       "apps": "Apps"
     }
+  },
+  "Newsletter": {
+    "kicker": "◊ Comms",
+    "title": "Hop on the newsletter",
+    "intro": "New posts straight to your inbox. No spam, no schedule — only when there's something to share.",
+    "emailPlaceholder": "your@email.com",
+    "submit": "Subscribe",
+    "submitting": "Sending…",
+    "submitted": "Email sent — check your inbox.",
+    "errorPrefix": "Subscription failed —",
+    "errors": {
+      "emailInvalid": "Invalid email",
+      "rateLimited": "Too many attempts. Try again later."
+    },
+    "subscribed": {
+      "metaTitle": "Email sent — Newsletter",
+      "metaDescription": "Check your inbox to confirm your subscription.",
+      "kicker": "◊ Comms — Transmission",
+      "title": "Check your inbox",
+      "description": "We sent you a confirmation email. Click the link inside to validate your subscription. The link expires in 7 days.",
+      "back": "Back to station"
+    },
+    "confirmed": {
+      "metaTitle": "Subscription confirmed — Newsletter",
+      "metaDescription": "Your subscription is confirmed. Welcome.",
+      "kicker": "◊ Comms — Confirmed",
+      "title": "Subscription confirmed",
+      "description": "You're now on the list. You'll get the next posts as soon as they ship. No spam, as agreed.",
+      "viewBlog": "Read the blog",
+      "back": "Back to station"
+    },
+    "unsubscribed": {
+      "metaTitle": "Unsubscribed — Newsletter",
+      "metaDescription": "You're unsubscribed from the newsletter.",
+      "kicker": "◊ Comms — Signal off",
+      "title": "Unsubscribed",
+      "description": "No more emails will be sent your way. If that was a mistake, you can resubscribe anytime from the footer.",
+      "back": "Back to station"
+    },
+    "landing": {
+      "metaTitle": "Newsletter — Léo Deroin",
+      "metaDescription": "Get new posts straight to your inbox. No spam, no calendar — only when there's something to share.",
+      "ogAlt": "Léo Deroin — Newsletter",
+      "breadcrumbHome": "Home",
+      "breadcrumbCurrent": "Newsletter",
+      "bullets": {
+        "articles": {
+          "title": "New posts",
+          "description": "Every blog article hits your inbox, with no third-party curation."
+        },
+        "experiments": {
+          "title": "Experiments",
+          "description": "R3F demos, prototypes, work in progress — what I broke and what I learned."
+        },
+        "noSpam": {
+          "title": "No spam",
+          "description": "No calendar, no promotional sends. One-click unsubscribe in every email."
+        }
+      },
+      "pledge": "Double opt-in. Your email is stored encrypted server-side, never sold, never shared. Instant unsubscribe."
+    }
+  },
+  "Lab": {
+    "metaTitle": "Lab — R3F and shader demos",
+    "metaDescription": "Interactive Three.js / R3F demos: procedural planet, fbm noise field, attractive particles. GLSL shaders with live controls.",
+    "kicker": "◊ /lab — Playground",
+    "title": "Lab",
+    "intro": "Three isolated Three.js / R3F demos. Everything is shader-based or geometry-based, no texture loaded. Touch the sliders, the effect is instant.",
+    "demos": {
+      "planet": {
+        "title": "Procedural planet",
+        "description": "Shader-based sphere — 5-octave fbm for continents, polar caps, fresnel atmosphere, wrap-Lambert for soft terminator. No texture, everything computed on GPU.",
+        "speed": "Rotation speed",
+        "palette": "Palette",
+        "wireframe": "Wireframe",
+        "paletteNames": {
+          "cosmos": "Cosmos",
+          "ember": "Ember",
+          "glacier": "Glacier",
+          "flora": "Flora"
+        }
+      },
+      "noise": {
+        "title": "Noise field",
+        "description": "Ortho plane with fragment shader — 2D fbm with configurable octaves, time drift, color ramp and soft vignette. The pattern shifts dramatically with frequency.",
+        "frequency": "Frequency",
+        "octaves": "Octaves",
+        "pause": "Pause",
+        "play": "Play"
+      },
+      "particles": {
+        "title": "Particle attractor",
+        "description": "1500 points with inverse-square attraction toward the cursor. Minimal shader for the twinkle, Newtonian friction, soft bounds. Toggle attract / repel.",
+        "count": "Count",
+        "strength": "Strength",
+        "mode": "Mode",
+        "attract": "Attract",
+        "repel": "Repel",
+        "hint": "Move your cursor over the area"
+      }
+    }
+  },
+  "Now": {
+    "metaTitle": "Now — Currently",
+    "metaDescription": "What I'm spending my time on right now — apprenticeship, side projects, reading and setup updates. Hand-curated.",
+    "kicker": "◊ /now — Current state",
+    "title": "Right now",
+    "intro": "A \"now\" page inspired by nownownow.com — an honest snapshot of what I'm up to, rather than a frozen CV. Updated when something actually shifts.",
+    "lastUpdated": "Last updated",
+    "sections": {
+      "main": "Main trajectory",
+      "side": "Side projects",
+      "reading": "Reading and listening",
+      "setup": "Setup updates",
+      "empty": "To be filled — I write here when something stands out."
+    },
+    "inspired": "Page inspired by",
+    "viewSetup": "Full setup on /uses"
   },
   "Comments": {
     "title": "◊ Comments",
@@ -238,6 +393,26 @@
       "unknown": "Unknown error"
     }
   },
+  "Install": {
+    "kicker": "◊ Boarding available",
+    "cardTitle": "Embark the portfolio",
+    "cardDescription": "Install the station on your device for quick, full-screen access and offline reading of pages you already visited.",
+    "install": "Install",
+    "later": "Later",
+    "dismiss": "Close",
+    "footerLabel": "Embark · install"
+  },
+  "Offline": {
+    "metaTitle": "Offline — Transmission interrupted",
+    "metaDescription": "The station has lost signal — network connection is down.",
+    "kicker": "◊ Comms — Signal lost",
+    "title": "Transmission interrupted",
+    "description": "The terminal has no network connection. Pages you already visited stay reachable from cache; the rest waits for you to come back into orbit.",
+    "status": "Signal down",
+    "code": "ERR_NETWORK_OFFLINE",
+    "backHome": "Back to station",
+    "viewBlog": "Read the blog"
+  },
   "NotFound": {
     "metaTitle": "Signal lost — 404",
     "metaDescription": "The station can't reach this page.",
@@ -257,6 +432,10 @@
     "switchToEn": "Switch to English",
     "switchToFr": "Switch to French",
     "switchToLight": "Switch to light theme",
-    "switchToDark": "Switch to dark theme"
+    "switchToDark": "Switch to dark theme",
+    "home": "Home",
+    "breadcrumbAria": "Breadcrumb",
+    "downloadCv": "Download CV",
+    "downloadCvShort": "CV PDF"
   }
 }

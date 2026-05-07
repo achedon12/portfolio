@@ -5,11 +5,13 @@ import { Canvas } from "@react-three/fiber";
 import { Planet } from "@/components/three/Planet";
 import { OrbitingTechs } from "@/components/three/OrbitingTechs";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
+import { useDeviceCapability } from "@/hooks/useDeviceCapability";
 
 function HeroSceneInner() {
   const reduced = usePrefersReducedMotion();
+  const { coarsePointer, lowEnd } = useDeviceCapability();
 
-  if (reduced) {
+  if (reduced || lowEnd) {
     return (
       <div className="absolute inset-0 flex items-center justify-center" aria-hidden>
         <div
@@ -24,12 +26,15 @@ function HeroSceneInner() {
     );
   }
 
+  const dpr: [number, number] = coarsePointer ? [1, 1.25] : [1, 1.75];
+  const antialias = !coarsePointer;
+
   return (
     <Canvas
       className="absolute inset-0"
       camera={{ position: [0, 0.6, 6], fov: 45 }}
-      dpr={[1, 1.75]}
-      gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+      dpr={dpr}
+      gl={{ antialias, alpha: true, powerPreference: "high-performance" }}
     >
       <ambientLight intensity={0.15} />
       <Planet />

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, useInView, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useRef } from "react";
+import { Download } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { profile, getStats } from "@/lib/profile";
 import { Card } from "@/components/ui/card";
@@ -25,6 +26,7 @@ function StatCounter({ value, suffix, locale }: { value: number; suffix: string;
 
 export function About() {
   const t = useTranslations("About");
+  const tCommon = useTranslations("Common");
   const locale = useLocale();
 
   return (
@@ -72,6 +74,15 @@ export function About() {
                 </p>
                 <p className="mt-1 font-mono text-xs text-slate-500">📡 {profile.location}</p>
               </div>
+
+              <a
+                href="/leo-deroin-cv.pdf"
+                download
+                className="mt-5 inline-flex items-center gap-2 rounded-md border border-nebula-cyan/40 bg-nebula-cyan/10 px-4 py-2 font-mono text-xs uppercase tracking-[0.18em] text-nebula-cyan transition-all hover:bg-nebula-cyan/15 hover:shadow-[0_0_25px_rgba(34,211,238,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nebula-cyan/60"
+              >
+                <Download className="h-3.5 w-3.5" />
+                {tCommon("downloadCv")}
+              </a>
             </div>
 
             <div>

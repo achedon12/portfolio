@@ -4,11 +4,13 @@ import dynamic from "next/dynamic";
 import { Canvas } from "@react-three/fiber";
 import { Starfield } from "@/components/three/Starfield";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
+import { useDeviceCapability } from "@/hooks/useDeviceCapability";
 
 function StarfieldCanvasInner() {
   const reduced = usePrefersReducedMotion();
+  const { coarsePointer, lowEnd } = useDeviceCapability();
 
-  if (reduced) {
+  if (reduced || lowEnd) {
     return (
       <div
         aria-hidden
@@ -22,14 +24,16 @@ function StarfieldCanvasInner() {
     );
   }
 
+  const dpr: [number, number] = coarsePointer ? [1, 1] : [1, 1.5];
+
   return (
     <div aria-hidden className="starfield-canvas fixed inset-0 -z-10">
       <Canvas
         camera={{ position: [0, 0, 1], fov: 75 }}
-        dpr={[1, 1.5]}
+        dpr={dpr}
         gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
       >
-        <Starfield />
+        <Starfield mobile={coarsePointer} />
       </Canvas>
     </div>
   );

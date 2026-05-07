@@ -1,9 +1,10 @@
 "use client";
 
-import { ArrowUp, Github, Linkedin, Mail } from "lucide-react";
+import { ArrowUp, Download, Github, Linkedin, Mail } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { profile } from "@/lib/profile";
+import { NewsletterForm } from "@/components/newsletter/NewsletterForm";
 
 function scrollToTop() {
   if (typeof window === "undefined") return;
@@ -13,16 +14,21 @@ function scrollToTop() {
 export function Footer() {
   const tNav = useTranslations("Nav");
   const t = useTranslations("Footer");
+  const tCommon = useTranslations("Common");
+  const tNewsletter = useTranslations("Newsletter");
   const year = new Date().getFullYear();
 
-  const navLinks = [
-    { href: "/#about", label: tNav("about") },
-    { href: "/#skills", label: tNav("skills") },
+  const primary = [
     { href: "/projects", label: tNav("projects") },
     { href: "/blog", label: tNav("blog") },
-    { href: "/uses", label: tNav("uses") },
-    { href: "/#experience", label: tNav("experience") },
     { href: "/#contact", label: tNav("contact") },
+  ];
+
+  const explore = [
+    { href: "/lab", label: tNav("lab") },
+    { href: "/now", label: tNav("now") },
+    { href: "/uses", label: tNav("uses") },
+    { href: "/newsletter", label: tNav("newsletter") },
   ];
 
   return (
@@ -34,6 +40,29 @@ export function Footer() {
 
       <div className="bg-cosmos-deep/85 backdrop-blur-md">
         <div className="mx-auto max-w-7xl px-6 py-16">
+          <section
+            aria-labelledby="newsletter-heading"
+            className="mb-14 rounded-xl border border-white/10 bg-gradient-to-br from-nebula-cyan/5 via-transparent to-nebula-violet/5 p-6 md:p-8"
+          >
+            <div className="grid gap-6 md:grid-cols-[1.5fr_1fr] md:items-center">
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-nebula-cyan/80">
+                  {tNewsletter("kicker")}
+                </p>
+                <h2
+                  id="newsletter-heading"
+                  className="mt-2 font-display text-xl font-semibold text-slate-100 md:text-2xl"
+                >
+                  {tNewsletter("title")}
+                </h2>
+                <p className="mt-2 text-sm leading-relaxed text-slate-400">
+                  {tNewsletter("intro")}
+                </p>
+              </div>
+              <NewsletterForm variant="compact" />
+            </div>
+          </section>
+
           <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-12">
             <div className="lg:col-span-5">
               <Link href="/" className="inline-flex items-center gap-3 group">
@@ -70,7 +99,23 @@ export function Footer() {
                 {t("navigation")}
               </h3>
               <ul className="mt-5 space-y-2.5">
-                {navLinks.map((item) => (
+                {primary.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      href={item.href}
+                      className="text-sm text-slate-300 transition-colors hover:text-nebula-cyan hover:underline underline-offset-4 decoration-nebula-cyan/40"
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+
+              <h3 className="mt-8 font-mono text-[10px] uppercase tracking-[0.25em] text-nebula-cyan/80">
+                {t("explore")}
+              </h3>
+              <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2.5">
+                {explore.map((item) => (
                   <li key={item.href}>
                     <Link
                       href={item.href}
@@ -94,6 +139,15 @@ export function Footer() {
               >
                 <Mail className="h-4 w-4 text-nebula-cyan transition-transform group-hover:-rotate-12" />
                 <span className="font-mono text-slate-200">{profile.email}</span>
+              </a>
+
+              <a
+                href="/leo-deroin-cv.pdf"
+                download
+                className="group mt-3 inline-flex items-center gap-3 rounded-md border border-nebula-cyan/30 bg-nebula-cyan/5 px-4 py-2.5 text-sm transition-all hover:border-nebula-cyan/60 hover:bg-nebula-cyan/10 hover:shadow-[0_0_30px_rgba(34,211,238,0.2)]"
+              >
+                <Download className="h-4 w-4 text-nebula-cyan transition-transform group-hover:-translate-y-0.5" />
+                <span className="font-mono text-slate-200">{tCommon("downloadCv")}</span>
               </a>
 
               <div className="mt-5 flex items-center gap-2">

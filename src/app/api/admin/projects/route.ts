@@ -32,6 +32,7 @@ export async function POST(req: Request) {
         liveUrl: parsed.data.liveUrl || null,
         githubUrl: parsed.data.githubUrl || null,
         featured: parsed.data.featured ?? false,
+        published: parsed.data.published ?? true,
       },
     });
     return NextResponse.json({ ok: true, id: created.id }, { status: 201 });

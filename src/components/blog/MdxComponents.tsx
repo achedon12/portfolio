@@ -1,4 +1,5 @@
 import type { ComponentPropsWithoutRef } from "react";
+import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 
@@ -75,4 +76,38 @@ export const mdxComponents = {
   strong: (props: ComponentPropsWithoutRef<"strong">) => (
     <strong {...props} className={cn("font-semibold text-slate-100", props.className)} />
   ),
+  img: ({ src, alt = "", width, height, className }: ComponentPropsWithoutRef<"img">) => {
+    if (!src) return null;
+    const srcStr = String(src);
+    const w = width ? Number(width) : 1280;
+    const h = height ? Number(height) : 720;
+    const wrapperClass = "my-6 block overflow-hidden rounded-lg border border-white/10";
+    const imgClass = cn("h-auto w-full", className);
+    if (srcStr.startsWith("/")) {
+      return (
+        <span className={wrapperClass}>
+          <Image
+            src={srcStr}
+            alt={alt}
+            width={w}
+            height={h}
+            sizes="(min-width: 1024px) 720px, 100vw"
+            className={imgClass}
+          />
+        </span>
+      );
+    }
+    return (
+      <span className={wrapperClass}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={srcStr}
+          alt={alt}
+          loading="lazy"
+          decoding="async"
+          className={imgClass}
+        />
+      </span>
+    );
+  },
 };

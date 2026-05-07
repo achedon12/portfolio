@@ -3,6 +3,12 @@ import { z } from "zod";
 export const contactSubjects = ["projet", "freelance", "collab", "autre"] as const;
 export type ContactSubject = (typeof contactSubjects)[number];
 
+export const contactTimelines = ["urgent", "month", "quarter", "flexible"] as const;
+export type ContactTimeline = (typeof contactTimelines)[number];
+
+export const contactBudgets = ["under5k", "5to15k", "15to50k", "over50k", "todiscuss"] as const;
+export type ContactBudget = (typeof contactBudgets)[number];
+
 /**
  * Codes d'erreur (i18n-friendly).
  * Le composant client mappe vers une traduction via `Contact.errors.<code>`.
@@ -29,6 +35,11 @@ export const contactSchema = z.object({
     .trim()
     .min(20, contactErrorCodes.messageTooShort)
     .max(4000, contactErrorCodes.messageTooLong),
+  // Champs de contexte optionnels — uniquement transmis dans l'email,
+  // pas persistés en DB (pas de migration nécessaire).
+  timeline: z.enum(contactTimelines).optional().or(z.literal("")),
+  stack: z.string().trim().max(200).optional().or(z.literal("")),
+  budget: z.enum(contactBudgets).optional().or(z.literal("")),
   website: z.string().max(0, "spam").optional().or(z.literal("")),
 });
 
@@ -51,6 +62,7 @@ export const projectSchema = z.object({
   liveUrl: z.string().url().optional().or(z.literal("")).nullable(),
   githubUrl: z.string().url().optional().or(z.literal("")).nullable(),
   featured: z.boolean().optional(),
+  published: z.boolean().optional(),
 });
 
 export type ProjectInput = z.infer<typeof projectSchema>;
@@ -123,3 +135,16 @@ export const blogCommentSchema = z.object({
 });
 
 export type BlogCommentInput = z.infer<typeof blogCommentSchema>;
+
+export const newsletterSubscribeSchema = z.object({
+  email: z.string().trim().toLowerCase().email().max(160),
+  locale: z.enum(["fr", "en"]).optional(),
+  website: z.string().max(0).optional().or(z.literal("")),
+});
+export type NewsletterSubscribeInput = z.infer<typeof newsletterSubscribeSchema>;
+
+export const newsletterBroadcastSchema = z.object({
+  subject: z.string().trim().min(2).max(200),
+  html: z.string().trim().min(10).max(100_000),
+});
+export type NewsletterBroadcastInput = z.infer<typeof newsletterBroadcastSchema>;

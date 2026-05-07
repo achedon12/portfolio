@@ -55,7 +55,15 @@ export async function POST(req: Request) {
     await sendEmail({
       to: profile.email,
       subject: `[leoderoin.fr] ${parsed.data.subject} — ${parsed.data.name}`,
-      html: contactNotificationHtml(parsed.data),
+      html: contactNotificationHtml({
+        name: parsed.data.name,
+        email: parsed.data.email,
+        subject: parsed.data.subject,
+        message: parsed.data.message,
+        timeline: parsed.data.timeline || undefined,
+        stack: parsed.data.stack || undefined,
+        budget: parsed.data.budget || undefined,
+      }),
       replyTo: parsed.data.email,
     });
   } catch (e) {

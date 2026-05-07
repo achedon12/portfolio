@@ -11,6 +11,10 @@ import { mdxComponents } from "@/components/blog/MdxComponents";
 import { ViewTracker } from "@/components/blog/ViewTracker";
 import { LikeButton } from "@/components/blog/LikeButton";
 import { CommentsSection } from "@/components/blog/CommentsSection";
+import { ReadingProgress } from "@/components/blog/ReadingProgress";
+import { RelatedPosts } from "@/components/blog/RelatedPosts";
+import { Breadcrumbs, type BreadcrumbItem } from "@/components/Breadcrumbs";
+import { getRelatedPosts } from "@/lib/related-posts";
 import { mdxOptions } from "@/lib/mdx-options";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
 import { breadcrumbJsonLd } from "@/lib/seo";
@@ -67,14 +71,14 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt,
       tags: post.tags,
-      images: ogImage ? [{ url: ogImage }] : undefined,
       locale: isFr ? "fr_FR" : "en_US",
+      ...(ogImage ? { images: [{ url: ogImage }] } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: ogImage ? [ogImage] : undefined,
+      ...(ogImage ? { images: [ogImage] } : {}),
     },
   };
 }
@@ -92,6 +96,7 @@ export default async function BlogPostPage({ params }: PageProps) {
   const idx = allPosts.findIndex((p) => p.slug === slug);
   const prev = idx >= 0 && idx < allPosts.length - 1 ? allPosts[idx + 1] : null;
   const next = idx > 0 ? allPosts[idx - 1] : null;
+  const related = getRelatedPosts(slug, allPosts, 3);
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://www.leoderoin.fr";
   const isFr = locale === "fr";
@@ -120,6 +125,12 @@ export default async function BlogPostPage({ params }: PageProps) {
     timeRequired: `PT${post.readingTime}M`,
   };
 
+  const breadcrumbItems: BreadcrumbItem[] = [
+    { name: homeName, href: "/" },
+    { name: tBlog("title"), href: "/blog" },
+    { name: post.title },
+  ];
+  const tCommon = await getTranslations("Common");
   const breadcrumbsLd = breadcrumbJsonLd([
     { name: homeName, url: `${baseUrl}${localePrefix}/` },
     { name: tBlog("title"), url: `${baseUrl}${localePrefix}/blog` },
@@ -128,7 +139,9 @@ export default async function BlogPostPage({ params }: PageProps) {
 
   return (
     <article className="relative">
+      <ReadingProgress />
       <div className="mx-auto max-w-7xl px-6 pt-28 pb-20">
+        <Breadcrumbs items={breadcrumbItems} ariaLabel={tCommon("breadcrumbAria")} className="mb-6" />
         <Link
           href="/blog"
           className="inline-flex items-center gap-2 font-mono text-xs uppercase tracking-wider text-slate-400 transition-colors hover:text-nebula-cyan"
@@ -198,6 +211,8 @@ export default async function BlogPostPage({ params }: PageProps) {
                 {t("viewAll")}
               </Link>
             </footer>
+
+            <RelatedPosts posts={related} locale={locale} />
 
             <CommentsSection slug={post.slug} enabled={post.commentsEnabled} />
 

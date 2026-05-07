@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
 import { useTranslations } from "next-intl";
@@ -32,11 +33,14 @@ export function ProjectCard({ project, index }: { project: ProjectCardData; inde
       >
         <div className="relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-nebula-violet/40 via-cosmos-dark to-nebula-cyan/20">
           {project.coverImage && project.coverImage.startsWith("/") && (
-            <img
+            <Image
               src={project.coverImage}
               alt=""
-              loading="lazy"
-              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+              fill
+              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+              priority={index < 2}
+              loading={index < 2 ? "eager" : "lazy"}
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
             />
           )}
           <div

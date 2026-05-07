@@ -47,16 +47,62 @@ export async function sendEmail({ to, subject, html, replyTo }: SendArgs): Promi
   await transporter.sendMail({ from, to, subject, html, replyTo });
 }
 
+const TIMELINE_LABELS_FR: Record<string, string> = {
+  urgent: "Urgent (sous 2 semaines)",
+  month: "Sous 1 mois",
+  quarter: "Sous 3 mois",
+  flexible: "Flexible",
+};
+
+const BUDGET_LABELS_FR: Record<string, string> = {
+  under5k: "< 5 k€",
+  "5to15k": "5 – 15 k€",
+  "15to50k": "15 – 50 k€",
+  over50k: "> 50 k€",
+  todiscuss: "À discuter",
+};
+
 export function contactNotificationHtml(args: {
   name: string;
   email: string;
   subject: string;
   message: string;
+  timeline?: string;
+  stack?: string;
+  budget?: string;
 }): string {
   const safe = (s: string) =>
     s.replace(/[&<>"']/g, (c) =>
       ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!,
     );
+
+  const contextRows: string[] = [];
+  if (args.timeline) {
+    const label = TIMELINE_LABELS_FR[args.timeline] ?? args.timeline;
+    contextRows.push(
+      `<tr><td style="padding:8px 0; color:#94a3b8;">Timeline</td><td>${safe(label)}</td></tr>`,
+    );
+  }
+  if (args.stack) {
+    contextRows.push(
+      `<tr><td style="padding:8px 0; color:#94a3b8;">Stack souhaitée</td><td>${safe(args.stack)}</td></tr>`,
+    );
+  }
+  if (args.budget) {
+    const label = BUDGET_LABELS_FR[args.budget] ?? args.budget;
+    contextRows.push(
+      `<tr><td style="padding:8px 0; color:#94a3b8;">Budget</td><td>${safe(label)}</td></tr>`,
+    );
+  }
+
+  const contextBlock =
+    contextRows.length > 0
+      ? `
+    <h3 style="color:#22d3ee; margin: 20px 0 8px; font-size: 14px;">◊ Contexte projet</h3>
+    <table style="width:100%; border-collapse: collapse;">
+      ${contextRows.join("\n      ")}
+    </table>`
+      : "";
 
   return `
   <div style="font-family: system-ui, sans-serif; max-width: 600px; margin: 0 auto; background:#0a0420; color:#e2e8f0; padding: 24px; border-radius: 12px;">
@@ -65,7 +111,7 @@ export function contactNotificationHtml(args: {
       <tr><td style="padding:8px 0; color:#94a3b8;">Nom</td><td><strong>${safe(args.name)}</strong></td></tr>
       <tr><td style="padding:8px 0; color:#94a3b8;">Email</td><td><a style="color:#22d3ee" href="mailto:${safe(args.email)}">${safe(args.email)}</a></td></tr>
       <tr><td style="padding:8px 0; color:#94a3b8;">Sujet</td><td>${safe(args.subject)}</td></tr>
-    </table>
+    </table>${contextBlock}
     <hr style="border: none; border-top: 1px solid #334155; margin: 16px 0;" />
     <div style="white-space: pre-wrap; line-height: 1.6;">${safe(args.message)}</div>
   </div>`;

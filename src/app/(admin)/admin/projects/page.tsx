@@ -26,6 +26,22 @@ async function toggleFeatured(formData: FormData) {
   revalidatePath("/projects");
 }
 
+async function togglePublished(formData: FormData) {
+  "use server";
+  const id = Number(formData.get("id"));
+  const published = formData.get("published") === "true";
+  if (!Number.isFinite(id)) return;
+  const updated = await prisma.project.update({
+    where: { id },
+    data: { published: !published },
+    select: { slug: true },
+  });
+  revalidatePath("/admin/projects");
+  revalidatePath("/projects");
+  revalidatePath(`/projects/${updated.slug}`);
+  revalidatePath("/sitemap.xml");
+}
+
 export default async function AdminProjectsPage() {
   const projects = await prisma.project.findMany({
     orderBy: [{ featured: "desc" }, { publishedAt: "desc" }],
@@ -55,6 +71,7 @@ export default async function AdminProjectsPage() {
               <th className="px-4 py-3">Titre</th>
               <th className="px-4 py-3">Slug</th>
               <th className="px-4 py-3">Catégorie</th>
+              <th className="px-4 py-3">Visible</th>
               <th className="px-4 py-3">Featured</th>
               <th className="px-4 py-3">Publié</th>
               <th className="px-4 py-3 text-right">Actions</th>
@@ -63,17 +80,46 @@ export default async function AdminProjectsPage() {
           <tbody className="divide-y divide-white/5">
             {projects.length === 0 && (
               <tr>
-                <td colSpan={6} className="px-4 py-12 text-center font-mono text-slate-500">
+                <td colSpan={7} className="px-4 py-12 text-center font-mono text-slate-500">
                   Aucun projet — commence par en créer un.
                 </td>
               </tr>
             )}
             {projects.map((p) => (
-              <tr key={p.id} className="bg-cosmos-dark/20 hover:bg-cosmos-dark/40">
+              <tr
+                key={p.id}
+                className={
+                  p.published
+                    ? "bg-cosmos-dark/20 hover:bg-cosmos-dark/40"
+                    : "bg-cosmos-dark/10 opacity-60 hover:bg-cosmos-dark/30"
+                }
+              >
                 <td className="px-4 py-3 font-display font-medium text-slate-100">{p.title}</td>
                 <td className="px-4 py-3 font-mono text-xs text-slate-500">{p.slug}</td>
                 <td className="px-4 py-3">
                   <Badge variant="default">{p.category}</Badge>
+                </td>
+                <td className="px-4 py-3">
+                  <form action={togglePublished}>
+                    <input type="hidden" name="id" value={p.id} />
+                    <input type="hidden" name="published" value={String(p.published)} />
+                    <button
+                      type="submit"
+                      aria-pressed={p.published}
+                      title={
+                        p.published
+                          ? "Visible sur le site — clic pour cacher"
+                          : "Caché — clic pour publier"
+                      }
+                      className={
+                        p.published
+                          ? "rounded border border-emerald-500/40 bg-emerald-500/10 px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-emerald-300 hover:bg-emerald-500/15"
+                          : "rounded border border-amber-500/40 bg-amber-500/10 px-2 py-1 font-mono text-[10px] uppercase tracking-wider text-amber-300 hover:bg-amber-500/15"
+                      }
+                    >
+                      {p.published ? "● Visible" : "○ Caché"}
+                    </button>
+                  </form>
                 </td>
                 <td className="px-4 py-3">
                   <form action={toggleFeatured}>

@@ -11,19 +11,33 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = await getTranslations({ locale, namespace: "Projects" });
   const isFr = locale === "fr";
   const path = isFr ? "/projects" : "/en/projects";
+  const title = t("metaTitle");
+  const description = t("metaDescription");
+  const ogAlt = isFr
+    ? "Léo Deroin — Galerie de projets"
+    : "Léo Deroin — Project gallery";
+
   return {
-    title: t("metaTitle"),
-    description: t("metaDescription"),
+    title,
+    description,
     alternates: {
       canonical: path,
       languages: { fr: "/projects", en: "/en/projects", "x-default": "/projects" },
     },
     openGraph: {
-      title: t("metaTitle"),
-      description: t("metaDescription"),
+      title,
+      description,
       type: "website",
       url: path,
       locale: isFr ? "fr_FR" : "en_US",
+      siteName: "Léo Deroin",
+      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: ogAlt }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [{ url: "/opengraph-image", alt: ogAlt }],
     },
   };
 }
@@ -41,6 +55,7 @@ export default async function ProjectsPage({ params }: Props) {
   let projects: Awaited<ReturnType<typeof prisma.project.findMany>> = [];
   try {
     projects = await prisma.project.findMany({
+      where: { published: true },
       orderBy: [{ featured: "desc" }, { publishedAt: "desc" }],
     });
   } catch (e) {

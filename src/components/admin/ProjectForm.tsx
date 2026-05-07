@@ -40,6 +40,7 @@ export function ProjectForm({ initial, mode }: Props) {
       liveUrl: initial?.liveUrl ?? "",
       githubUrl: initial?.githubUrl ?? "",
       featured: initial?.featured ?? false,
+      published: initial?.published ?? true,
     },
   });
 
@@ -113,10 +114,23 @@ export function ProjectForm({ initial, mode }: Props) {
           <Input type="url" {...register("githubUrl")} />
         </Field>
       </div>
-      <label className="inline-flex items-center gap-2 text-sm">
-        <input type="checkbox" {...register("featured")} className="h-4 w-4 accent-nebula-cyan" />
-        Mettre en avant (featured)
-      </label>
+      <div className="grid gap-3">
+        <label className="inline-flex items-center gap-2 text-sm">
+          <input type="checkbox" {...register("featured")} className="h-4 w-4 accent-nebula-cyan" />
+          Mettre en avant (featured)
+        </label>
+        <label className="inline-flex items-center gap-2 text-sm">
+          <input
+            type="checkbox"
+            {...register("published")}
+            className="h-4 w-4 accent-nebula-cyan"
+          />
+          Visible sur le site public
+          <span className="font-mono text-[10px] text-slate-500">
+            (décoche pour brouillon — exclu de /projects, sitemap et llms.txt)
+          </span>
+        </label>
+      </div>
 
       {error && (
         <p className="rounded-md border border-rose-500/30 bg-rose-500/10 p-3 text-sm text-rose-200">

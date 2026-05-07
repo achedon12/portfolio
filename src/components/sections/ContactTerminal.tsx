@@ -1,12 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, AnimatePresence } from "framer-motion";
-import { CheckCircle2, Send, AlertTriangle } from "lucide-react";
+import { CheckCircle2, ChevronDown, Send, AlertTriangle } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { contactSchema, contactSubjects, type ContactInput } from "@/lib/validations";
+import {
+  contactSchema,
+  contactSubjects,
+  contactTimelines,
+  contactBudgets,
+  type ContactInput,
+  type ContactTimeline,
+  type ContactBudget,
+} from "@/lib/validations";
+import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -17,18 +26,31 @@ type Status = { state: "idle" } | { state: "sending" } | { state: "success" } | 
 export function ContactTerminal() {
   const t = useTranslations("Contact");
   const [status, setStatus] = useState<Status>({ state: "idle" });
+  const [showContext, setShowContext] = useState(false);
+
   const {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors, isValid },
   } = useForm<ContactInput>({
     resolver: zodResolver(contactSchema),
     mode: "onTouched",
-    defaultValues: { website: "" },
+    defaultValues: { website: "", timeline: "", stack: "", budget: "" },
   });
 
-  /** Map a Zod code (or fallback string) to its translated message. */
+  const subject = watch("subject");
+
+  // Auto-expand the context section when the inquiry looks like a real project.
+  // Sticky : once expanded, we don't auto-collapse to avoid losing user input
+  // if they tinker with the subject field.
+  useEffect(() => {
+    if (subject === "projet" || subject === "freelance") {
+      setShowContext(true);
+    }
+  }, [subject]);
+
   const errorLabel = (code?: string) => {
     if (!code) return undefined;
     const knownCodes = [
@@ -61,6 +83,7 @@ export function ContactTerminal() {
       }
       setStatus({ state: "success" });
       reset();
+      setShowContext(false);
     } catch (e) {
       setStatus({ state: "error", msg: e instanceof Error ? e.message : t("errorPrefix") });
     }
@@ -180,6 +203,80 @@ export function ContactTerminal() {
                     </p>
                   )}
                 </div>
+
+                <button
+                  type="button"
+                  onClick={() => setShowContext((v) => !v)}
+                  aria-expanded={showContext}
+                  aria-controls="contact-context"
+                  className="inline-flex items-center gap-2 self-start font-mono text-[11px] uppercase tracking-[0.18em] text-nebula-cyan/80 transition-colors hover:text-nebula-cyan focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nebula-cyan/60 rounded-sm"
+                >
+                  <ChevronDown
+                    className={cn(
+                      "h-3 w-3 transition-transform",
+                      showContext ? "rotate-180" : "rotate-0",
+                    )}
+                  />
+                  {showContext ? t("context.toggleHide") : t("context.toggleShow")}
+                </button>
+
+                <AnimatePresence initial={false}>
+                  {showContext && (
+                    <motion.div
+                      id="contact-context"
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25, ease: "easeOut" }}
+                      className="overflow-hidden"
+                    >
+                      <div className="grid gap-5 border-l-2 border-nebula-cyan/30 pl-5">
+                        <div className="grid gap-5 md:grid-cols-2">
+                          <div className="grid gap-2">
+                            <Label htmlFor="timeline">{t("labels.timeline")}</Label>
+                            <select
+                              id="timeline"
+                              {...register("timeline")}
+                              className="flex h-10 w-full rounded-md border border-white/10 bg-cosmos-dark/40 px-3 py-2 font-mono text-sm text-slate-100 backdrop-blur-sm focus-visible:border-nebula-cyan/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nebula-cyan/30"
+                            >
+                              <option value="">{t("context.selectTimeline")}</option>
+                              {contactTimelines.map((tl) => (
+                                <option key={tl} value={tl} className="bg-cosmos-dark">
+                                  {t(`timelines.${tl as ContactTimeline}`)}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                          <div className="grid gap-2">
+                            <Label htmlFor="budget">{t("labels.budget")}</Label>
+                            <select
+                              id="budget"
+                              {...register("budget")}
+                              className="flex h-10 w-full rounded-md border border-white/10 bg-cosmos-dark/40 px-3 py-2 font-mono text-sm text-slate-100 backdrop-blur-sm focus-visible:border-nebula-cyan/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nebula-cyan/30"
+                            >
+                              <option value="">{t("context.selectBudget")}</option>
+                              {contactBudgets.map((b) => (
+                                <option key={b} value={b} className="bg-cosmos-dark">
+                                  {t(`budgets.${b as ContactBudget}`)}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+                        </div>
+
+                        <div className="grid gap-2">
+                          <Label htmlFor="stack">{t("labels.stack")}</Label>
+                          <Input
+                            id="stack"
+                            placeholder={t("context.stackPlaceholder")}
+                            {...register("stack")}
+                            maxLength={200}
+                          />
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
                 <div className="absolute left-[-9999px]" aria-hidden>
                   <label>

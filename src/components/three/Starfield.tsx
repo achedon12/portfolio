@@ -101,11 +101,13 @@ function StarLayer({ count, spread, size, color, rotationSpeed, scrollFactor }: 
   );
 }
 
-export function Starfield() {
+export function Starfield({ mobile = false }: { mobile?: boolean }) {
+  // Counts are halved on coarse-pointer devices to keep GPU cost down.
+  const scale = mobile ? 0.5 : 1;
   return (
     <>
       <StarLayer
-        count={1200}
+        count={Math.round(1200 * scale)}
         spread={80}
         size={1.0}
         color="#e2e8f0"
@@ -113,7 +115,7 @@ export function Starfield() {
         scrollFactor={0.0008}
       />
       <StarLayer
-        count={500}
+        count={Math.round(500 * scale)}
         spread={50}
         size={1.6}
         color="#a78bfa"
@@ -121,7 +123,7 @@ export function Starfield() {
         scrollFactor={0.002}
       />
       <StarLayer
-        count={200}
+        count={Math.round(200 * scale)}
         spread={28}
         size={2.4}
         color="#22d3ee"

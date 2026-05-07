@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
-import { LogOut, Mail, FolderKanban, LayoutDashboard, Newspaper, BarChart3, MessageSquare } from "lucide-react";
+import { LogOut, Mail, FolderKanban, LayoutDashboard, Newspaper, BarChart3, MessageSquare, Send } from "lucide-react";
 import "../globals.css";
 import { getAdminSession } from "@/lib/auth";
 import { SignOutButton } from "@/components/admin/SignOutButton";
@@ -73,6 +73,9 @@ export default async function AdminLayout({ children }: { children: ReactNode })
                   icon={<MessageSquare className="h-4 w-4" />}
                 >
                   Commentaires
+                </NavItem>
+                <NavItem href="/admin/newsletter" icon={<Send className="h-4 w-4" />}>
+                  Newsletter
                 </NavItem>
                 <NavItem href="/admin/analytics" icon={<BarChart3 className="h-4 w-4" />}>
                   Analytics

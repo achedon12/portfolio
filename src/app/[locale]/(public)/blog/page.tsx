@@ -1,50 +1,54 @@
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { Link } from "@/i18n/navigation";
 import { getAllPosts } from "@/lib/blog";
-import { PostCard } from "@/components/blog/PostCard";
-import { cn } from "@/lib/utils";
+import { BlogIndexClient } from "@/components/blog/BlogIndexClient";
 import { blogIndexJsonLd, breadcrumbJsonLd } from "@/lib/seo";
 
 export const revalidate = 60;
 
-const PAGE_SIZE = 6;
-
 interface PageProps {
   params: Promise<{ locale: string }>;
-  searchParams: Promise<{ page?: string }>;
+  searchParams: Promise<{ page?: string; q?: string; tag?: string }>;
 }
 
-export async function generateMetadata({ params, searchParams }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;
-  const sp = await searchParams;
-  const page = Math.max(1, Number(sp.page ?? 1) || 1);
   const isFr = locale === "fr";
   const localePrefix = isFr ? "" : "/en";
 
   const t = await getTranslations({ locale, namespace: "Blog" });
 
-  const canonical =
-    page === 1 ? `${localePrefix}/blog` : `${localePrefix}/blog?page=${page}`;
+  const canonical = `${localePrefix}/blog`;
+  const title = t("metaTitle");
+  const description = t("metaDescription");
+  const ogAlt = isFr ? "Léo Deroin — Carnets de bord" : "Léo Deroin — Logbook";
 
   return {
-    title: page === 1 ? t("metaTitle") : t("metaTitlePage", { page }),
-    description: t("metaDescription"),
+    title,
+    description,
     alternates: {
       canonical,
       languages: {
-        fr: page === 1 ? "/blog" : `/blog?page=${page}`,
-        en: page === 1 ? "/en/blog" : `/en/blog?page=${page}`,
-        "x-default": page === 1 ? "/blog" : `/blog?page=${page}`,
+        fr: "/blog",
+        en: "/en/blog",
+        "x-default": "/blog",
       },
       types: { "application/rss+xml": "/blog/rss.xml" },
     },
     openGraph: {
-      title: page === 1 ? t("metaTitle") : t("metaTitlePage", { page }),
-      description: t("metaDescription"),
+      title,
+      description,
       type: "website",
       url: canonical,
       locale: isFr ? "fr_FR" : "en_US",
+      siteName: "Léo Deroin",
+      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: ogAlt }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [{ url: "/opengraph-image", alt: ogAlt }],
     },
   };
 }
@@ -52,15 +56,13 @@ export async function generateMetadata({ params, searchParams }: PageProps): Pro
 export default async function BlogIndex({ params, searchParams }: PageProps) {
   const { locale } = await params;
   setRequestLocale(locale);
-  const { page: pageParam } = await searchParams;
   const t = await getTranslations("Blog");
 
-  const allPosts = await getAllPosts();
-  const totalPages = Math.max(1, Math.ceil(allPosts.length / PAGE_SIZE));
-  const currentPage = Math.min(Math.max(1, Number(pageParam ?? 1) || 1), totalPages);
+  const sp = await searchParams;
+  const initialQ = typeof sp.q === "string" ? sp.q : "";
+  const initialTag = typeof sp.tag === "string" ? sp.tag : "";
 
-  const start = (currentPage - 1) * PAGE_SIZE;
-  const posts = allPosts.slice(start, start + PAGE_SIZE);
+  const allPosts = await getAllPosts();
 
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "https://www.leoderoin.fr";
   const isFr = locale === "fr";
@@ -100,40 +102,16 @@ export default async function BlogIndex({ params, searchParams }: PageProps) {
         </p>
       </header>
 
-      {posts.length === 0 ? (
+      {allPosts.length === 0 ? (
         <p className="rounded-md border border-white/10 bg-cosmos-dark/40 p-8 text-center font-mono text-sm text-slate-500">
           {t("empty")}
         </p>
       ) : (
-        <div className="grid gap-6 md:grid-cols-2">
-          {posts.map((post) => (
-            <PostCard key={post.slug} post={post} />
-          ))}
-        </div>
-      )}
-
-      {totalPages > 1 && (
-        <nav className="mt-12 flex items-center justify-center gap-2" aria-label="Pagination">
-          {Array.from({ length: totalPages }).map((_, i) => {
-            const page = i + 1;
-            const active = page === currentPage;
-            return (
-              <Link
-                key={page}
-                href={page === 1 ? "/blog" : `/blog?page=${page}`}
-                aria-current={active ? "page" : undefined}
-                className={cn(
-                  "h-9 min-w-9 rounded-md border px-3 text-sm font-mono transition-colors flex items-center justify-center",
-                  active
-                    ? "border-nebula-cyan/60 bg-nebula-cyan/10 text-nebula-cyan"
-                    : "border-white/10 bg-white/5 text-slate-400 hover:text-slate-200",
-                )}
-              >
-                {page}
-              </Link>
-            );
-          })}
-        </nav>
+        <BlogIndexClient
+          posts={allPosts}
+          initialQ={initialQ}
+          initialTag={initialTag}
+        />
       )}
 
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: blogLd }} />
