@@ -255,6 +255,8 @@
     "fr": "Français",
     "en": "Anglais",
     "switchToEn": "Passer en anglais",
-    "switchToFr": "Passer en français"
+    "switchToFr": "Passer en français",
+    "switchToLight": "Passer en thème clair",
+    "switchToDark": "Passer en thème sombre"
   }
 }

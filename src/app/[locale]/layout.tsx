@@ -6,6 +6,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import "../globals.css";
 import { Matomo } from "@/components/Matomo";
+import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { profile } from "@/lib/profile";
 import { routing, type Locale } from "@/i18n/routing";
 
@@ -136,15 +137,17 @@ export default async function LocaleLayout({ children, params }: Props) {
       suppressHydrationWarning
     >
       <body className="min-h-screen bg-cosmos-deep text-slate-200 antialiased font-sans">
-        <NextIntlClientProvider locale={locale as Locale} messages={messages}>
-          {children}
-        </NextIntlClientProvider>
-        {IS_PROD && (
-          <>
-            <Analytics />
-            {MATOMO_URL && MATOMO_SITE_ID && <Matomo url={MATOMO_URL} siteId={MATOMO_SITE_ID} />}
-          </>
-        )}
+        <ThemeProvider>
+          <NextIntlClientProvider locale={locale as Locale} messages={messages}>
+            {children}
+          </NextIntlClientProvider>
+          {IS_PROD && (
+            <>
+              <Analytics />
+              {MATOMO_URL && MATOMO_SITE_ID && <Matomo url={MATOMO_URL} siteId={MATOMO_SITE_ID} />}
+            </>
+          )}
+        </ThemeProvider>
       </body>
     </html>
   );

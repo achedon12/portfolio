@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
@@ -61,6 +62,7 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <LocaleSwitcher />
+          <ThemeToggle />
         </div>
       </nav>
     </header>

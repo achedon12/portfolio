@@ -23,6 +23,66 @@ body {
   color: #f8fafc;
 }
 
+/* ════════════════════════════════════════════════════════════════
+ * LIGHT THEME — off-white doux teinté violet, contraste mesuré.
+ * Activé via class="light" sur <html> (par next-themes).
+ * Stratégie : on override les CSS variables de @theme + on pose
+ * des règles ciblées sur les classes Tailwind utilisées partout
+ * (slate-*, white/x). Aucune modif des composants nécessaire.
+ * ════════════════════════════════════════════════════════════════ */
+
+.light {
+  --color-cosmos-deep: #f5f3fb;
+  --color-cosmos-dark: #ffffff;
+  --color-nebula-violet: #6d28d9;
+  --color-nebula-cyan: #0891b2;
+  --color-solar-orange: #ea580c;
+}
+
+.light html,
+.light body,
+html.light,
+html.light body {
+  background-color: #f5f3fb;
+  color: #1e1b3a;
+}
+
+.light ::selection {
+  background-color: rgb(124 58 237 / 0.25);
+  color: #1e1b3a;
+}
+
+/* Inversion graduée slate-* (titres → secondaire → muted) */
+.light .text-slate-100 { color: #1e1b3a; }
+.light .text-slate-200 { color: #2d2a4a; }
+.light .text-slate-300 { color: #3d3a5a; }
+.light .text-slate-400 { color: #5a5775; }
+.light .text-slate-500 { color: #7a7795; }
+.light .text-slate-600 { color: #9694b0; }
+.light .fill-slate-300 { fill: #3d3a5a; }
+
+/* Bordures et fonds semi-trans : on inverse le canal */
+.light .border-white\/5 { border-color: rgb(30 27 58 / 0.06); }
+.light .border-white\/10 { border-color: rgb(30 27 58 / 0.10); }
+.light .border-white\/15 { border-color: rgb(30 27 58 / 0.14); }
+.light .bg-white\/5 { background-color: rgb(30 27 58 / 0.04); }
+.light .bg-white\/10 { background-color: rgb(30 27 58 / 0.07); }
+
+/* Surfaces semi-trans cosmos-* : adoucies en light */
+.light .bg-cosmos-dark\/40 { background-color: rgb(255 255 255 / 0.7); }
+.light .bg-cosmos-dark\/60 { background-color: rgb(255 255 255 / 0.85); }
+.light .bg-cosmos-dark\/80 { background-color: rgb(255 255 255 / 0.95); }
+.light .bg-cosmos-deep\/85 { background-color: rgb(245 243 251 / 0.92); }
+.light .bg-cosmos-deep\/70 { background-color: rgb(245 243 251 / 0.88); }
+.light .bg-cosmos-deep\/60 { background-color: rgb(245 243 251 / 0.8); }
+
+/* Glows hover réduits (cyan moins intense sur fond clair) */
+.light .hover\:shadow-\[0_0_60px_rgba\(34\,211\,238\,0\.15\)\]:hover { box-shadow: 0 0 30px rgba(8, 145, 178, 0.25); }
+.light .hover\:shadow-\[0_0_60px_rgba\(34\,211\,238\,0\.12\)\]:hover { box-shadow: 0 0 25px rgba(8, 145, 178, 0.20); }
+
+/* Starfield 3D désactivé en light (étoiles sur fond clair = bruit visuel) */
+.light .starfield-canvas { opacity: 0; pointer-events: none; }
+
 /* ---------- Blog : autolink heading + shiki code blocks ---------- */
 .prose-cosmos a.heading-anchor {
   color: inherit;
