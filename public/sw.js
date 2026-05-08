@@ -5,7 +5,7 @@
 //  - HTML pages: network-first with SWR fallback, /offline as final fallback
 //  - api / admin / auth / analytics: network-only (skip SW entirely)
 
-const VERSION = "v1";
+const VERSION = "v2";
 const STATIC_CACHE = `portfolio-static-${VERSION}`;
 const PAGE_CACHE = `portfolio-pages-${VERSION}`;
 const PRECACHE_URLS = ["/offline", "/en/offline"];
