@@ -197,6 +197,7 @@ const PROJECTS = [
     liveUrl: "https://ccr.confluent-digital.com",
     githubUrl: null,
     featured: true,
+    published: false,
   },
   {
     slug: "chronos",
@@ -223,12 +224,16 @@ const PROJECTS = [
 ];
 
 async function seedProjects() {
-
   for (const p of PROJECTS) {
+    // On ne touche jamais à `published` lors des updates : c'est un drapeau
+    // contrôlé par l'admin via /admin/projects, le seed ne doit pas l'écraser.
+    // Sur le create initial en revanche, la valeur du PROJECTS array fait foi
+    // (false pour CCR, true par défaut Prisma sinon).
+    const { published: _ignored, ...updateData } = p;
     await prisma.project.upsert({
       where: { slug: p.slug },
       create: p,
-      update: p,
+      update: updateData,
     });
   }
   console.log(`[seed] projects upserted: ${PROJECTS.length}`);
