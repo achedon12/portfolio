@@ -16,7 +16,7 @@ export function Hero() {
   const tCommon = useTranslations("Common");
 
   const onEmbark = () => {
-    document.getElementById("about")?.scrollIntoView({ behavior: "smooth" });
+    document.getElementById("about")?.scrollIntoView();
   };
 
   return (

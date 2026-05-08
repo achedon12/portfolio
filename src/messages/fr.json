@@ -11,7 +11,11 @@
     "explore": "Explorer",
     "exploreAria": "Ouvrir le menu Explorer",
     "experience": "Parcours",
-    "contact": "Contact"
+    "contact": "Contact",
+    "menuOpenAria": "Ouvrir le menu de navigation",
+    "menuCloseAria": "Fermer le menu de navigation",
+    "menuPrimaryHeading": "Trajectoires",
+    "menuExploreHeading": "Expéditions"
   },
   "Hero": {
     "kicker": "◊ Station LD-001 — Coordonnées 48.8566° N, 2.3522° E",

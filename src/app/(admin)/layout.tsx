@@ -6,6 +6,7 @@ import { LogOut, Mail, FolderKanban, LayoutDashboard, Newspaper, BarChart3, Mess
 import "../globals.css";
 import { getAdminSession } from "@/lib/auth";
 import { SignOutButton } from "@/components/admin/SignOutButton";
+import { AdminMobileNav } from "@/components/admin/AdminMobileNav";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -47,6 +48,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
     >
       <body className="min-h-screen bg-cosmos-deep text-slate-200 antialiased font-sans">
         <div className="min-h-screen bg-cosmos-deep">
+          {session && <AdminMobileNav email={session.user?.email} />}
           {session && (
             <aside className="fixed inset-y-0 left-0 hidden w-60 flex-col border-r border-white/10 bg-cosmos-dark/60 p-4 md:flex">
               <Link href="/admin" className="mb-8 flex items-center gap-2 px-2">
@@ -93,7 +95,7 @@ export default async function AdminLayout({ children }: { children: ReactNode })
               </div>
             </aside>
           )}
-          <main className={session ? "md:ml-60" : ""}>{children}</main>
+          <main className={session ? "pt-14 md:ml-60 md:pt-0" : ""}>{children}</main>
         </div>
       </body>
     </html>

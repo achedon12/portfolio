@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Menu, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
@@ -30,6 +30,7 @@ function isActive(href: string, pathname: string): boolean {
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const t = useTranslations("Nav");
   const pathname = usePathname();
 
@@ -39,6 +40,26 @@ export function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Le drawer mobile se ferme dès que la route change (clic sur un Link).
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
+
+  // Lock du scroll du body + escape-to-close pendant que le drawer est ouvert.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setMobileOpen(false);
+    };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [mobileOpen]);
 
   const primary: NavItem[] = [
     { href: "/projects", label: t("projects") },
@@ -57,7 +78,7 @@ export function Header() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-40 transition-all duration-300",
-        scrolled
+        scrolled || mobileOpen
           ? "bg-cosmos-deep/70 backdrop-blur-md border-b border-white/5"
           : "bg-transparent",
       )}
@@ -106,9 +127,126 @@ export function Header() {
         <div className="flex items-center gap-2">
           <LocaleSwitcher />
           <ThemeToggle />
+          <button
+            type="button"
+            onClick={() => setMobileOpen((v) => !v)}
+            aria-label={mobileOpen ? t("menuCloseAria") : t("menuOpenAria")}
+            aria-expanded={mobileOpen}
+            aria-controls="mobile-nav"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-white/10 bg-white/5 text-slate-200 transition-colors hover:text-nebula-cyan hover:border-nebula-cyan/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nebula-cyan/60 md:hidden"
+          >
+            {mobileOpen ? (
+              <X className="h-4 w-4" aria-hidden />
+            ) : (
+              <Menu className="h-4 w-4" aria-hidden />
+            )}
+          </button>
         </div>
       </nav>
+
+      <MobileDrawer
+        id="mobile-nav"
+        open={mobileOpen}
+        onClose={() => setMobileOpen(false)}
+        primary={primary}
+        explore={explore}
+        pathname={pathname}
+        primaryHeading={t("menuPrimaryHeading")}
+        exploreHeading={t("menuExploreHeading")}
+      />
     </header>
+  );
+}
+
+function MobileDrawer({
+  id,
+  open,
+  onClose,
+  primary,
+  explore,
+  pathname,
+  primaryHeading,
+  exploreHeading,
+}: {
+  id: string;
+  open: boolean;
+  onClose: () => void;
+  primary: NavItem[];
+  explore: NavItem[];
+  pathname: string;
+  primaryHeading: string;
+  exploreHeading: string;
+}) {
+  return (
+    <div
+      id={id}
+      role="dialog"
+      aria-modal="true"
+      aria-hidden={!open}
+      className={cn(
+        "fixed inset-x-0 top-16 bottom-0 z-30 origin-top transition-all duration-200 md:hidden",
+        open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
+      )}
+    >
+      <button
+        type="button"
+        tabIndex={-1}
+        aria-hidden
+        onClick={onClose}
+        className="absolute inset-0 bg-cosmos-deep/80 backdrop-blur-md"
+      />
+      <div
+        className={cn(
+          "relative flex h-full flex-col gap-6 overflow-y-auto border-t border-white/10 bg-cosmos-deep/95 px-6 py-6 transition-transform duration-200",
+          open ? "translate-y-0" : "-translate-y-2",
+        )}
+      >
+        <MobileSection heading={primaryHeading} items={primary} pathname={pathname} onItemClick={onClose} />
+        <MobileSection heading={exploreHeading} items={explore} pathname={pathname} onItemClick={onClose} />
+      </div>
+    </div>
+  );
+}
+
+function MobileSection({
+  heading,
+  items,
+  pathname,
+  onItemClick,
+}: {
+  heading: string;
+  items: NavItem[];
+  pathname: string;
+  onItemClick: () => void;
+}) {
+  return (
+    <div>
+      <p className="mb-2 px-2 font-mono text-[10px] uppercase tracking-[0.2em] text-slate-500">
+        {heading}
+      </p>
+      <ul className="flex flex-col">
+        {items.map((item) => {
+          const active = isActive(item.href, pathname);
+          return (
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                onClick={onItemClick}
+                aria-current={active ? "page" : undefined}
+                className={cn(
+                  "block rounded-md px-3 py-3 font-display text-base transition-colors focus-visible:outline-none focus-visible:bg-nebula-cyan/10",
+                  active
+                    ? "bg-nebula-cyan/10 text-nebula-cyan"
+                    : "text-slate-200 hover:bg-white/5 hover:text-nebula-cyan",
+                )}
+              >
+                {item.label}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 }
 

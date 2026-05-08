@@ -8,7 +8,7 @@ import { NewsletterForm } from "@/components/newsletter/NewsletterForm";
 
 function scrollToTop() {
   if (typeof window === "undefined") return;
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  window.scrollTo({ top: 0 });
 }
 
 export function Footer() {
