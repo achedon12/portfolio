@@ -34,25 +34,8 @@ services:
     image: leoderoin-portfolio:latest
     container_name: portfolio_app
     restart: unless-stopped
-    environment:
-      NODE_ENV: production
-      DATABASE_URL: "mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}"
-      NEXTAUTH_URL: ${NEXTAUTH_URL}
-      NEXTAUTH_SECRET: ${NEXTAUTH_SECRET}
-      ADMIN_EMAIL: ${ADMIN_EMAIL}
-      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
-      RESEND_API_KEY: ${RESEND_API_KEY}
-      RESEND_FROM: ${RESEND_FROM}
-      SMTP_HOST: ${SMTP_HOST}
-      SMTP_PORT: ${SMTP_PORT}
-      SMTP_USER: ${SMTP_USER}
-      SMTP_PASS: ${SMTP_PASS}
-      SMTP_FROM: ${SMTP_FROM}
-      NEXT_PUBLIC_APP_URL: ${NEXT_PUBLIC_APP_URL}
-      # Server-only secrets (jamais NEXT_PUBLIC_*)
-      IP_HASH_PEPPER: ${IP_HASH_PEPPER}
-      MATOMO_API_TOKEN: ${MATOMO_API_TOKEN}
-      TZ: ${TZ:-Europe/Paris}
+    env_file:
+      - .env
     depends_on:
       db:
         condition: service_healthy
