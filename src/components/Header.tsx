@@ -78,9 +78,10 @@ export function Header() {
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-40 transition-all duration-300",
-        scrolled || mobileOpen
-          ? "bg-cosmos-deep/70 backdrop-blur-md border-b border-white/5"
-          : "bg-transparent",
+        "border-b border-white/10 bg-cosmos-deep/90 backdrop-blur-md",
+        "md:border-b-0 md:bg-transparent md:backdrop-blur-none",
+        (scrolled || mobileOpen) &&
+          "md:border-b md:border-white/5 md:bg-cosmos-deep/70 md:backdrop-blur-md",
       )}
     >
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-6">
