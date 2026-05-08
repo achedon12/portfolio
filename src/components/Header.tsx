@@ -179,33 +179,35 @@ function MobileDrawer({
   exploreHeading: string;
 }) {
   return (
-    <div
-      id={id}
-      role="dialog"
-      aria-modal="true"
-      aria-hidden={!open}
-      className={cn(
-        "fixed inset-x-0 top-16 bottom-0 z-30 origin-top transition-all duration-200 md:hidden",
-        open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
-      )}
-    >
+    <>
+      {/* Backdrop : couvre tout le viewport sous le header, fermeture au clic. */}
       <button
         type="button"
         tabIndex={-1}
         aria-hidden
         onClick={onClose}
-        className="absolute inset-0 bg-cosmos-deep/80 backdrop-blur-md"
-      />
-      <div
         className={cn(
-          "relative flex h-full flex-col gap-6 overflow-y-auto border-t border-white/10 bg-cosmos-deep/95 px-6 py-6 transition-transform duration-200",
-          open ? "translate-y-0" : "-translate-y-2",
+          "fixed inset-0 top-16 z-20 bg-cosmos-deep/80 backdrop-blur-md transition-opacity duration-200 md:hidden",
+          open ? "pointer-events-auto opacity-100" : "pointer-events-none opacity-0",
+        )}
+      />
+      {/* Panel : auto-sized au contenu, capé à svh-header pour les petits écrans. */}
+      <div
+        id={id}
+        role="dialog"
+        aria-modal="true"
+        aria-hidden={!open}
+        className={cn(
+          "fixed inset-x-0 top-16 z-30 max-h-[calc(100svh-4rem)] origin-top overflow-y-auto border-b border-white/10 bg-cosmos-deep/95 px-4 py-3 transition-all duration-200 md:hidden",
+          open
+            ? "pointer-events-auto translate-y-0 opacity-100"
+            : "pointer-events-none -translate-y-2 opacity-0",
         )}
       >
         <MobileSection heading={primaryHeading} items={primary} pathname={pathname} onItemClick={onClose} />
         <MobileSection heading={exploreHeading} items={explore} pathname={pathname} onItemClick={onClose} />
       </div>
-    </div>
+    </>
   );
 }
 
@@ -221,8 +223,8 @@ function MobileSection({
   onItemClick: () => void;
 }) {
   return (
-    <div>
-      <p className="mb-2 px-2 font-mono text-[10px] uppercase tracking-[0.2em] text-slate-500">
+    <div className="mt-2 first:mt-0">
+      <p className="mb-1 px-2 font-mono text-[10px] uppercase tracking-[0.2em] text-slate-500">
         {heading}
       </p>
       <ul className="flex flex-col">
@@ -235,7 +237,7 @@ function MobileSection({
                 onClick={onItemClick}
                 aria-current={active ? "page" : undefined}
                 className={cn(
-                  "block rounded-md px-3 py-3 font-display text-base transition-colors focus-visible:outline-none focus-visible:bg-nebula-cyan/10",
+                  "block rounded-md px-3 py-2 font-display text-sm transition-colors focus-visible:outline-none focus-visible:bg-nebula-cyan/10",
                   active
                     ? "bg-nebula-cyan/10 text-nebula-cyan"
                     : "text-slate-200 hover:bg-white/5 hover:text-nebula-cyan",
