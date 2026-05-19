@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, ChevronDown, Send, AlertTriangle } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import {
   contactSchema,
   contactSubjects,
@@ -25,6 +25,7 @@ type Status = { state: "idle" } | { state: "sending" } | { state: "success" } | 
 
 export function ContactTerminal() {
   const t = useTranslations("Contact");
+  const locale = useLocale();
   const [status, setStatus] = useState<Status>({ state: "idle" });
   const [showContext, setShowContext] = useState(false);
 
@@ -73,7 +74,7 @@ export function ContactTerminal() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, locale }),
       });
       if (!res.ok) {
         const json = (await res.json().catch(() => ({}))) as { code?: string; message?: string };

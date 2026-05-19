@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { contactSchema } from "@/lib/validations";
 import { prisma } from "@/lib/prisma";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
-import { sendEmail, contactNotificationHtml } from "@/lib/email";
+import { sendEmail, contactNotificationHtml, contactConfirmationHtml } from "@/lib/email";
 import { profile } from "@/lib/profile";
 
 export const runtime = "nodejs";
@@ -51,8 +51,20 @@ export async function POST(req: Request) {
     },
   });
 
-  try {
-    await sendEmail({
+  const locale: "fr" | "en" = parsed.data.locale ?? "fr";
+
+  // Notification admin (FR) + accusé de réception visiteur (locale du site),
+  // envoyés en parallèle. Aucun n'est bloquant pour la réponse HTTP : si un
+  // envoi échoue, le message reste en DB et est visible dans /admin/messages.
+  const confirmation = contactConfirmationHtml({
+    name: parsed.data.name,
+    subject: parsed.data.subject,
+    message: parsed.data.message,
+    locale,
+  });
+
+  const results = await Promise.allSettled([
+    sendEmail({
       to: profile.email,
       subject: `[leoderoin.fr] ${parsed.data.subject} — ${parsed.data.name}`,
       html: contactNotificationHtml({
@@ -65,10 +77,21 @@ export async function POST(req: Request) {
         budget: parsed.data.budget || undefined,
       }),
       replyTo: parsed.data.email,
-    });
-  } catch (e) {
-    console.error("[contact] email notification failed:", e);
-  }
+    }),
+    sendEmail({
+      to: parsed.data.email,
+      subject: confirmation.subject,
+      html: confirmation.html,
+      replyTo: profile.email,
+    }),
+  ]);
+
+  results.forEach((r, i) => {
+    if (r.status === "rejected") {
+      const which = i === 0 ? "admin notification" : "visitor confirmation";
+      console.error(`[contact] ${which} email failed:`, r.reason);
+    }
+  });
 
   return NextResponse.json({ ok: true, id: created.id }, { status: 201 });
 }

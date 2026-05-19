@@ -86,7 +86,7 @@ En prod, l'`entrypoint.sh` du conteneur app exécute automatiquement `prisma mig
 #    NEXT_PUBLIC_APP_URL=https://www.leoderoin.fr
 #    NEXTAUTH_SECRET=<openssl rand -base64 32>
 #    IP_HASH_PEPPER=<openssl rand -base64 32>  (constant, jamais le changer en prod)
-#    RESEND_API_KEY=<...>
+#    SMTP_HOST / SMTP_PORT / SMTP_USER / SMTP_PASS / SMTP_FROM (envoi des mails de contact)
 #    MATOMO_API_TOKEN=<...>  (si tu utilises le dashboard admin Matomo)
 #    DOCKER_HTTP_PORT=80 (ou autre)
 

@@ -40,6 +40,8 @@ export const contactSchema = z.object({
   timeline: z.enum(contactTimelines).optional().or(z.literal("")),
   stack: z.string().trim().max(200).optional().or(z.literal("")),
   budget: z.enum(contactBudgets).optional().or(z.literal("")),
+  // Locale du visiteur — détermine la langue de l'email d'accusé de réception.
+  locale: z.enum(["fr", "en"]).optional(),
   website: z.string().max(0, "spam").optional().or(z.literal("")),
 });
 
