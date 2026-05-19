@@ -2,45 +2,21 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import { useTransition } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
-
-/**
- * Retire le préfixe de locale d'un pathname (`/en/foo` → `/foo`, `/en` → `/`).
- * Préserve les chemins déjà sans préfixe.
- */
-function stripLocalePrefix(path: string): string {
-  for (const l of routing.locales) {
-    if (path === `/${l}`) return "/";
-    if (path.startsWith(`/${l}/`)) return path.slice(l.length + 1);
-  }
-  return path;
-}
-
-/**
- * Construit l'URL cible pour une locale donnée en respectant `localePrefix: "as-needed"` :
- * la locale par défaut n'a jamais de préfixe.
- */
-function buildLocalizedPath(basePath: string, target: Locale): string {
-  if (target === routing.defaultLocale) return basePath;
-  if (basePath === "/") return `/${target}`;
-  return `/${target}${basePath}`;
-}
 
 export function LocaleSwitcher() {
   const t = useTranslations("Common");
   const router = useRouter();
-  const rawPathname = usePathname();
+  const pathname = usePathname();
   const locale = useLocale() as Locale;
   const [isPending, startTransition] = useTransition();
 
   function setLocale(next: Locale) {
     if (next === locale) return;
-    const basePath = stripLocalePrefix(rawPathname);
-    const target = buildLocalizedPath(basePath, next);
     startTransition(() => {
-      router.replace(target);
+      router.replace(pathname, { locale: next });
     });
   }
 
