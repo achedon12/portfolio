@@ -98,6 +98,34 @@ const PROJECTS = [
     featured: true,
   },
   {
+    slug: "michelin-ride-finder",
+    title: "Michelin Ride Finder",
+    description:
+      "Hackathon M2 : application mobile qui aide un cycliste à trouver le bon pneu Michelin en trois questions, justifie chaque recommandation et propose livraison à domicile ou retrait magasin avec stock temps réel. Stack 100 % TypeScript : React Native + Expo / Fastify / Prisma / PostgreSQL.",
+    longContent:
+      "Michelin Ride Finder est une application mobile réalisée lors d'un hackathon en M2. Elle aide un cycliste à choisir le bon pneu Michelin via un finder en trois étapes (vélo, taille, besoin) qui explique pourquoi tel pneu est recommandé — le moteur de reco repose sur des règles pondérées, pas de ML. Deux parcours d'achat sont proposés : livraison D2C ou retrait en magasin avec le stock revendeur en temps réel.\n\nAutour de ce cœur, l'app embarque un quiz persona, un garage de vélos, le suivi de sorties et des statistiques, une dimension sociale (amis, badges), la connexion Strava, le scan de pneu par OCR, les comptes email/mot de passe et Google, les emails transactionnels et les notifications push.\n\nLa stack est volontairement 100 % TypeScript pour un seul langage de bout en bout : app mobile iOS/Android en React Native + Expo (Expo Router, démo immédiate via Expo Go et un QR code), API en Fastify (Node.js) avec Prisma sur PostgreSQL et validation Zod, back-office d'administration en React + Vite + Recharts. Une démo IoT vient compléter le tout : un capteur ESP32 (pression / usure) qui publie via MQTT et est ingéré par l'API. L'ensemble est orchestré avec Docker.",
+    coverImage: "/projects/michelin-ride-finder.png",
+    techStack: [
+      "React Native",
+      "Expo",
+      "TypeScript",
+      "Fastify",
+      "Node.js",
+      "Prisma",
+      "PostgreSQL",
+      "Zod",
+      "React",
+      "Vite",
+      "MQTT",
+      "Docker",
+      "Git",
+    ],
+    category: "école",
+    liveUrl: null,
+    githubUrl: "https://github.com/achedon12/Michelin-Ride-Finder",
+    featured: true,
+  },
+  {
     slug: "charly-sy-portfolio",
     title: "Charly Sy — Portfolio artiste",
     description:
