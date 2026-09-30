@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Léo Deroin">
+  <defs>
+    <linearGradient id="ldTile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#1e1b4b"/>
+      <stop offset="1" stop-color="#030014"/>
+    </linearGradient>
+    <linearGradient id="ldPlanet" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7c3aed"/>
+      <stop offset="1" stop-color="#22d3ee"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="url(#ldTile)"/>
+  <g transform="translate(32 32) rotate(-20)">
+    <path d="M-24 0A24 8 0 0 1 24 0" fill="none" stroke="#22d3ee" stroke-opacity="0.55" stroke-width="2.2"/>
+    <circle r="13" fill="url(#ldPlanet)"/>
+    <path d="M-24 0A24 8 0 0 0 24 0" fill="none" stroke="#22d3ee" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="-17" cy="5.6" r="2.8" fill="#e0f7ff"/>
+  </g>
+</svg>

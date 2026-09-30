@@ -66,9 +66,8 @@ export function Footer() {
           <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-12">
             <div className="lg:col-span-5">
               <Link href="/" className="inline-flex items-center gap-3 group">
-                <span className="relative flex h-10 w-10 items-center justify-center rounded-full border border-nebula-cyan/40 bg-nebula-cyan/10 font-mono text-xs font-semibold text-nebula-cyan transition-all group-hover:shadow-[0_0_25px_rgba(34,211,238,0.45)]">
-                  LD
-                </span>
+                {/* eslint-disable-next-line @next/next/no-img-element -- SVG statique */}
+                <img src="/logo-mark.svg" alt="" width={40} height={40} className="h-10 w-10 rounded-lg transition-shadow group-hover:shadow-[0_0_25px_rgba(34,211,238,0.45)]" />
                 <span>
                   <p className="font-display text-base font-semibold text-slate-100">
                     {profile.name}

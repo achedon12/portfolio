@@ -89,10 +89,16 @@ export function Header() {
           href="/"
           className="group flex items-center gap-2 font-display text-base font-semibold tracking-tight"
         >
-          <span className="relative flex h-7 w-7 items-center justify-center rounded-full border border-nebula-cyan/40 bg-nebula-cyan/10 text-[10px] font-mono text-nebula-cyan transition-all group-hover:shadow-[0_0_20px_rgba(34,211,238,0.6)]">
-            LD
-          </span>
+          {/* eslint-disable-next-line @next/next/no-img-element -- SVG statique, pas d'optimisation utile */}
+          <img
+            src="/logo-mark.svg"
+            alt=""
+            width={28}
+            height={28}
+            className="h-7 w-7 rounded-md transition-shadow group-hover:shadow-[0_0_20px_rgba(34,211,238,0.6)]"
+          />
           <span className="hidden sm:inline">leoderoin</span>
+          <span className="sr-only sm:hidden">Léo Deroin</span>
         </Link>
 
         <ul className="hidden items-center gap-1 md:flex">

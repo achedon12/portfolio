@@ -4,10 +4,10 @@
 
 **There is no top-level `src/app/layout.tsx`.** Two independent root layouts each render their own `<html>` and `<body>`:
 
-- `src/app/[locale]/layout.tsx` — public root. Sets `<html lang={locale}>`, wraps in `NextIntlClientProvider`, runs `setRequestLocale`, mounts fonts + conditional Analytics + Matomo (production only via `NODE_ENV` check). Calls `notFound()` if locale ∉ `routing.locales`.
+- `src/app/[locale]/layout.tsx` — public root. Sets `<html lang={locale}>`, wraps in `NextIntlClientProvider`, runs `setRequestLocale`, mounts fonts + Matomo (production only via `NODE_ENV` check). Calls `notFound()` if locale ∉ `routing.locales`.
 - `src/app/(admin)/layout.tsx` — admin root, `<html lang="fr">`, FR-only by design.
 
-Top-level metadata files (`icon.tsx`, `apple-icon.tsx`, `opengraph-image.tsx`, `manifest.ts`, `robots.ts`, `sitemap.ts`, `blog/rss.xml/route.ts`, `api/**`) live outside both layouts and don't need an HTML wrapper.
+Top-level metadata files (`favicon.ico`, `icon.png`, `apple-icon.png` — generated from `public/logo-mark.svg` by `npm run logos` —, `opengraph-image.tsx`, `manifest.ts`, `robots.ts`, `sitemap.ts`, `blog/rss.xml/route.ts`, `api/**`) live outside both layouts and don't need an HTML wrapper.
 
 ## Middleware is `proxy.ts`
 

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" role="img" aria-label="Léo Deroin">
+  <defs>
+    <!-- Découpe la planète le long de l'anneau avant : en une seule couleur,
+         c'est ce vide qui fait lire l'anneau devant la planète. -->
+    <mask id="ldRingGap" maskUnits="userSpaceOnUse" x="-32" y="-32" width="64" height="64">
+      <rect x="-32" y="-32" width="64" height="64" fill="#fff"/>
+      <path d="M-24 0A24 8 0 0 0 24 0" fill="none" stroke="#000" stroke-width="5"/>
+    </mask>
+  </defs>
+  <g transform="translate(32 32) rotate(-20)" fill="currentColor">
+    <path d="M-24 0A24 8 0 0 1 24 0" fill="none" stroke="currentColor" stroke-opacity="0.55" stroke-width="2.2"/>
+    <circle r="13" mask="url(#ldRingGap)"/>
+    <path d="M-24 0A24 8 0 0 0 24 0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+    <circle cx="-17" cy="5.6" r="2.8"/>
+  </g>
+</svg>

@@ -52,9 +52,8 @@ export default async function AdminLayout({ children }: { children: ReactNode })
           {session && (
             <aside className="fixed inset-y-0 left-0 hidden w-60 flex-col border-r border-white/10 bg-cosmos-dark/60 p-4 md:flex">
               <Link href="/admin" className="mb-8 flex items-center gap-2 px-2">
-                <span className="flex h-7 w-7 items-center justify-center rounded-full border border-nebula-cyan/40 bg-nebula-cyan/10 font-mono text-[10px] text-nebula-cyan">
-                  LD
-                </span>
+                {/* eslint-disable-next-line @next/next/no-img-element -- SVG statique */}
+                <img src="/logo-mark.svg" alt="" width={28} height={28} className="h-7 w-7 rounded-md" />
                 <span className="font-display text-sm font-semibold">Cockpit</span>
               </Link>
               <nav className="flex flex-1 flex-col gap-1">

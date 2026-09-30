@@ -63,9 +63,8 @@ export function AdminMobileNav({ email }: AdminMobileNavProps) {
     <>
       <header className="fixed inset-x-0 top-0 z-40 flex h-14 items-center justify-between border-b border-white/10 bg-cosmos-dark/90 px-4 backdrop-blur-md md:hidden">
         <Link href="/admin" className="flex items-center gap-2">
-          <span className="flex h-7 w-7 items-center justify-center rounded-full border border-nebula-cyan/40 bg-nebula-cyan/10 font-mono text-[10px] text-nebula-cyan">
-            LD
-          </span>
+          {/* eslint-disable-next-line @next/next/no-img-element -- SVG statique */}
+          <img src="/logo-mark.svg" alt="" width={28} height={28} className="h-7 w-7 rounded-md" />
           <span className="font-display text-sm font-semibold">Cockpit</span>
         </Link>
         <button
