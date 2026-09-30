@@ -1,46 +1,37 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { Canvas } from "@react-three/fiber";
-import { Planet } from "@/components/three/Planet";
-import { OrbitingTechs } from "@/components/three/OrbitingTechs";
 import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { useDeviceCapability } from "@/hooks/useDeviceCapability";
+import { useDeferredMount } from "@/hooks/useDeferredMount";
 
-function HeroSceneInner() {
-  const reduced = usePrefersReducedMotion();
-  const { coarsePointer, lowEnd } = useDeviceCapability();
-
-  if (reduced || lowEnd) {
-    return (
-      <div className="absolute inset-0 flex items-center justify-center" aria-hidden>
-        <div
-          className="h-[60vmin] w-[60vmin] rounded-full"
-          style={{
-            background:
-              "radial-gradient(circle at 30% 30%, #7c3aed 0%, #4c1d95 40%, #0a0420 80%)",
-            boxShadow: "0 0 100px 20px rgba(34,211,238,0.25)",
-          }}
-        />
-      </div>
-    );
-  }
-
-  const dpr: [number, number] = coarsePointer ? [1, 1.25] : [1, 1.75];
-  const antialias = !coarsePointer;
-
+/** Planète CSS : rendue côté serveur, affichée tant que (ou si) le WebGL n'est pas monté. */
+function PlanetFallback() {
   return (
-    <Canvas
-      className="absolute inset-0"
-      camera={{ position: [0, 0.6, 6], fov: 45 }}
-      dpr={dpr}
-      gl={{ antialias, alpha: true, powerPreference: "high-performance" }}
-    >
-      <ambientLight intensity={0.15} />
-      <Planet />
-      <OrbitingTechs />
-    </Canvas>
+    <div className="absolute inset-0 flex items-center justify-center" aria-hidden>
+      <div
+        className="h-[60vmin] w-[60vmin] rounded-full"
+        style={{
+          background:
+            "radial-gradient(circle at 30% 30%, #7c3aed 0%, #4c1d95 40%, #0a0420 80%)",
+          boxShadow: "0 0 100px 20px rgba(34,211,238,0.25)",
+        }}
+      />
+    </div>
   );
 }
 
-export const HeroSceneCanvas = dynamic(() => Promise.resolve(HeroSceneInner), { ssr: false });
+// Vrai code-splitting : three.js + R3F ne sont téléchargés qu'au montage.
+const HeroSceneGL = dynamic(() => import("@/components/three/HeroSceneGL"), {
+  ssr: false,
+  loading: PlanetFallback,
+});
+
+export function HeroSceneCanvas() {
+  const reduced = usePrefersReducedMotion();
+  const { coarsePointer, lowEnd } = useDeviceCapability();
+  const ready = useDeferredMount();
+
+  if (!ready || reduced || lowEnd) return <PlanetFallback />;
+  return <HeroSceneGL coarsePointer={coarsePointer} />;
+}
