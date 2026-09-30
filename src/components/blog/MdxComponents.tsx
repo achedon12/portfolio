@@ -55,7 +55,9 @@ export const mdxComponents = {
     />
   ),
   code: ({ className, ...rest }: ComponentPropsWithoutRef<"code">) => {
-    if (className) return <code className={className} {...rest} />;
+    // Les blocs rehype-pretty-code n'ont pas de className, seulement des data-attributes.
+    const isBlock = "data-language" in rest || "data-theme" in rest;
+    if (className || isBlock) return <code className={className} {...rest} />;
     return (
       <code
         className="rounded-sm border border-white/10 bg-cosmos-dark/60 px-1.5 py-0.5 font-mono text-[0.9em] text-nebula-cyan"
