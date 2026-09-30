@@ -19,6 +19,11 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
       defaultTheme="dark"
       enableSystem={false}
       disableTransitionOnChange={false}
+      // Script inerte côté client : React 19 avertit sur les <script> créés au re-rendu (changement de langue).
+      scriptProps={{
+        type: typeof window === "undefined" ? "text/javascript" : "application/json",
+        suppressHydrationWarning: true,
+      }}
     >
       {children}
     </NextThemesProvider>
