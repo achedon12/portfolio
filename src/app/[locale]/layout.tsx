@@ -64,8 +64,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "https://www.leoderoin.fr"),
     title: {
       default: title,
-      // Suffixe court : les titres de page restent dans la plage 30-65
-      // caractères affichée par Google sans être tronqués.
       template: "%s · Léo Deroin",
     },
     description,

@@ -51,8 +51,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const ogImage = post.ogImage ?? post.coverImage ?? undefined;
 
   return {
-    // Au-delà de 50 caractères, le suffixe " · Léo Deroin" ferait dépasser
-    // les ~65 caractères affichés par Google : on publie le titre seul.
+    // Sans suffixe au-delà de 50 caractères, sinon Google tronque le titre.
     title: title.length > 50 ? { absolute: title } : title,
     description,
     keywords: post.metaKeywords ?? post.tags?.join(", "),

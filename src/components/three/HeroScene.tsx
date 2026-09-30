@@ -5,7 +5,6 @@ import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { useDeviceCapability } from "@/hooks/useDeviceCapability";
 import { useDeferredMount } from "@/hooks/useDeferredMount";
 
-/** Planète CSS : rendue côté serveur, affichée tant que (ou si) le WebGL n'est pas monté. */
 function PlanetFallback() {
   return (
     <div className="absolute inset-0 flex items-center justify-center" aria-hidden>
@@ -21,7 +20,6 @@ function PlanetFallback() {
   );
 }
 
-// Vrai code-splitting : three.js + R3F ne sont téléchargés qu'au montage.
 const HeroSceneGL = dynamic(() => import("@/components/three/HeroSceneGL"), {
   ssr: false,
   loading: PlanetFallback,

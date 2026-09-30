@@ -5,7 +5,6 @@ import { usePrefersReducedMotion } from "@/hooks/usePrefersReducedMotion";
 import { useDeviceCapability } from "@/hooks/useDeviceCapability";
 import { useDeferredMount } from "@/hooks/useDeferredMount";
 
-/** Ciel étoilé CSS : rendu côté serveur, affiché tant que (ou si) le WebGL n'est pas monté. */
 function StarfieldFallback() {
   return (
     <div
@@ -20,7 +19,6 @@ function StarfieldFallback() {
   );
 }
 
-// Vrai code-splitting : three.js + R3F ne sont téléchargés qu'au montage.
 const StarfieldGL = dynamic(() => import("@/components/three/StarfieldGL"), {
   ssr: false,
   loading: StarfieldFallback,

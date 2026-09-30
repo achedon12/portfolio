@@ -1,14 +1,7 @@
 import type { ReactNode } from "react";
 import { Link } from "@/i18n/navigation";
 
-/**
- * Liens internes insérables dans les textes traduits via `t.rich()`.
- * Dans `src/messages/*.json`, un tag `<projects>la galerie</projects>`
- * devient un lien locale-aware vers `/projects`.
- *
- * Utilisable côté serveur (`getTranslations`) comme côté client
- * (`useTranslations`) : le `Link` de next-intl fonctionne dans les deux.
- */
+/** Tags `<projects>…</projects>` des messages → liens internes, via `t.rich(key, inlineLinks)`. */
 const ROUTES = {
   home: "/",
   services: "/#services",

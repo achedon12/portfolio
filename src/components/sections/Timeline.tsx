@@ -77,10 +77,7 @@ export function Timeline() {
           <p className="mt-3 max-w-2xl text-slate-400">{t.rich("intro", inlineLinks)}</p>
         </motion.div>
 
-        {/* Axe de la ligne (w-px) : centre à 16.5px, 28.5px en md. Fusée (32px)
-            et points (12px) sont positionnés pour être centrés dessus :
-            points = centre - padding (pl-12 / pl-20) - 6px. L'entrée des items
-            se fait en vertical pour ne jamais décaler les points de l'axe. */}
+        {/* Axe centré à 16.5px (28.5px en md) : fusée et points sont calés dessus. */}
         <div ref={trackRef} className="relative pl-12 md:pl-20">
           <div className="absolute left-4 top-0 h-full w-px bg-gradient-to-b from-transparent via-nebula-cyan/50 to-transparent md:left-7" />
 

@@ -1,12 +1,6 @@
 /**
- * Rasterise les logos SVG de `public/` en PNG, et assemble `src/app/favicon.ico`.
- *
- * Les SVG restent la source : on ne retouche jamais un PNG à la main, on relance
- * ce script après avoir modifié le tracé.
- *
- *   npm run logos
- *
- * Exécuté directement par Node (type stripping natif), sans dépendance `tsx`.
+ * `npm run logos` : rasterise les SVG de `public/` en PNG et génère le favicon.
+ * Les SVG sont la source, ne jamais retoucher un PNG à la main.
  */
 import sharp from "sharp";
 import { Buffer } from "node:buffer";
@@ -16,8 +10,6 @@ const PUBLIC = new URL("../public/", import.meta.url);
 const APP = new URL("../src/app/", import.meta.url);
 
 const EXPORTS: { source: string; sizes: number[] }[] = [
-  // 192 et 512 sont les tailles exigées par les manifestes d'application web,
-  // 180 celle de l'icône Apple.
   { source: "logo-mark.svg", sizes: [32, 64, 180, 192, 256, 384, 512, 1024] },
   { source: "logo-mark-light.svg", sizes: [256, 512] },
   { source: "logo.svg", sizes: [600, 1200] },
@@ -29,8 +21,7 @@ async function main() {
     const svg = await readFile(new URL(source, PUBLIC));
     for (const width of sizes) {
       const name = source.replace(".svg", `-${width}.png`);
-      // `density` élevé avant redimensionnement : sinon sharp rastérise le
-      // SVG à 72 ppp puis agrandit, et les bords du tracé bavent.
+      // Sans density élevée, sharp rastérise à 72 ppp puis agrandit : bords flous.
       const png = await sharp(svg, { density: 384 })
         .resize({ width })
         .png({ compressionLevel: 9 })
@@ -40,18 +31,12 @@ async function main() {
     }
   }
 
-  // Conventions de fichiers Next : `icon.png` et `apple-icon.png` dans `src/app`
-  // sont injectés automatiquement dans le <head>.
   await copyFile(new URL("logo-mark-512.png", PUBLIC), new URL("icon.png", APP));
   await copyFile(new URL("logo-mark-180.png", PUBLIC), new URL("apple-icon.png", APP));
   console.log("src/app/icon.png, src/app/apple-icon.png");
 }
 
-/**
- * Assemble un vrai `favicon.ico` : le format ICO sait encapsuler des PNG tels
- * quels, il suffit d'écrire l'en-tête. sharp ne produit pas d'ICO, et servir un
- * PNG renommé en `.ico` marche « en général », ce qui n'est pas une garantie.
- */
+/** sharp ne produit pas d'ICO : on écrit l'en-tête et on y encapsule les PNG. */
 async function buildFavicon() {
   const sizes = [16, 32, 48];
   const svg = await readFile(new URL("logo-mark.svg", PUBLIC));

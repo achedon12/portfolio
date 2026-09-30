@@ -5,8 +5,6 @@ const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 const isDev = process.env.NODE_ENV !== "production";
 
-// Origine Matomo (script + beacon) autorisée par la CSP. Inlinée au build,
-// comme les autres NEXT_PUBLIC_*.
 const matomoOrigin = (() => {
   try {
     return process.env.NEXT_PUBLIC_MATOMO_URL
@@ -17,13 +15,7 @@ const matomoOrigin = (() => {
   }
 })();
 
-/**
- * CSP volontairement pragmatique : `'unsafe-inline'` reste nécessaire pour
- * les scripts inline de Next (hydratation, JSON-LD, snippet Matomo) sans
- * passer toutes les pages en rendu dynamique avec un nonce. Les directives
- * utiles contre l'injection / le clickjacking (object-src, base-uri,
- * form-action, frame-ancestors) sont, elles, verrouillées.
- */
+// 'unsafe-inline' : scripts inline de Next et JSON-LD, sans passer en rendu dynamique avec nonce.
 const csp = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} ${matomoOrigin}`,
@@ -45,7 +37,6 @@ const csp = [
 
 const securityHeaders = [
   { key: "Content-Security-Policy", value: csp },
-  // HSTS n'est pris en compte par les navigateurs qu'en HTTPS : sans effet en local.
   { key: "Strict-Transport-Security", value: "max-age=63072000" },
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "X-Frame-Options", value: "DENY" },
@@ -55,7 +46,6 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   output: "standalone",
-  // Ne pas annoncer "X-Powered-By: Next.js" (empreinte logicielle).
   poweredByHeader: false,
   images: {
     remotePatterns: [],

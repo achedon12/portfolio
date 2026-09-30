@@ -89,7 +89,7 @@ export function Header() {
           href="/"
           className="group flex items-center gap-2 font-display text-base font-semibold tracking-tight"
         >
-          {/* eslint-disable-next-line @next/next/no-img-element -- SVG statique, pas d'optimisation utile */}
+          {/* eslint-disable-next-line @next/next/no-img-element -- SVG statique */}
           <img
             src="/logo-mark.svg"
             alt=""

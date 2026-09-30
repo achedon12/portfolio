@@ -22,15 +22,13 @@ export function SkillsConstellation() {
   const t = useTranslations("Skills");
   const [activeCategory, setActiveCategory] = useState<SkillCategory | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
-  // Par défaut : uniquement les technos du quotidien. "Toutes" révèle le reste.
   const [scope, setScope] = useState<Scope>("core");
 
   const visibleSkills = useMemo(
     () => (scope === "core" ? skills.filter((s) => s.core) : skills),
     [scope],
   );
-  // Cadrage du SVG sur les étoiles visibles : sans ça, la vue "au quotidien"
-  // laisse de grandes zones vides autour d'un sous-ensemble de positions.
+  // Recadre le SVG sur les étoiles visibles.
   const viewBox = useMemo(() => {
     const margin = 70;
     const xs = visibleSkills.map((s) => toX(s.x));

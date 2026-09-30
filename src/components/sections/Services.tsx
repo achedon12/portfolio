@@ -12,10 +12,6 @@ const SERVICES: Array<{ id: "build" | "redesign" | "tools"; icon: LucideIcon }> 
 
 const STEPS = ["problem", "solution", "result"] as const;
 
-/**
- * Offre : pour chaque type de mission, problème client → prestation → résultat.
- * Composant serveur, sans animation : tout le texte est dans le HTML initial.
- */
 export function Services() {
   const t = useTranslations("Services");
 

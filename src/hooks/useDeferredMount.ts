@@ -5,13 +5,8 @@ import { useEffect, useState } from "react";
 const INTERACTION_EVENTS = ["pointerdown", "touchstart", "scroll", "keydown", "wheel"] as const;
 
 /**
- * Retarde le montage d'un rendu lourd (scènes WebGL) pour qu'il ne pèse ni
- * sur l'affichage du contenu (LCP) ni sur le thread principal au chargement
- * (TBT) :
- *   - desktop (pointeur fin) → après l'événement `load` + un créneau idle ;
- *   - mobile (pointeur tactile ou viewport étroit) → à la première
- *     interaction (scroll, toucher, clavier). Tant que rien ne se passe,
- *     le fallback CSS reste affiché, ce qui suffit sur petit écran.
+ * Retarde un rendu lourd (WebGL) pour préserver LCP et TBT : desktop après
+ * `load` + idle, mobile à la première interaction.
  */
 export function useDeferredMount(): boolean {
   const [ready, setReady] = useState(false);

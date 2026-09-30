@@ -1,7 +1,4 @@
-/**
- * Données des satellites du hero, séparées du composant R3F pour que le
- * Hero (HUD texte) puisse lister les noms sans tirer three.js dans son bundle.
- */
+// Séparé d'OrbitingTechs pour que le Hero liste les noms sans importer three.js.
 export interface OrbitTech {
   name: string;
   /** Couleur du satellite (sera émissive) */

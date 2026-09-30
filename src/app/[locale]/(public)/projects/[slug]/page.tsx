@@ -38,7 +38,6 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const pageTitle = `${project.title} — ${isFr ? "Projet" : "Project"} ${project.category}`;
 
   return {
-    // Même garde-fou que les articles : pas de suffixe si le titre est déjà long.
     title: pageTitle.length > 50 ? { absolute: pageTitle } : pageTitle,
     description: project.description,
     keywords,

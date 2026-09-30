@@ -16,7 +16,6 @@ export default function manifest(): MetadataRoute.Manifest {
     lang: "fr",
     dir: "ltr",
     icons: [
-      // Générées depuis public/logo-mark.svg par `npm run logos`.
       { src: "/logo-mark-192.png", sizes: "192x192", type: "image/png", purpose: "any" },
       { src: "/logo-mark-384.png", sizes: "384x384", type: "image/png", purpose: "any" },
       { src: "/logo-mark-512.png", sizes: "512x512", type: "image/png", purpose: "any" },

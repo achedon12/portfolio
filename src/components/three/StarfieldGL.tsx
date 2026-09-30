@@ -3,10 +3,7 @@
 import { Canvas } from "@react-three/fiber";
 import { Starfield } from "@/components/three/Starfield";
 
-/**
- * Canvas du fond étoilé. Chargé uniquement via `import()` depuis
- * StarfieldCanvas.tsx pour garder three.js hors du bundle initial.
- */
+/** Chargé par import() depuis StarfieldCanvas : garde three.js hors du bundle initial. */
 export default function StarfieldGL({ coarsePointer }: { coarsePointer: boolean }) {
   const dpr: [number, number] = coarsePointer ? [1, 1] : [1, 1.5];
 
