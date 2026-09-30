@@ -40,7 +40,7 @@ export function LocaleSwitcher() {
             onClick={() => setLocale(l)}
             className={cn(
               "rounded px-2 py-1 transition-colors",
-              active ? "bg-nebula-cyan/20 text-nebula-cyan" : "text-slate-400 hover:text-slate-200",
+              active ? "bg-nebula-cyan/15 text-nebula-cyan" : "text-slate-400 hover:text-slate-200",
             )}
           >
             {l}

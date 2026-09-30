@@ -7,6 +7,12 @@
   --color-nebula-cyan: #22d3ee;
   --color-solar-orange: #fb923c;
 
+  /* Gris muets éclaircis : slate-500 (#62748e) et slate-600 (#45556c) de
+   * Tailwind restent sous 4.5:1 sur le fond cosmos. Le thème clair les
+   * redéfinit plus bas (.light .text-slate-*). */
+  --color-slate-500: #71829c;
+  --color-slate-600: #6b7c96;
+
   --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
@@ -35,8 +41,11 @@ body {
   --color-cosmos-deep: #f5f3fb;
   --color-cosmos-dark: #ffffff;
   --color-nebula-violet: #6d28d9;
-  --color-nebula-cyan: #0891b2;
-  --color-solar-orange: #ea580c;
+  /* Cyan assombri : #0891b2 plafonnait à 3.3:1 sur le fond (texte en
+   * dessous du seuil WCAG AA 4.5:1). #0a6275 tient 6.3:1 sur le fond et
+   * ~4.7:1 sur les fonds teintés bg-nebula-cyan/10-20. */
+  --color-nebula-cyan: #0a6275;
+  --color-solar-orange: #c2410c;
 }
 
 .light html,
@@ -57,9 +66,31 @@ html.light body {
 .light .text-slate-200 { color: #2d2a4a; }
 .light .text-slate-300 { color: #3d3a5a; }
 .light .text-slate-400 { color: #5a5775; }
-.light .text-slate-500 { color: #7a7795; }
-.light .text-slate-600 { color: #9694b0; }
+.light .text-slate-500 { color: #5d5a78; }
+.light .text-slate-600 { color: #615e7c; }
 .light .fill-slate-300 { fill: #3d3a5a; }
+
+/* Texte cyan semi-transparent : l'opacité ferait repasser sous 4.5:1 sur fond clair */
+.light .text-nebula-cyan\/60,
+.light .text-nebula-cyan\/80,
+.light .text-nebula-cyan\/90 { color: var(--color-nebula-cyan); }
+
+/* Couleurs d'état pensées pour le fond sombre (tons 100-400) : équivalents
+ * foncés en light pour rester lisibles (>= 4.5:1). */
+.light .text-emerald-100\/80,
+.light .text-emerald-200,
+.light .text-emerald-300,
+.light .text-emerald-400,
+.light .text-emerald-400\/80 { color: #065f46; }
+.light .text-rose-200,
+.light .text-rose-300,
+.light .text-rose-300\/90,
+.light .text-rose-400 { color: #be123c; }
+.light .text-amber-200,
+.light .text-amber-300,
+.light .text-amber-300\/80,
+.light .text-amber-400 { color: #92400e; }
+.light .text-violet-300 { color: #6d28d9; }
 
 /* Bordures et fonds semi-trans : on inverse le canal */
 .light .border-white\/5 { border-color: rgb(30 27 58 / 0.06); }
