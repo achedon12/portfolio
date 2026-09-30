@@ -28,7 +28,7 @@ export type SectionId =
   | "apps";
 
 /** Date de dernière mise à jour manuelle (à bumper quand tu édites le contenu). */
-export const USES_LAST_UPDATED = "2026-05-06";
+export const USES_LAST_UPDATED = "2026-09-30";
 
 export const uses: UseSection[] = [
   {
@@ -45,9 +45,9 @@ export const uses: UseSection[] = [
     id: "hardware",
     items: [
       {
-        name: "Dell Inspiron 7791 2-in-1",
-        fr: "Intel Core i7-10510U · 16 Go RAM · 8 cœurs",
-        en: "Intel Core i7-10510U · 16 GB RAM · 8 cores",
+        name: "Lenovo ThinkPad T16 Gen 4",
+        fr: "AMD Ryzen AI 5 PRO 340 · Radeon 840M · 16 Go RAM · 6 cœurs / 12 threads · SSD NVMe 1 To",
+        en: "AMD Ryzen AI 5 PRO 340 · Radeon 840M · 16 GB RAM · 6 cores / 12 threads · 1 TB NVMe SSD",
       },
     ],
   },
@@ -55,20 +55,20 @@ export const uses: UseSection[] = [
     id: "os",
     items: [
       {
-        name: "Xubuntu 24.04 LTS (Noble Numbat)",
-        fr: "Xfce 4.18 · noyau Linux 6.8 — léger, stable, jamais dans le chemin",
-        en: "Xfce 4.18 · Linux kernel 6.8 — light, stable, stays out of the way",
+        name: "Xubuntu 26.04 LTS (Resolute Raccoon)",
+        fr: "Xfce 4.20 · noyau Linux 7.0 — léger, stable, jamais dans le chemin",
+        en: "Xfce 4.20 · Linux kernel 7.0 — light, stable, stays out of the way",
       },
     ],
   },
   {
     id: "terminal",
     items: [
-      { name: "xfce4-terminal", fr: "Terminal par défaut de Xfce", en: "Xfce default terminal" },
-      { name: "bash 5.2", fr: "Shell par défaut, sans fioritures", en: "Default shell, no frills" },
-      { name: "Git 2.43" },
-      { name: "Node.js 22 + npm 10" },
-      { name: "Docker 29 + Compose v2" },
+      { name: "xfce4-terminal 1.1", fr: "Terminal par défaut de Xfce", en: "Xfce default terminal" },
+      { name: "bash 5.3", fr: "Shell par défaut, sans fioritures", en: "Default shell, no frills" },
+      { name: "Git 2.53" },
+      { name: "Node.js 26 + npm 11" },
+      { name: "Docker 29 + Compose v5" },
     ],
   },
   {
