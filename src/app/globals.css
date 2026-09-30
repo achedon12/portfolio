@@ -7,11 +7,14 @@
   --color-nebula-cyan: #22d3ee;
   --color-solar-orange: #fb923c;
 
-  /* Gris muets éclaircis : slate-500 (#62748e) et slate-600 (#45556c) de
-   * Tailwind restent sous 4.5:1 sur le fond cosmos. Le thème clair les
-   * redéfinit plus bas (.light .text-slate-*). */
+  /* Gris et blancs adoucis : contraste AA sur le fond cosmos sans blanc pur. */
   --color-slate-500: #71829c;
   --color-slate-600: #6b7c96;
+  --color-slate-50: #ece8fb;
+  --color-slate-100: #e4e0f5;
+  --color-slate-200: #d6d2ea;
+  --color-slate-300: #c3bfdb;
+  --color-slate-400: #a8a4c4;
 
   --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -21,7 +24,7 @@
 html,
 body {
   background-color: var(--color-cosmos-deep);
-  color: #e2e8f0;
+  color: var(--color-slate-200);
 }
 
 ::selection {
@@ -38,21 +41,18 @@ body {
  * ════════════════════════════════════════════════════════════════ */
 
 .light {
-  --color-cosmos-deep: #f5f3fb;
-  --color-cosmos-dark: #ffffff;
+  --color-cosmos-deep: #e8e6f1;
+  --color-cosmos-dark: #f2f1f7;
   --color-nebula-violet: #6d28d9;
-  /* Cyan assombri : #0891b2 plafonnait à 3.3:1 sur le fond (texte en
-   * dessous du seuil WCAG AA 4.5:1). #0a6275 tient 6.3:1 sur le fond et
-   * ~4.7:1 sur les fonds teintés bg-nebula-cyan/10-20. */
-  --color-nebula-cyan: #0a6275;
-  --color-solar-orange: #c2410c;
+  --color-nebula-cyan: #085264;
+  --color-solar-orange: #9a3412;
 }
 
 .light html,
 .light body,
 html.light,
 html.light body {
-  background-color: #f5f3fb;
+  background-color: #e8e6f1;
   color: #1e1b3a;
 }
 
@@ -70,13 +70,11 @@ html.light body {
 .light .text-slate-600 { color: #615e7c; }
 .light .fill-slate-300 { fill: #3d3a5a; }
 
-/* Texte cyan semi-transparent : l'opacité ferait repasser sous 4.5:1 sur fond clair */
 .light .text-nebula-cyan\/60,
 .light .text-nebula-cyan\/80,
 .light .text-nebula-cyan\/90 { color: var(--color-nebula-cyan); }
 
-/* Couleurs d'état pensées pour le fond sombre (tons 100-400) : équivalents
- * foncés en light pour rester lisibles (>= 4.5:1). */
+/* Couleurs d'état : tons foncés en light pour rester lisibles */
 .light .text-emerald-100\/80,
 .light .text-emerald-200,
 .light .text-emerald-300,
@@ -100,16 +98,22 @@ html.light body {
 .light .bg-white\/10 { background-color: rgb(30 27 58 / 0.07); }
 
 /* Surfaces semi-trans cosmos-* : adoucies en light */
-.light .bg-cosmos-dark\/40 { background-color: rgb(255 255 255 / 0.7); }
-.light .bg-cosmos-dark\/60 { background-color: rgb(255 255 255 / 0.85); }
-.light .bg-cosmos-dark\/80 { background-color: rgb(255 255 255 / 0.95); }
-.light .bg-cosmos-deep\/85 { background-color: rgb(245 243 251 / 0.92); }
-.light .bg-cosmos-deep\/70 { background-color: rgb(245 243 251 / 0.88); }
-.light .bg-cosmos-deep\/60 { background-color: rgb(245 243 251 / 0.8); }
+.light .bg-cosmos-dark\/40 { background-color: rgb(242 241 247 / 0.7); }
+.light .bg-cosmos-dark\/60 { background-color: rgb(242 241 247 / 0.85); }
+.light .bg-cosmos-dark\/80 { background-color: rgb(242 241 247 / 0.95); }
+.light .bg-cosmos-deep\/85 { background-color: rgb(232 230 241 / 0.92); }
+.light .bg-cosmos-deep\/70 { background-color: rgb(232 230 241 / 0.88); }
+.light .bg-cosmos-deep\/60 { background-color: rgb(232 230 241 / 0.8); }
 
 /* Glows hover réduits (cyan moins intense sur fond clair) */
 .light .hover\:shadow-\[0_0_60px_rgba\(34\,211\,238\,0\.15\)\]:hover { box-shadow: 0 0 30px rgba(8, 145, 178, 0.25); }
 .light .hover\:shadow-\[0_0_60px_rgba\(34\,211\,238\,0\.12\)\]:hover { box-shadow: 0 0 25px rgba(8, 145, 178, 0.20); }
+
+/* Hero en light : nom en dégradé sombre, planète atténuée sous le texte */
+.light .hero-name {
+  background-image: linear-gradient(to bottom right, #1e1b3a, #3d3a5a 50%, #5b21b6);
+}
+.light .hero-planet { opacity: 0.35; }
 
 /* Starfield 3D désactivé en light (étoiles sur fond clair = bruit visuel) */
 .light .starfield-canvas { opacity: 0; pointer-events: none; }
@@ -180,12 +184,8 @@ html.light body {
   }
 }
 
-/* ---------- Hero : animations d'entrée en CSS pur ----------
- * Pas de framer-motion au-dessus de la ligne de flottaison : le texte est
- * peint dès le premier rendu HTML, sans attendre l'hydratation JS (LCP).
- * `hero-rise` ne joue que sur la position — jamais sur l'opacité — pour que
- * le titre et l'intro restent visibles (et comptés comme tels) immédiatement.
- */
+/* ---------- Hero : animations d'entrée en CSS (pas d'attente du JS pour le LCP) ----------
+ * `hero-rise` n'anime jamais l'opacité : le titre reste visible d'emblée. */
 @keyframes hero-rise {
   from { transform: translateY(12px); }
   to { transform: none; }

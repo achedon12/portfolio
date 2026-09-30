@@ -9,11 +9,6 @@ import { cn } from "@/lib/utils";
 import { inlineLinks } from "@/components/InlineLinks";
 import { orbitTechNames } from "@/components/three/orbit-techs";
 
-/**
- * Premier écran. Animations d'entrée en CSS (globals.css → `.hero-rise`,
- * `.hero-fade`) plutôt qu'en framer-motion : le titre et l'intro sont
- * visibles dès le HTML serveur, sans attendre le JS (LCP mobile).
- */
 export function Hero() {
   const t = useTranslations("Hero");
   const tCommon = useTranslations("Common");
@@ -27,9 +22,14 @@ export function Hero() {
       id="home"
       className="relative isolate flex min-h-[100svh] w-full items-center overflow-hidden"
     >
-      <div className="pointer-events-none absolute inset-0">
+      <div className="hero-planet pointer-events-none absolute inset-0">
         <HeroSceneCanvas />
       </div>
+      {/* Voile de lisibilité du texte sur la planète */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-gradient-to-r from-cosmos-deep/85 via-cosmos-deep/55 to-cosmos-deep/10"
+      />
 
       <div className="relative z-10 mx-auto flex w-full max-w-5xl flex-col items-start gap-6 px-6 pt-32">
         <p
@@ -40,7 +40,7 @@ export function Hero() {
         </p>
 
         <h1 className="hero-rise font-display text-5xl font-bold leading-[1.05] tracking-tight md:text-7xl lg:text-8xl">
-          <span className="block bg-gradient-to-br from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+          <span className="hero-name block bg-gradient-to-br from-slate-50 via-slate-200 to-slate-400 bg-clip-text text-transparent">
             {t("name")}
           </span>
           <span className="sr-only">, </span>
