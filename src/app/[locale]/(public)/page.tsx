@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 import { setRequestLocale } from "next-intl/server";
 import { Hero } from "@/components/sections/Hero";
-import { personJsonLd, websiteJsonLd, professionalServiceJsonLd } from "@/lib/seo";
+import { Services } from "@/components/sections/Services";
+import { personJsonLd, websiteJsonLd } from "@/lib/seo";
 
 // Below-the-fold sections: code-split into their own chunks so the initial
 // bundle (Hero + above-fold) stays small. SSR is preserved (default true)
@@ -31,18 +32,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const isFr = locale === "fr";
 
   const title = isFr
-    ? "Léo Deroin — Développeur Fullstack à Lyon · Next.js, React, Symfony"
-    : "Léo Deroin — Fullstack Developer in Lyon · Next.js, React, Symfony";
+    ? "Léo Deroin — Développeur fullstack à Besançon · Next.js, Symfony"
+    : "Léo Deroin — Fullstack developer in Besançon · Next.js, Symfony";
   const description = isFr
-    ? "Développeur fullstack basé à Lyon, en alternance chez Confluent Digital. Stack PHP/Symfony, Next.js, React, Vue.js, TypeScript. Découvrez projets, compétences et parcours."
-    : "Fullstack developer based in Lyon, France, on a work-study program at Confluent Digital. Stack: PHP/Symfony, Next.js, React, Vue.js, TypeScript.";
+    ? "Léo Deroin, développeur fullstack à Besançon : Symfony, React, Next.js. Deux ans d'alternance chez Confluent Digital, Master ESGI. Disponible pour un CDI."
+    : "Léo Deroin, fullstack developer in Besançon, France: Symfony, React, Next.js. Two years of apprenticeship, Master's from ESGI. Available for a full-time role.";
   const ogAlt = isFr
-    ? "Léo Deroin — Développeur Fullstack à Lyon"
-    : "Léo Deroin — Fullstack Developer in Lyon";
+    ? "Léo Deroin — Développeur fullstack à Besançon"
+    : "Léo Deroin — Fullstack developer in Besançon";
 
   return {
     // `absolute` court-circuite le `title.template` du layout parent — sans ça
-    // la marque apparaît deux fois ("...à Lyon · Léo Deroin — ...à Lyon").
+    // la marque apparaît deux fois ("... · Léo Deroin").
     title: { absolute: title },
     description,
     alternates: {
@@ -81,6 +82,7 @@ export default async function HomePage({ params }: Props) {
   return (
     <>
       <Hero />
+      <Services />
       <About />
       <SkillsConstellation />
       <Timeline />
@@ -93,10 +95,6 @@ export default async function HomePage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: websiteJsonLd() }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: professionalServiceJsonLd() }}
       />
     </>
   );

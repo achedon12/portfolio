@@ -46,9 +46,9 @@ export async function GET() {
     .map((p) => `- [${p.title}](${base}/blog/${p.slug}) — ${p.description}`)
     .join("\n");
 
-  const body = `# ${profile.name} — Développeur Fullstack à Lyon
+  const body = `# ${profile.name} — Développeur Fullstack à Besançon
 
-> ${profile.bio[0]} Stack principale : Next.js, React, Symfony, Phalcon, Vue.js, TypeScript, MySQL, Three.js. En alternance chez Confluent Digital. Site bilingue FR (par défaut) et EN (préfixe /en).
+> ${profile.bio[0]} Stack principale : Next.js, React, Symfony, Phalcon, Vue.js, TypeScript, MySQL, Three.js. Alternance chez Confluent Digital et Master ESGI terminés en septembre 2026, en recherche de CDI. Site bilingue FR (par défaut) et EN (préfixe /en).
 
 ## Identité
 - Nom : ${profile.name}
@@ -86,7 +86,6 @@ ${postLines || "- (Aucun article exposé via l'API au moment de la génération.
 
 ## Contact direct
 Le formulaire de contact public est sur la home (section #contact). Réponse sous 24-48h.
-Pour les freelances : ${profile.links.malt}
 `;
 
   return new Response(body, {

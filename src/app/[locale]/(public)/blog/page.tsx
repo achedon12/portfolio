@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getAllPosts } from "@/lib/blog";
 import { BlogIndexClient } from "@/components/blog/BlogIndexClient";
 import { blogIndexJsonLd, breadcrumbJsonLd } from "@/lib/seo";
+import { inlineLinks } from "@/components/InlineLinks";
 
 export const revalidate = 60;
 
@@ -91,7 +92,7 @@ export default async function BlogIndex({ params, searchParams }: PageProps) {
           {t("kicker")}
         </p>
         <h1 className="mt-3 font-display text-4xl font-bold md:text-5xl">{t("title")}</h1>
-        <p className="mt-3 max-w-2xl text-slate-400">{t("intro")}</p>
+        <p className="mt-3 max-w-2xl text-slate-400">{t.rich("intro", inlineLinks)}</p>
         <p className="mt-3">
           <a
             href="/blog/rss.xml"

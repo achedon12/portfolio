@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import { Link } from "@/i18n/navigation";
 import { Breadcrumbs, type BreadcrumbItem } from "@/components/Breadcrumbs";
 import { breadcrumbJsonLd } from "@/lib/seo";
+import { inlineLinks } from "@/components/InlineLinks";
 import { routing, type Locale } from "@/i18n/routing";
 import {
   NOW_LAST_UPDATED,
@@ -101,7 +102,7 @@ export default async function NowPage({ params }: Props) {
           {t("kicker")}
         </p>
         <h1 className="mt-3 font-display text-4xl font-bold md:text-5xl">{t("title")}</h1>
-        <p className="mt-4 max-w-2xl text-slate-400">{t("intro")}</p>
+        <p className="mt-4 max-w-2xl text-slate-400">{t.rich("intro", inlineLinks)}</p>
         <p className="mt-3 font-mono text-[10px] uppercase tracking-wider text-slate-500">
           {t("lastUpdated")} : <time dateTime={NOW_LAST_UPDATED}>{lastUpdatedFmt}</time>
         </p>

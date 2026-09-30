@@ -30,7 +30,7 @@ export const timeline: TimelineStep[] = [
     id: "confluent-digital",
     kind: "apprenticeship",
     from: "2024-08",
-    to: "present",
+    to: "2026-09",
     location: "Lyon",
     stack: ["Next.js", "Symfony", "MySQL", "Docker", "TypeScript"],
   },
@@ -38,7 +38,7 @@ export const timeline: TimelineStep[] = [
     id: "esgi-master",
     kind: "education",
     from: "2024-07",
-    to: "2026-07",
+    to: "2026-09",
     stack: ["Next.js", "Express.js"],
   },
   {

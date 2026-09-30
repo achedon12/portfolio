@@ -34,45 +34,29 @@ export async function sendEmail({ to, subject, html, replyTo }: SendArgs): Promi
 }
 
 const TIMELINE_LABELS_FR: Record<string, string> = {
-  urgent: "Urgent (sous 2 semaines)",
+  urgent: "Dès que possible",
   month: "Sous 1 mois",
   quarter: "Sous 3 mois",
   flexible: "Flexible",
 };
 
 const TIMELINE_LABELS_EN: Record<string, string> = {
-  urgent: "Urgent (within 2 weeks)",
+  urgent: "As soon as possible",
   month: "Within 1 month",
   quarter: "Within 3 months",
   flexible: "Flexible",
 };
 
-const BUDGET_LABELS_FR: Record<string, string> = {
-  under5k: "< 5 k€",
-  "5to15k": "5 – 15 k€",
-  "15to50k": "15 – 50 k€",
-  over50k: "> 50 k€",
-  todiscuss: "À discuter",
-};
-
-const BUDGET_LABELS_EN: Record<string, string> = {
-  under5k: "< €5k",
-  "5to15k": "€5–15k",
-  "15to50k": "€15–50k",
-  over50k: "> €50k",
-  todiscuss: "To discuss",
-};
-
 const SUBJECT_LABELS_FR: Record<string, string> = {
+  emploi: "Offre d'emploi",
   projet: "Projet",
-  freelance: "Freelance",
   collab: "Collaboration",
   autre: "Autre",
 };
 
 const SUBJECT_LABELS_EN: Record<string, string> = {
+  emploi: "Job offer",
   projet: "Project",
-  freelance: "Freelance",
   collab: "Collaboration",
   autre: "Other",
 };
@@ -94,24 +78,17 @@ export function contactNotificationHtml(args: {
   message: string;
   timeline?: string;
   stack?: string;
-  budget?: string;
 }): string {
   const contextRows: string[] = [];
   if (args.timeline) {
     const label = TIMELINE_LABELS_FR[args.timeline] ?? args.timeline;
     contextRows.push(
-      `<tr><td style="padding:8px 0; color:#94a3b8;">Timeline</td><td>${escapeHtml(label)}</td></tr>`,
+      `<tr><td style="padding:8px 0; color:#94a3b8;">Démarrage</td><td>${escapeHtml(label)}</td></tr>`,
     );
   }
   if (args.stack) {
     contextRows.push(
-      `<tr><td style="padding:8px 0; color:#94a3b8;">Stack souhaitée</td><td>${escapeHtml(args.stack)}</td></tr>`,
-    );
-  }
-  if (args.budget) {
-    const label = BUDGET_LABELS_FR[args.budget] ?? args.budget;
-    contextRows.push(
-      `<tr><td style="padding:8px 0; color:#94a3b8;">Budget</td><td>${escapeHtml(label)}</td></tr>`,
+      `<tr><td style="padding:8px 0; color:#94a3b8;">Stack de l'équipe</td><td>${escapeHtml(args.stack)}</td></tr>`,
     );
   }
 

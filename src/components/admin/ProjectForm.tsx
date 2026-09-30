@@ -104,7 +104,7 @@ export function ProjectForm({ initial, mode }: Props) {
         {errors.techStack && <Hint>{errors.techStack.message}</Hint>}
       </Field>
       <Field label="Catégorie">
-        <Input {...register("category")} placeholder="freelance / pro / perso" />
+        <Input {...register("category")} placeholder="pro / perso / école" />
       </Field>
       <div className="grid gap-5 md:grid-cols-2">
         <Field label="Live URL">

@@ -188,7 +188,7 @@ Dockerfile                     # Multi-stage standalone
   - **likes** toggle (table `BlogPostLike`, unique sur `(postId, ipHash)`)
   - **commentaires** modérés (table `BlogComment`, statuts `pending / approved / spam`)
   - **IP hashée** SHA-256 + pepper (`IP_HASH_PEPPER`), jamais l'IP brute (RGPD)
-- **SEO** : metadata + JSON-LD par page (`Person`, `WebSite`, `ProfessionalService`, `BlogPosting`, `CreativeWork`, `BreadcrumbList`, `CollectionPage`, `ItemList`), sitemap.xml dual-locale avec hreflang, RSS, OpenGraph image générée via `ImageResponse`, favicons / manifest / Apple icon programmatiques, mots-clés ciblés Lyon
+- **SEO** : metadata + JSON-LD par page (`Person`, `WebSite`, `BlogPosting`, `CreativeWork`, `BreadcrumbList`, `CollectionPage`, `ItemList`), sitemap.xml dual-locale avec hreflang, RSS, OpenGraph image générée via `ImageResponse`, favicons / manifest / Apple icon programmatiques, mots-clés ciblés Besançon
 - **Admin** : NextAuth credentials + JWT, CRUD projets, CRUD articles avec section SEO complète + toggle commentaires + reset stats, modération commentaires avec onglets pending/approved/spam, dashboard Matomo (sparkline interactive)
 - **Email** : Resend en prod (Nodemailer fallback), notification owner sur nouveau message contact
 - **A11y** : clavier, focus visibles, ARIA, contraste, `prefers-reduced-motion` respecté

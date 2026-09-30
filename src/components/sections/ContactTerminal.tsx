@@ -10,10 +10,8 @@ import {
   contactSchema,
   contactSubjects,
   contactTimelines,
-  contactBudgets,
   type ContactInput,
   type ContactTimeline,
-  type ContactBudget,
 } from "@/lib/validations";
 import { cn } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
@@ -38,7 +36,7 @@ export function ContactTerminal() {
   } = useForm<ContactInput>({
     resolver: zodResolver(contactSchema),
     mode: "onTouched",
-    defaultValues: { website: "", timeline: "", stack: "", budget: "" },
+    defaultValues: { website: "", timeline: "", stack: "" },
   });
 
   const subject = watch("subject");
@@ -47,7 +45,7 @@ export function ContactTerminal() {
   // Sticky : once expanded, we don't auto-collapse to avoid losing user input
   // if they tinker with the subject field.
   useEffect(() => {
-    if (subject === "projet" || subject === "freelance") {
+    if (subject === "emploi" || subject === "projet") {
       setShowContext(true);
     }
   }, [subject]);
@@ -94,8 +92,8 @@ export function ContactTerminal() {
     <section id="contact" className="relative scroll-mt-24 py-24 md:py-32">
       <div className="mx-auto max-w-3xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ y: 16 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true, margin: "-15% 0px" }}
           transition={{ duration: 0.6 }}
           className="mb-10"
@@ -249,30 +247,14 @@ export function ContactTerminal() {
                             </select>
                           </div>
                           <div className="grid gap-2">
-                            <Label htmlFor="budget">{t("labels.budget")}</Label>
-                            <select
-                              id="budget"
-                              {...register("budget")}
-                              className="flex h-10 w-full rounded-md border border-white/10 bg-cosmos-dark/40 px-3 py-2 font-mono text-sm text-slate-100 backdrop-blur-sm focus-visible:border-nebula-cyan/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-nebula-cyan/30"
-                            >
-                              <option value="">{t("context.selectBudget")}</option>
-                              {contactBudgets.map((b) => (
-                                <option key={b} value={b} className="bg-cosmos-dark">
-                                  {t(`budgets.${b as ContactBudget}`)}
-                                </option>
-                              ))}
-                            </select>
+                            <Label htmlFor="stack">{t("labels.stack")}</Label>
+                            <Input
+                              id="stack"
+                              placeholder={t("context.stackPlaceholder")}
+                              {...register("stack")}
+                              maxLength={200}
+                            />
                           </div>
-                        </div>
-
-                        <div className="grid gap-2">
-                          <Label htmlFor="stack">{t("labels.stack")}</Label>
-                          <Input
-                            id="stack"
-                            placeholder={t("context.stackPlaceholder")}
-                            {...register("stack")}
-                            maxLength={200}
-                          />
                         </div>
                       </div>
                     </motion.div>

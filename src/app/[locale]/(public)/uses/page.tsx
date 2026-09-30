@@ -4,6 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Card } from "@/components/ui/card";
 import { uses, USES_LAST_UPDATED, type SectionId } from "@/lib/uses";
 import { breadcrumbJsonLd } from "@/lib/seo";
+import { inlineLinks } from "@/components/InlineLinks";
 import { Breadcrumbs, type BreadcrumbItem } from "@/components/Breadcrumbs";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -99,7 +100,7 @@ export default async function UsesPage({ params }: Props) {
           {t("kicker")}
         </p>
         <h1 className="mt-3 font-display text-4xl font-bold md:text-5xl">{t("title")}</h1>
-        <p className="mt-4 max-w-2xl text-slate-400">{t("intro")}</p>
+        <p className="mt-4 max-w-2xl text-slate-400">{t.rich("intro", inlineLinks)}</p>
         <p className="mt-3 font-mono text-[10px] uppercase tracking-wider text-slate-500">
           {t("lastUpdated")} : <time dateTime={USES_LAST_UPDATED}>{lastUpdatedFmt}</time>
         </p>

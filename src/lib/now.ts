@@ -8,7 +8,7 @@
  * `NOW_LAST_UPDATED` à la date du jour (format ISO YYYY-MM-DD).
  */
 
-export const NOW_LAST_UPDATED = "2026-05-07";
+export const NOW_LAST_UPDATED = "2026-09-30";
 
 export interface NowItem {
   /** Clé stable, sert au key React. */
@@ -28,15 +28,15 @@ export interface NowFocusItem extends NowItem {
 /** Activités principales et secondaires du moment. */
 export const nowFocus: NowFocusItem[] = [
   {
-    key: "confluent",
-    fr: "Alternance fullstack chez Confluent Digital à Lyon — conception et développement d'outils SaaS pour des PME, stack PHP / Symfony / Next.js.",
-    en: "Fullstack apprenticeship at Confluent Digital in Lyon — designing and shipping SaaS tools for SMBs, PHP / Symfony / Next.js stack.",
+    key: "job-search",
+    fr: "Recherche d'un CDI de développeur fullstack, depuis Besançon — stack PHP / Symfony, Next.js / React, Vue.",
+    en: "Looking for a full-time fullstack developer role, from Besançon — PHP / Symfony, Next.js / React, Vue stack.",
     category: "main",
   },
   {
-    key: "esgi",
-    fr: "Master Ingénierie du web à l'ESGI, en alternance — spécialisation architectures web modernes.",
-    en: "Master's in Web Engineering at ESGI, on a work-study program — focused on modern web architectures.",
+    key: "graduated",
+    fr: "Fin de l'alternance chez Confluent Digital et du Master Ingénierie du web à l'ESGI (septembre 2026), après deux ans à livrer des outils SaaS pour des PME.",
+    en: "Wrapped up the Confluent Digital apprenticeship and the Master's in Web Engineering at ESGI (September 2026), after two years shipping SaaS tools for SMBs.",
     category: "main",
   },
   {

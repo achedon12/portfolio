@@ -148,3 +148,37 @@ html.light body {
     scroll-behavior: auto !important;
   }
 }
+
+/* ---------- Hero : animations d'entrée en CSS pur ----------
+ * Pas de framer-motion au-dessus de la ligne de flottaison : le texte est
+ * peint dès le premier rendu HTML, sans attendre l'hydratation JS (LCP).
+ * `hero-rise` ne joue que sur la position — jamais sur l'opacité — pour que
+ * le titre et l'intro restent visibles (et comptés comme tels) immédiatement.
+ */
+@keyframes hero-rise {
+  from { transform: translateY(12px); }
+  to { transform: none; }
+}
+@keyframes hero-fade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes hero-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+.hero-rise { animation: hero-rise 0.6s ease-out both; }
+.hero-fade { animation: hero-fade 0.5s ease-out both; }
+.hero-bob { animation: hero-bob 1.6s ease-in-out infinite; }
+
+/* Liens internes placés dans les paragraphes (t.rich) */
+.inline-link {
+  color: var(--color-nebula-cyan);
+  text-decoration: underline;
+  text-decoration-color: rgb(34 211 238 / 0.35);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s;
+}
+.inline-link:hover {
+  text-decoration-color: currentColor;
+}

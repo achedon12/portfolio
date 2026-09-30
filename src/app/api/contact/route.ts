@@ -74,7 +74,6 @@ export async function POST(req: Request) {
         message: parsed.data.message,
         timeline: parsed.data.timeline || undefined,
         stack: parsed.data.stack || undefined,
-        budget: parsed.data.budget || undefined,
       }),
       replyTo: parsed.data.email,
     }),

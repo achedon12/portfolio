@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { prisma } from "@/lib/prisma";
 import { ProjectsGrid } from "@/components/projects/ProjectFilters";
 import { breadcrumbJsonLd } from "@/lib/seo";
+import { inlineLinks } from "@/components/InlineLinks";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -109,7 +110,7 @@ export default async function ProjectsPage({ params }: Props) {
           {t("kicker")}
         </p>
         <h1 className="mt-3 font-display text-4xl font-bold md:text-5xl">{t("title")}</h1>
-        <p className="mt-3 max-w-2xl text-slate-400">{t("intro")}</p>
+        <p className="mt-3 max-w-2xl text-slate-400">{t.rich("intro", inlineLinks)}</p>
       </header>
 
       {data.length === 0 ? (

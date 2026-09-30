@@ -18,32 +18,69 @@
     "menuExploreHeading": "Expeditions"
   },
   "Hero": {
-    "kicker": "◊ Station LD-001 — Coordinates 48.8566° N, 2.3522° E",
+    "kicker": "◊ Station LD-001 — Besançon · 47.2378° N, 6.0241° E",
     "name": "Léo Deroin",
-    "subtitle": "Fullstack Developer",
-    "intro": "I jump aboard your web projects and ship interfaces people actually want to revisit. PHP, Symfony, React, Next, Vue — and a serious soft spot for what happens on screen.",
-    "embark": "Embark",
+    "subtitle": "Fullstack developer in Besançon",
+    "intro": "Does your team need a fullstack developer who can own a Symfony backend as well as a React or Next.js frontend? Two years of apprenticeship shipping production SaaS tools at Confluent Digital, a Master's in web engineering from ESGI: I'm available for a full-time role. 40+ projects shipped — browse <projects>the gallery</projects> and see <services>what I bring</services> to a team.",
+    "ctaContact": "Get in touch",
     "viewProjects": "View projects",
     "satellitesLabel": "// satellites in orbit",
     "scrollLabel": "Scroll",
     "scrollAria": "Scroll to the next section"
   },
+  "Services": {
+    "kicker": "◊ 02 — What I bring aboard",
+    "title": "What I bring to a development team",
+    "intro": "Three areas where I'm productive from day one, honed over two years of apprenticeship on products running in production.",
+    "labels": {
+      "problem": "The need",
+      "solution": "What I do",
+      "result": "The outcome"
+    },
+    "items": {
+      "build": {
+        "title": "Web applications, end to end",
+        "problem": "A feature or product to build, from the data model all the way to the interface.",
+        "solution": "Symfony, Phalcon or Node backend, React / Next.js or Vue frontend, MySQL, Docker deployment — I cover the whole chain.",
+        "result": "A developer who understands both sides and ships complete features."
+      },
+      "redesign": {
+        "title": "Performance and modernisation",
+        "problem": "Pages that are slow on mobile, code that's hard to evolve, a site that barely shows up on Google.",
+        "solution": "I take over the existing code, split what needs splitting and lay a sound base: performance, technical SEO, accessibility.",
+        "result": "A faster product that ranks better and is easier for the whole team to maintain."
+      },
+      "tools": {
+        "title": "Business tools and SaaS",
+        "problem": "Teams juggling spreadsheets, copy-paste and repetitive manual tasks.",
+        "solution": "Back offices, dashboards, API integrations and automations — the SaaS tools I built for SMBs at Confluent Digital.",
+        "result": "Less manual entry, fewer errors, more time for the core business."
+      }
+    },
+    "outro": "I'm looking for a full-time fullstack developer role. Browse <projects>projects already shipped</projects> or <contact>write to me</contact> — reply within 24-48h.",
+    "cta": "Discuss a role"
+  },
   "About": {
-    "kicker": "◊ 02 — Pilot ID card",
-    "title": "Who runs the station?",
+    "kicker": "◊ 03 — Pilot ID card",
+    "title": "The fullstack developer at the controls",
     "stats": {
       "yearsOfExperience": "Years of experience",
       "projectsDelivered": "Projects shipped",
       "techMastered": "Technologies mastered"
     },
-    "bio1": "Fullstack developer based in Lyon, hooked on interfaces that step outside the lines — the kind that make you stay on a page because something is actually happening.",
-    "bio2": "I work mostly on the PHP/Symfony and JS/TS stacks (React, Next.js, Vue 3), from solid backends to polished frontend experiences. I like projects with a real reason to exist, not just a spec.",
-    "bio3": "Apprentice at Confluent Digital in Lyon, building SaaS tools for SMBs and spending too much time animating shaders."
+    "bio1": "Fullstack developer based in Besançon, hooked on interfaces that step outside the lines — the kind that make you stay on a page because something is actually happening. The <lab>3D demos in the Lab</lab> are my playground.",
+    "bio2": "I work mostly on the PHP/Symfony and JS/TS stacks (React, Next.js, Vue 3), from solid backends to polished frontend experiences. I like projects with a real reason to exist, not just a spec. My full toolbox lives on the <uses>setup page</uses>.",
+    "bio3": "Two years of apprenticeship at Confluent Digital building SaaS tools for SMBs, a Master's in web engineering at ESGI completed in September 2026 — and still too much time spent animating shaders. I'm now looking for a full-time role: what I'm busy with is on <now>the Now page</now>, and what I learn ends up on <blog>the blog</blog>."
   },
   "Skills": {
-    "kicker": "◊ 03 — Skills constellation",
-    "title": "A star map of the stack",
-    "intro": "Each star = a technology. Lines = how they fit together. Hover for details, filter to highlight a family.",
+    "kicker": "◊ 04 — Skills constellation",
+    "title": "Fullstack skills: a star map",
+    "intro": "Each star = a technology. Lines = how they fit together. By default only my daily drivers are shown; \"All technologies\" reveals the rest. To see them in action, head to <projects>the projects</projects>.",
+    "scope": {
+      "core": "Daily drivers",
+      "all": "All technologies"
+    },
+    "scopeAria": "Choose which technologies to show",
     "all": "All",
     "category": {
       "frontend": "Frontend",
@@ -56,8 +93,9 @@
     "ariaLabel": "Technical skills constellation"
   },
   "Timeline": {
-    "kicker": "◊ 04 — Orbital trajectory",
-    "title": "The journey, step by step",
+    "kicker": "◊ 05 — Orbital trajectory",
+    "title": "A developer's journey, step by step",
+    "intro": "A computer science degree (BUT) in Grenoble, fullstack development apprenticeships, then a Master's in web engineering at ESGI alongside two years at Confluent Digital, both completed in September 2026. The <projects>projects built</projects> along the way are detailed in the gallery.",
     "present": "Present",
     "kind": {
       "education": "Education",
@@ -106,22 +144,21 @@
     }
   },
   "Contact": {
-    "kicker": "◊ 05 — Comms station",
-    "title": "Open a channel",
-    "intro": "Project, freelance, collab, just saying hi. The terminal is listening.",
+    "kicker": "◊ 06 — Comms station",
+    "title": "A fullstack developer role to fill?",
+    "intro": "Full-time offer, question about a project, collab or just saying hi: write me a few lines, I'll get back to you within 24-48h.",
     "labels": {
       "name": "› Name",
       "email": "› Email",
       "subject": "› Subject",
       "message": "› Message",
-      "timeline": "› Timeline",
-      "stack": "› Preferred stack",
-      "budget": "› Approximate budget"
+      "timeline": "› Start date",
+      "stack": "› Team stack"
     },
     "selectSubject": "— select —",
     "subjects": {
+      "emploi": "job offer",
       "projet": "project",
-      "freelance": "freelance",
       "collab": "collab",
       "autre": "other"
     },
@@ -129,21 +166,13 @@
       "toggleShow": "More context (optional)",
       "toggleHide": "Hide context",
       "stackPlaceholder": "Next.js, Symfony, Vue.js…",
-      "selectTimeline": "— no rush —",
-      "selectBudget": "— not specified —"
+      "selectTimeline": "— not specified —"
     },
     "timelines": {
-      "urgent": "Urgent (within 2 weeks)",
+      "urgent": "As soon as possible",
       "month": "Within 1 month",
       "quarter": "Within 3 months",
       "flexible": "Flexible"
-    },
-    "budgets": {
-      "under5k": "< €5k",
-      "5to15k": "€5 – 15k",
-      "15to50k": "€15 – 50k",
-      "over50k": "> €50k",
-      "todiscuss": "To discuss"
     },
     "submit": "Transmit",
     "submitting": "Transmitting…",
@@ -163,7 +192,7 @@
   },
   "Footer": {
     "tagline": "I design and build web apps on the PHP / Symfony / Phalcon and JS / TS / Next / Vue stack. From rock-solid backends to polished frontend experiences.",
-    "available": "Open to opportunities",
+    "available": "Available for a full-time role",
     "navigation": "Navigation",
     "explore": "Explore",
     "letsConnect": "Let's connect",
@@ -172,11 +201,11 @@
     "backToTop": "Back to top"
   },
   "Projects": {
-    "metaTitle": "Projects — Lyon-based fullstack developer portfolio",
-    "metaDescription": "Project gallery by Léo Deroin, fullstack developer in Lyon: web apps built with Next.js, React, Symfony, Phalcon, Vue.js. Personal, school and apprenticeship work at Confluent Digital.",
+    "metaTitle": "Web projects: Next.js, React and Symfony",
+    "metaDescription": "Projects by Léo Deroin, fullstack developer in Besançon: web apps built with Next.js, React, Symfony, Vue.js. Personal, school and apprenticeship work.",
     "kicker": "◊ Expedition gallery",
-    "title": "Projects & missions",
-    "intro": "Each card is a planet to explore — personal, school, work or freelance. Filter by category or stack to focus. A selection of web projects shipped in Lyon and elsewhere during my apprenticeship, studies and free time.",
+    "title": "Web projects & missions",
+    "intro": "Each card is a planet to explore — personal, school or work. Filter by category or stack to focus. A selection of web projects built during my apprenticeships, studies and free time. Hiring on this kind of stack? <contact>Let's talk</contact>, and find the technical backstory on <blog>the blog</blog>.",
     "filterCategory": "Category:",
     "filterStack": "Stack:",
     "all": "All",
@@ -197,12 +226,12 @@
     "nextMission": "Next mission →"
   },
   "Blog": {
-    "metaTitle": "Logbook",
-    "metaTitlePage": "Logbook — page {page}",
+    "metaTitle": "Web development blog — Logbook",
+    "metaTitlePage": "Web development blog — page {page}",
     "metaDescription": "Articles by Léo Deroin on web development, shaders, Symfony, Next.js and the stack in general.",
     "kicker": "◊ Logbook",
-    "title": "Articles",
-    "intro": "Notes, takeaways and analysis on my stack. No publishing schedule — I write when I have something to say.",
+    "title": "Web development articles",
+    "intro": "Notes, takeaways and analysis on my stack. No publishing schedule — I write when I have something to say. To never miss a post, join <newsletter>the newsletter</newsletter>; to see these topics applied, browse the <projects>projects</projects>.",
     "rss": "RSS Feed",
     "empty": "No articles yet. Come back soon.",
     "readingTime": "{minutes} min",
@@ -232,11 +261,11 @@
     "notFound": "Article not found"
   },
   "Uses": {
-    "metaTitle": "Setup and stack — PhpStorm, Xubuntu, Next.js, Symfony",
-    "metaDescription": "The full setup of Léo Deroin, fullstack developer in Lyon: PhpStorm on Xubuntu 24.04, Next.js / Symfony / Phalcon stack, Chrome extensions, hardware and CLI tools.",
+    "metaTitle": "Setup and stack of a fullstack developer",
+    "metaDescription": "Léo Deroin's setup as a fullstack developer in Besançon: PhpStorm on Xubuntu 26.04, Next.js / Symfony / Phalcon stack, extensions, hardware and CLI tools.",
     "kicker": "◊ /uses",
     "title": "My setup and stack",
-    "intro": "An honest list of everything I run daily on my machine — editors, hardware, browser, default stack. Updated when my setup actually shifts, not for show.",
+    "intro": "An honest list of everything I run daily on my machine — editors, hardware, browser, default stack. Updated when my setup actually shifts, not for show. To see what it's running right now, check <now>the Now page</now>, or see it at work in <projects>the projects</projects>.",
     "lastUpdated": "Last updated",
     "inspiredBy": "Page inspired by",
     "sections": {
@@ -290,9 +319,11 @@
       "back": "Back to station"
     },
     "landing": {
-      "metaTitle": "Newsletter — Léo Deroin",
+      "metaTitle": "Web dev newsletter: articles and demos",
       "metaDescription": "Get new posts straight to your inbox. No spam, no calendar — only when there's something to share.",
       "ogAlt": "Léo Deroin — Newsletter",
+      "intro": "New <blog>blog</blog> posts straight to your inbox. No spam, no schedule — only when there's something to share.",
+      "topics": "On the menu: fullstack development with PHP/Symfony and Next.js, web performance, technical SEO, Three.js and shaders — lessons drawn from <projects>real projects</projects>, not documentation summaries.",
       "breadcrumbHome": "Home",
       "breadcrumbCurrent": "Newsletter",
       "bullets": {
@@ -313,11 +344,12 @@
     }
   },
   "Lab": {
-    "metaTitle": "Lab — R3F and shader demos",
+    "metaTitle": "Lab — Three.js, R3F and GLSL shader demos",
     "metaDescription": "Interactive Three.js / R3F demos: procedural planet, fbm noise field, attractive particles. GLSL shaders with live controls.",
     "kicker": "◊ /lab — Playground",
-    "title": "Lab",
-    "intro": "Three isolated Three.js / R3F demos. Everything is shader-based or geometry-based, no texture loaded. Touch the sliders, the effect is instant.",
+    "title": "3D Lab: Three.js demos",
+    "intro": "Three isolated Three.js / R3F demos. Everything is shader-based or geometry-based, no texture loaded. Touch the sliders, the effect is instant. The same approach drives <home>the planet on the home page</home>; technical write-ups land on <blog>the blog</blog>.",
+    "why": "The lab is where I test interface ideas before bringing them into a real project: WebGL animations, data visualisations, scroll effects. If your team builds that kind of experience, <contact>let's talk</contact>.",
     "demos": {
       "planet": {
         "title": "Procedural planet",
@@ -353,11 +385,11 @@
     }
   },
   "Now": {
-    "metaTitle": "Now — Currently",
-    "metaDescription": "What I'm spending my time on right now — apprenticeship, side projects, reading and setup updates. Hand-curated.",
+    "metaTitle": "Now — What I'm working on right now",
+    "metaDescription": "What I'm spending my time on right now — full-time job search, side projects, reading and setup updates. Hand-curated.",
     "kicker": "◊ /now — Current state",
     "title": "Right now",
-    "intro": "A \"now\" page inspired by nownownow.com — an honest snapshot of what I'm up to, rather than a frozen CV. Updated when something actually shifts.",
+    "intro": "A \"now\" page inspired by nownownow.com — an honest snapshot of what I'm up to, rather than a frozen CV. Updated when something actually shifts. Hardware and tools are listed on <uses>the setup page</uses>, shipped work in <projects>the project gallery</projects>.",
     "lastUpdated": "Last updated",
     "sections": {
       "main": "Main trajectory",

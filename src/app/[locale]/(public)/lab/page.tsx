@@ -4,6 +4,7 @@ import { hasLocale } from "next-intl";
 import { notFound } from "next/navigation";
 import { Breadcrumbs, type BreadcrumbItem } from "@/components/Breadcrumbs";
 import { breadcrumbJsonLd } from "@/lib/seo";
+import { inlineLinks } from "@/components/InlineLinks";
 import { routing, type Locale } from "@/i18n/routing";
 import { PlanetDemo } from "@/components/three/lab/PlanetDemo";
 import { NoiseField } from "@/components/three/lab/NoiseField";
@@ -111,7 +112,8 @@ export default async function LabPage({ params }: Props) {
           {t("kicker")}
         </p>
         <h1 className="mt-3 font-display text-4xl font-bold md:text-5xl">{t("title")}</h1>
-        <p className="mt-4 max-w-2xl text-slate-400">{t("intro")}</p>
+        <p className="mt-4 max-w-2xl text-slate-400">{t.rich("intro", inlineLinks)}</p>
+        <p className="mt-3 max-w-2xl text-slate-400">{t.rich("why", inlineLinks)}</p>
       </header>
 
       <div className="space-y-16">

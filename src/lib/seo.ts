@@ -11,7 +11,7 @@ export function personJsonLd(): string {
     url,
     image: `${url}/profile.jpg`,
     email: `mailto:${profile.email}`,
-    sameAs: [profile.links.github, profile.links.linkedin, profile.links.malt],
+    sameAs: [profile.links.github, profile.links.linkedin],
     address: {
       "@type": "PostalAddress",
       addressLocality: profile.address.locality,
@@ -30,38 +30,6 @@ export function personJsonLd(): string {
     },
     knowsAbout: [...profile.knowsAbout],
     nationality: { "@type": "Country", name: "France" },
-  };
-  return JSON.stringify(data);
-}
-
-/**
- * ProfessionalService — pour la SEO locale (Google Maps, Knowledge Panel).
- * Indique que Léo Deroin est un service de développement web basé à Lyon
- * et qu'il intervient dans la région.
- */
-export function professionalServiceJsonLd(): string {
-  const url = process.env.NEXT_PUBLIC_APP_URL ?? "https://www.leoderoin.fr";
-  const data = {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    name: profile.name,
-    description: `Services de développement web fullstack à ${profile.address.locality} et en ${profile.address.region} : applications Next.js, React, Symfony, Vue.js, intégrations API, refontes.`,
-    url,
-    image: `${url}/profile.jpg`,
-    provider: { "@type": "Person", name: profile.name },
-    address: {
-      "@type": "PostalAddress",
-      addressLocality: profile.address.locality,
-      addressRegion: profile.address.region,
-      addressCountry: profile.address.country,
-    },
-    areaServed: [
-      { "@type": "City", name: profile.address.locality },
-      { "@type": "AdministrativeArea", name: profile.address.region },
-      { "@type": "Country", name: "France" },
-    ],
-    serviceType: "Développement web fullstack",
-    knowsAbout: [...profile.knowsAbout],
   };
   return JSON.stringify(data);
 }

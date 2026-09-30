@@ -7,6 +7,7 @@ import { Download } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { profile, getStats } from "@/lib/profile";
 import { Card } from "@/components/ui/card";
+import { inlineLinks } from "@/components/InlineLinks";
 
 function StatCounter({ value, suffix, locale }: { value: number; suffix: string; locale: string }) {
   const ref = useRef<HTMLSpanElement>(null);
@@ -33,8 +34,8 @@ export function About() {
     <section id="about" className="relative scroll-mt-24 py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ y: 16 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true, margin: "-15% 0px" }}
           transition={{ duration: 0.6 }}
           className="mb-12"
@@ -62,7 +63,6 @@ export function About() {
                     fill
                     sizes="(min-width: 768px) 160px, 176px"
                     className="object-cover"
-                    priority
                   />
                 </div>
               </div>
@@ -90,13 +90,13 @@ export function About() {
                 {(["bio1", "bio2", "bio3"] as const).map((key, i) => (
                   <motion.p
                     key={key}
-                    initial={{ opacity: 0, y: 8 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    initial={{ y: 8 }}
+                    whileInView={{ y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1, duration: 0.5 }}
                     className="leading-relaxed"
                   >
-                    {t(key)}
+                    {t.rich(key, inlineLinks)}
                   </motion.p>
                 ))}
               </div>

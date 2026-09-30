@@ -4,23 +4,22 @@ export const profile = {
   role: "Développeur Fullstack",
   tagline: "Explorateur du web",
   /** Affiché tel quel dans l'UI (footer, fiche about). */
-  location: "Lyon, France",
+  location: "Besançon, France",
   /** Adresse structurée pour JSON-LD / SEO local. */
   address: {
-    locality: "Lyon",
-    region: "Auvergne-Rhône-Alpes",
+    locality: "Besançon",
+    region: "Bourgogne-Franche-Comté",
     country: "FR",
   },
   email: "contact@leoderoin.fr",
   links: {
     github: "https://github.com/achedon12",
     linkedin: "https://www.linkedin.com/in/leo-deroin/",
-    malt: "https://www.malt.fr/profile/leoderoin",
   },
   bio: [
-    "Développeur fullstack basé à Lyon, passionné par les interfaces qui sortent du cadre — celles qui te font rester sur une page parce qu'il s'y passe quelque chose.",
+    "Développeur fullstack basé à Besançon, passionné par les interfaces qui sortent du cadre — celles qui te font rester sur une page parce qu'il s'y passe quelque chose.",
     "Je travaille principalement sur la stack PHP/Symfony et JS/TS (React, Next.js, Vue 3), du back robuste à l'expérience front soignée. J'aime quand un projet a une raison d'exister, pas juste un cahier des charges.",
-    "En alternance chez Confluent Digital à Lyon, je construis des outils SaaS pour des PME et je passe trop de temps à animer des shaders.",
+    "Deux ans d'alternance chez Confluent Digital à construire des outils SaaS pour des PME, un Master Ingénierie du web à l'ESGI terminé en septembre 2026. Je cherche désormais un CDI de développeur fullstack.",
   ],
   /** Compétences clés pour le `knowsAbout` du Person JSON-LD. Boost SEO sémantique. */
   knowsAbout: [
@@ -43,16 +42,16 @@ export const profile = {
   ],
   /** Mots-clés FR optimisés pour la recherche locale. */
   searchKeywords: [
-    "développeur fullstack lyon",
-    "développeur web lyon",
-    "freelance développeur lyon",
-    "développeur next.js lyon",
-    "développeur symfony lyon",
-    "développeur react lyon",
+    "développeur fullstack besançon",
+    "développeur web besançon",
+    "développeur fullstack cdi",
+    "développeur next.js besançon",
+    "développeur symfony besançon",
+    "développeur react besançon",
     "léo deroin",
     "leoderoin",
-    "développeur php lyon",
-    "développeur fullstack auvergne-rhône-alpes",
+    "développeur php besançon",
+    "développeur fullstack bourgogne-franche-comté",
   ],
 } as const;
 

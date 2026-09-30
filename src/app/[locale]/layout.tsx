@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
 import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import "../globals.css";
@@ -55,19 +54,19 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const isFr = locale === "fr";
   const title = isFr
-    ? "Léo Deroin — Développeur Fullstack à Lyon · Next.js, React, Symfony"
-    : "Léo Deroin — Fullstack Developer in Lyon · Next.js, React, Symfony";
+    ? "Léo Deroin — Développeur fullstack à Besançon · Next.js, Symfony"
+    : "Léo Deroin — Fullstack developer in Besançon · Next.js, Symfony";
   const description = isFr
-    ? "Léo Deroin — développeur fullstack à Lyon (Auvergne-Rhône-Alpes). Stack PHP/Symfony, Next.js, React, Vue, TypeScript. Découvrez mes projets, mon parcours et mon blog."
-    : "Léo Deroin — fullstack developer in Lyon, France. Stack: PHP/Symfony, Next.js, React, Vue, TypeScript. Browse my projects, career and blog.";
+    ? "Léo Deroin, développeur fullstack à Besançon : Symfony, React, Next.js. Deux ans d'alternance chez Confluent Digital, Master ESGI. Disponible pour un CDI."
+    : "Léo Deroin, fullstack developer in Besançon, France: Symfony, React, Next.js. Two years of apprenticeship, Master's from ESGI. Available for a full-time role.";
 
   return {
     metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "https://www.leoderoin.fr"),
     title: {
       default: title,
-      template: isFr
-        ? "%s · Léo Deroin — Développeur Fullstack à Lyon"
-        : "%s · Léo Deroin — Fullstack Developer in Lyon",
+      // Suffixe court : les titres de page restent dans la plage 30-65
+      // caractères affichée par Google sans être tronqués.
+      template: "%s · Léo Deroin",
     },
     description,
     applicationName: "Léo Deroin",
@@ -141,11 +140,8 @@ export default async function LocaleLayout({ children, params }: Props) {
           <NextIntlClientProvider locale={locale as Locale} messages={messages}>
             {children}
           </NextIntlClientProvider>
-          {IS_PROD && (
-            <>
-              <Analytics />
-              {MATOMO_URL && MATOMO_SITE_ID && <Matomo url={MATOMO_URL} siteId={MATOMO_SITE_ID} />}
-            </>
+          {IS_PROD && MATOMO_URL && MATOMO_SITE_ID && (
+            <Matomo url={MATOMO_URL} siteId={MATOMO_SITE_ID} />
           )}
         </ThemeProvider>
       </body>

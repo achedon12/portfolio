@@ -1,13 +1,10 @@
 import { z } from "zod";
 
-export const contactSubjects = ["projet", "freelance", "collab", "autre"] as const;
+export const contactSubjects = ["emploi", "projet", "collab", "autre"] as const;
 export type ContactSubject = (typeof contactSubjects)[number];
 
 export const contactTimelines = ["urgent", "month", "quarter", "flexible"] as const;
 export type ContactTimeline = (typeof contactTimelines)[number];
-
-export const contactBudgets = ["under5k", "5to15k", "15to50k", "over50k", "todiscuss"] as const;
-export type ContactBudget = (typeof contactBudgets)[number];
 
 /**
  * Codes d'erreur (i18n-friendly).
@@ -39,7 +36,6 @@ export const contactSchema = z.object({
   // pas persistés en DB (pas de migration nécessaire).
   timeline: z.enum(contactTimelines).optional().or(z.literal("")),
   stack: z.string().trim().max(200).optional().or(z.literal("")),
-  budget: z.enum(contactBudgets).optional().or(z.literal("")),
   // Locale du visiteur — détermine la langue de l'email d'accusé de réception.
   locale: z.enum(["fr", "en"]).optional(),
   website: z.string().max(0, "spam").optional().or(z.literal("")),

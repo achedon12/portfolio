@@ -6,6 +6,7 @@ import { Mail, Sparkles, ShieldCheck, Newspaper } from "lucide-react";
 import { NewsletterForm } from "@/components/newsletter/NewsletterForm";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { breadcrumbJsonLd } from "@/lib/seo";
+import { inlineLinks } from "@/components/InlineLinks";
 import { routing, type Locale } from "@/i18n/routing";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -83,7 +84,10 @@ export default async function NewsletterLandingPage({ params }: Props) {
           {t("title")}
         </h1>
         <p className="mt-6 max-w-2xl text-base leading-relaxed text-slate-400">
-          {t("intro")}
+          {tl.rich("intro", inlineLinks)}
+        </p>
+        <p className="mt-4 max-w-2xl text-base leading-relaxed text-slate-400">
+          {tl.rich("topics", inlineLinks)}
         </p>
       </header>
 

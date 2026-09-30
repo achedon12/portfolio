@@ -31,12 +31,15 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     project.title.toLowerCase(),
     ...techStack.map((t) => t.toLowerCase()),
     "léo deroin",
-    isFr ? "développeur fullstack lyon" : "fullstack developer lyon",
+    isFr ? "développeur fullstack besançon" : "fullstack developer besançon",
     `${isFr ? "projet" : "project"} ${project.category}`,
   ];
 
+  const pageTitle = `${project.title} — ${isFr ? "Projet" : "Project"} ${project.category}`;
+
   return {
-    title: `${project.title} — ${isFr ? "Projet" : "Project"} ${project.category}`,
+    // Même garde-fou que les articles : pas de suffixe si le titre est déjà long.
+    title: pageTitle.length > 50 ? { absolute: pageTitle } : pageTitle,
     description: project.description,
     keywords,
     alternates: {

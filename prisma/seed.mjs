@@ -134,7 +134,7 @@ const PROJECTS = [
       "Ce site est un site portfolio pour un artiste, lui permettant de présenter ses différentes créations. Le site est actuellement en développement.\n\nFront en Vue.js, back en Symfony pour la gestion du contenu, déploiement en Docker derrière Nginx.",
     coverImage: "/projects/charlySy.jpg",
     techStack: ["Vue.js", "Symfony", "PHP", "MySQL", "Docker", "JavaScript", "CSS", "Figma", "Git"],
-    category: "freelance",
+    category: "perso",
     githubUrl: null,
     featured: false,
   },
