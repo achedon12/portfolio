@@ -13,6 +13,8 @@ export interface Skill {
   y: number;
   /** IDs des skills connectés (lignes de la constellation) */
   links?: string[];
+  /** Techno utilisée au quotidien — affichée par défaut dans la constellation. */
+  core?: boolean;
 }
 
 export const categoryLabels: Record<SkillCategory, string> = {
@@ -43,34 +45,34 @@ export const skills: Skill[] = [
   { id: "css",    name: "CSS",          category: "frontend", level: 4, years: 5, x: 0.55, y: -0.20, links: ["html", "tailwind"] },
   { id: "js",     name: "JavaScript",   category: "frontend", level: 4, years: 5, x: 0.70, y: -0.10, links: ["html", "ts", "react", "vue", "node"] },
   { id: "ts",     name: "TypeScript",   category: "frontend", level: 3, years: 2, x: 0.55, y: -0.38, links: ["js", "react", "next", "vue"] },
-  { id: "react",  name: "React",        category: "frontend", level: 4, years: 3, x: 0.88, y: -0.30, links: ["next", "ts", "rn", "vite"] },
-  { id: "next",   name: "Next.js",      category: "frontend", level: 4, years: 2, x: 0.95, y: -0.55, links: ["react", "ts", "node", "keycloak"] },
-  { id: "vue",    name: "Vue 3",        category: "frontend", level: 4, years: 3, x: 0.40, y: -0.50, links: ["js", "ts", "vite"] },
-  { id: "tailwind", name: "Tailwind",   category: "frontend", level: 4, years: 2, x: 0.72, y: -0.60, links: ["css", "react", "next", "vue"] },
+  { id: "react",  name: "React",        category: "frontend", level: 4, years: 3, x: 0.88, y: -0.30, links: ["next", "ts", "rn", "vite"], core: true },
+  { id: "next",   name: "Next.js",      category: "frontend", level: 4, years: 2, x: 0.95, y: -0.55, links: ["react", "ts", "node", "keycloak"], core: true },
+  { id: "vue",    name: "Vue 3",        category: "frontend", level: 4, years: 3, x: 0.40, y: -0.50, links: ["js", "ts", "vite"], core: true },
+  { id: "tailwind", name: "Tailwind",   category: "frontend", level: 4, years: 2, x: 0.72, y: -0.60, links: ["css", "react", "next", "vue"], core: true },
   { id: "vite",   name: "Vite",         category: "frontend", level: 4, years: 2, x: 0.30, y: -0.65, links: ["react", "vue"] },
-  { id: "rn",     name: "React Native", category: "frontend", level: 2, years: 2, x: 0.88, y: -0.78, links: ["react", "expo"] },
+  { id: "rn",     name: "React Native", category: "frontend", level: 2, years: 2, x: 0.88, y: -0.78, links: ["react", "expo"], core: true },
   { id: "expo",   name: "Expo",         category: "frontend", level: 2, years: 2, x: 0.68, y: -0.86, links: ["rn", "react"] },
 
-  { id: "php",      name: "PHP",        category: "backend", level: 4, years: 3, x: -0.55, y: -0.10, links: ["symfony", "phalcon", "laravel", "mysql"] },
-  { id: "symfony",  name: "Symfony",    category: "backend", level: 3, years: 2, x: -0.85, y: -0.30, links: ["php", "doctrine"] },
+  { id: "php",      name: "PHP",        category: "backend", level: 4, years: 3, x: -0.55, y: -0.10, links: ["symfony", "phalcon", "laravel", "mysql"], core: true },
+  { id: "symfony",  name: "Symfony",    category: "backend", level: 3, years: 2, x: -0.85, y: -0.30, links: ["php", "doctrine"], core: true },
   { id: "phalcon",  name: "Phalcon",    category: "backend", level: 4, years: 2, x: -0.72, y: -0.52, links: ["php", "mysql"] },
   { id: "laravel",  name: "Laravel",    category: "backend", level: 2, years: 2, x: -0.40, y: -0.42, links: ["php", "mysql"] },
   { id: "doctrine", name: "Doctrine",   category: "backend", level: 3, years: 2, x: -0.50, y:  0.05, links: ["symfony", "mysql"] },
-  { id: "node",     name: "Node.js",    category: "backend", level: 3, years: 2, x: -0.28, y: -0.05, links: ["js", "express", "socket", "next", "fastify"] },
+  { id: "node",     name: "Node.js",    category: "backend", level: 3, years: 2, x: -0.28, y: -0.05, links: ["js", "express", "socket", "next", "fastify"], core: true },
   { id: "express",  name: "Express.js", category: "backend", level: 2, years: 1, x: -0.10, y:  0.30, links: ["node"] },
   { id: "fastify",  name: "Fastify",    category: "backend", level: 2, years: 1, x:  0.08, y:  0.05, links: ["node", "prisma"] },
   { id: "socket",   name: "Socket.io",  category: "backend", level: 3, years: 1, x: -0.05, y:  0.10, links: ["node"] },
-  { id: "mysql",    name: "MySQL",      category: "backend", level: 4, years: 4, x: -0.70, y:  0.25, links: ["doctrine", "phalcon", "prisma"] },
-  { id: "postgres", name: "PostgreSQL", category: "backend", level: 2, years: 1, x: -0.85, y:  0.50, links: ["prisma"] },
-  { id: "prisma",   name: "Prisma",     category: "backend", level: 3, years: 2, x: -0.45, y:  0.42, links: ["mysql", "postgres", "next", "fastify"] },
+  { id: "mysql",    name: "MySQL",      category: "backend", level: 4, years: 4, x: -0.70, y:  0.25, links: ["doctrine", "phalcon", "prisma"], core: true },
+  { id: "postgres", name: "PostgreSQL", category: "backend", level: 2, years: 1, x: -0.85, y:  0.50, links: ["prisma"], core: true },
+  { id: "prisma",   name: "Prisma",     category: "backend", level: 3, years: 2, x: -0.45, y:  0.42, links: ["mysql", "postgres", "next", "fastify"], core: true },
 
-  { id: "docker",   name: "Docker",     category: "devops", level: 4, years: 3, x:  0.05, y:  0.65, links: ["compose", "linux", "nginx"] },
-  { id: "compose",  name: "Compose",    category: "devops", level: 4, years: 3, x: -0.18, y:  0.85, links: ["docker"] },
-  { id: "linux",    name: "Linux",      category: "devops", level: 4, years: 3, x: -0.30, y:  0.65, links: ["docker", "nginx"] },
-  { id: "nginx",    name: "Nginx",      category: "devops", level: 3, years: 2, x:  0.30, y:  0.78, links: ["docker", "linux"] },
+  { id: "docker",   name: "Docker",     category: "devops", level: 4, years: 3, x:  0.05, y:  0.65, links: ["compose", "linux", "nginx"], core: true },
+  { id: "compose",  name: "Compose",    category: "devops", level: 4, years: 3, x: -0.18, y:  0.85, links: ["docker"], core: true },
+  { id: "linux",    name: "Linux",      category: "devops", level: 4, years: 3, x: -0.30, y:  0.65, links: ["docker", "nginx"], core: true },
+  { id: "nginx",    name: "Nginx",      category: "devops", level: 3, years: 2, x:  0.30, y:  0.78, links: ["docker", "linux"], core: true },
   { id: "keycloak", name: "Keycloak",   category: "devops", level: 3, years: 2, x:  0.55, y:  0.55, links: ["next"] },
 
-  { id: "git",     name: "Git",         category: "tools", level: 4, years: 5, x: -0.55, y: -0.78, links: ["github"] },
-  { id: "github",  name: "GitHub",      category: "tools", level: 3, years: 5, x: -0.30, y: -0.88, links: ["git"] },
+  { id: "git",     name: "Git",         category: "tools", level: 4, years: 5, x: -0.55, y: -0.78, links: ["github"], core: true },
+  { id: "github",  name: "GitHub",      category: "tools", level: 3, years: 5, x: -0.30, y: -0.88, links: ["git"], core: true },
   { id: "figma",   name: "Figma",       category: "tools", level: 3, years: 3, x:  0.00, y: -0.88 },
 ];

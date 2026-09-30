@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { skills, categoryColors, type SkillCategory } from "@/lib/skills";
 import { cn } from "@/lib/utils";
+import { inlineLinks } from "@/components/InlineLinks";
 
 const SVG_SIZE = 800;
 const PADDING = 60;
@@ -14,21 +15,49 @@ const toY = (y: number) => PADDING + ((y + 1) / 2) * (SVG_SIZE - PADDING * 2);
 
 const CATEGORIES: SkillCategory[] = ["frontend", "backend", "devops", "tools"];
 
+type Scope = "core" | "all";
+const SCOPES: Scope[] = ["core", "all"];
+
 export function SkillsConstellation() {
   const t = useTranslations("Skills");
   const [activeCategory, setActiveCategory] = useState<SkillCategory | null>(null);
   const [hoveredId, setHoveredId] = useState<string | null>(null);
+  // Par défaut : uniquement les technos du quotidien. "Toutes" révèle le reste.
+  const [scope, setScope] = useState<Scope>("core");
+
+  const visibleSkills = useMemo(
+    () => (scope === "core" ? skills.filter((s) => s.core) : skills),
+    [scope],
+  );
+  // Cadrage du SVG sur les étoiles visibles : sans ça, la vue "au quotidien"
+  // laisse de grandes zones vides autour d'un sous-ensemble de positions.
+  const viewBox = useMemo(() => {
+    const margin = 70;
+    const xs = visibleSkills.map((s) => toX(s.x));
+    const ys = visibleSkills.map((s) => toY(s.y));
+    const minX = Math.max(0, Math.min(...xs) - margin);
+    const minY = Math.max(0, Math.min(...ys) - margin);
+    const maxX = Math.min(SVG_SIZE, Math.max(...xs) + margin);
+    const maxY = Math.min(SVG_SIZE, Math.max(...ys) + margin);
+    return `${minX} ${minY} ${maxX - minX} ${maxY - minY}`;
+  }, [visibleSkills]);
+  const visibleCategories = useMemo(
+    () => CATEGORIES.filter((c) => visibleSkills.some((s) => s.category === c)),
+    [visibleSkills],
+  );
 
   const links = useMemo(() => {
     const out: Array<{ from: string; to: string; key: string }> = [];
-    skills.forEach((s) => {
+    const visibleIds = new Set(visibleSkills.map((s) => s.id));
+    visibleSkills.forEach((s) => {
       (s.links ?? []).forEach((toId) => {
+        if (!visibleIds.has(toId)) return;
         const key = [s.id, toId].sort().join("-");
         if (!out.find((l) => l.key === key)) out.push({ from: s.id, to: toId, key });
       });
     });
     return out;
-  }, []);
+  }, [visibleSkills]);
 
   const skillById = useMemo(() => Object.fromEntries(skills.map((s) => [s.id, s])), []);
   const hovered = hoveredId ? skillById[hoveredId] : null;
@@ -40,8 +69,8 @@ export function SkillsConstellation() {
     <section id="skills" className="relative scroll-mt-24 py-24 md:py-32">
       <div className="mx-auto max-w-6xl px-6">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          initial={{ y: 16 }}
+          whileInView={{ y: 0 }}
           viewport={{ once: true, margin: "-15% 0px" }}
           transition={{ duration: 0.6 }}
           className="mb-10"
@@ -50,8 +79,32 @@ export function SkillsConstellation() {
             {t("kicker")}
           </p>
           <h2 className="mt-3 font-display text-3xl font-bold md:text-4xl">{t("title")}</h2>
-          <p className="mt-3 max-w-2xl text-slate-400">{t("intro")}</p>
+          <p className="mt-3 max-w-2xl text-slate-400">{t.rich("intro", inlineLinks)}</p>
         </motion.div>
+
+        <div
+          role="group"
+          aria-label={t("scopeAria")}
+          className="mb-4 inline-flex rounded-full border border-white/10 bg-white/5 p-0.5 font-mono text-xs uppercase tracking-wider"
+        >
+          {SCOPES.map((sc) => (
+            <button
+              key={sc}
+              type="button"
+              aria-pressed={scope === sc}
+              onClick={() => {
+                setScope(sc);
+                setActiveCategory(null);
+              }}
+              className={cn(
+                "rounded-full px-3 py-1 transition-colors",
+                scope === sc ? "bg-nebula-cyan/15 text-nebula-cyan" : "text-slate-400 hover:text-slate-200",
+              )}
+            >
+              {t(`scope.${sc}`)}
+            </button>
+          ))}
+        </div>
 
         <div className="mb-6 flex flex-wrap gap-2">
           <button
@@ -66,7 +119,7 @@ export function SkillsConstellation() {
           >
             {t("all")}
           </button>
-          {CATEGORIES.map((cat) => (
+          {visibleCategories.map((cat) => (
             <button
               type="button"
               key={cat}
@@ -90,8 +143,8 @@ export function SkillsConstellation() {
 
         <div className="relative">
           <svg
-            viewBox={`0 0 ${SVG_SIZE} ${SVG_SIZE}`}
-            className="aspect-square w-full max-w-3xl mx-auto"
+            viewBox={viewBox}
+            className="mx-auto h-auto max-h-[80vh] w-full max-w-3xl"
             role="img"
             aria-label={t("ariaLabel")}
           >
@@ -118,7 +171,7 @@ export function SkillsConstellation() {
             </g>
 
             <g>
-              {skills.map((s, i) => {
+              {visibleSkills.map((s, i) => {
                 const cx = toX(s.x);
                 const cy = toY(s.y);
                 const dim = isDimmed(s.category);
